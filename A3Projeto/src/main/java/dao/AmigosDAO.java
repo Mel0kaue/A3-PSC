@@ -127,5 +127,15 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         }
 
     }
+    
+    public static ArrayList<Amigo> minhaLista = new ArrayList<>();
+
+    public static ArrayList<Amigo> getMinhaLista() {
+        return minhaLista;
+    }
+
+    public static void setMinhaLista(ArrayList<Amigo> minhaLista) {
+        AmigosDAO.minhaLista = minhaLista;
+    }
 
 }

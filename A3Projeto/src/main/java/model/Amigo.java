@@ -1,5 +1,8 @@
 package model;
 
+import dao.AmigosDAO;
+import java.util.ArrayList;
+
 public class Amigo {
     
     public String nome;
@@ -35,8 +38,11 @@ public class Amigo {
         this.IdAmigo = IdAmigo;
     }
 
-    
+    public ArrayList<Amigo> getMinhaLista() {
+        return AmigosDAO.getMinhaLista();
+    }
 
+    
     
     
     

@@ -17,9 +17,9 @@ public class ConexaoBancoDados {
     
     public ConexaoBancoDados(){
         this.servidor = "localhost";
-        this.banco = "GerenciamentoFerramentas";
+        this.banco = "bd_a3";
         this.usuario = "root";
-        this.senha = "root";
+        this.senha = "Unisul@1520";
     }
 
 //    public static void main(String[] args) throws SQLException {

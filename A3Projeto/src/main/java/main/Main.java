@@ -4,7 +4,7 @@
  */
 package main;
 
-import view.Tabela;
+import view.jFrmCadastroAmigo;
 
 /**
  *
@@ -12,7 +12,7 @@ import view.Tabela;
  */
 public class Main {
     public static void main(String[] args) {
-                new Tabela().setVisible(true);
+                new jFrmCadastroAmigo().setVisible(true);
 
     }
 }

@@ -13,7 +13,7 @@ public class Ferramenta {
     private int id;
     private String Nome;
     private String Marca;
-    private Double Unidade;
+    private Double Custo;
     private Double Aluguel;
 
     public int getId() {
@@ -40,12 +40,12 @@ public class Ferramenta {
         this.Marca = Marca;
     }
 
-    public Double getUnidade() {
-        return Unidade;
+    public Double getCusto() {
+        return Custo;
     }
 
-    public void setUnidade(Double Unidade) {
-        this.Unidade = Unidade;
+    public void setCusto(Double Custo) {
+        this.Custo = Custo;
     }
 
     public Double getAluguel() {

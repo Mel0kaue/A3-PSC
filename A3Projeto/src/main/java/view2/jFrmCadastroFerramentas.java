@@ -39,7 +39,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 f.getId(),
                 f.getNome(),
                 f.getMarca(),
-                f.getUnidade(),
+                f.getCusto(),
                 f.getAluguel()
             });
 
@@ -225,7 +225,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         //atualiza os valores
         f.setNome(txtInserirFerramenta.getText());
         f.setMarca(txtInserirMarca.getText());
-        f.setUnidade(Double.parseDouble(txtInserirUnidade.getText()));
+        f.setCusto(Double.parseDouble(txtInserirUnidade.getText()));
         f.setAluguel(Double.parseDouble(txtInserirAluguel.getText()));
         dao.create(f);
 
@@ -249,7 +249,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             //atualiza os valores
             f.setNome(txtInserirFerramenta.getText());
             f.setMarca(txtInserirMarca.getText());
-            f.setUnidade(Double.parseDouble(txtInserirUnidade.getText()));
+            f.setCusto(Double.parseDouble(txtInserirUnidade.getText()));
             f.setAluguel(Double.parseDouble(txtInserirAluguel.getText()));
             dao.update(f);
 

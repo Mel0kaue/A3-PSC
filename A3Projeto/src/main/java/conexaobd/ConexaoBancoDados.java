@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class ConexaoBancoDados {
     
     private static String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static String URL = "jdbc:mysql://localhost:3306/dbmercadinho";
+    private static String URL = "jdbc:mysql://localhost:3306/bd_a3";
     private static String USER = "root";
     private static String PASS = "Unisul@1520";
 

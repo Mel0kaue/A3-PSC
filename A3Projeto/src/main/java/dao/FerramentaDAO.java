@@ -27,10 +27,10 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramenta (Nome,Marca,Unidade, Aluguel) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel) VALUES (?,?,?,?)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
-            stmt.setDouble(3, f.getUnidade());
+            stmt.setDouble(3, f.getCusto());
             stmt.setDouble(4, f.getAluguel());
 
             stmt.executeUpdate(); //atualiza
@@ -55,7 +55,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
         List<Ferramenta> ferramentas = new ArrayList<>(); //cria uma lista pra adicionar os produtos
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_ferramenta");
+            stmt = con.prepareStatement("SELECT * FROM tb_ferramentas");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -63,9 +63,9 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
                 Ferramenta ferramenta = new Ferramenta();
 
                 ferramenta.setId(rs.getInt("id"));
-                ferramenta.setNome(rs.getString("Nome"));
-                ferramenta.setMarca(rs.getString("Marca"));
-                ferramenta.setUnidade(rs.getDouble("Unidade"));
+                ferramenta.setNome(rs.getString("nome"));
+                ferramenta.setMarca(rs.getString("marca"));
+                ferramenta.setCusto(rs.getDouble("Custo"));
                 ferramenta.setAluguel(rs.getDouble("Aluguel"));
 
                 ferramentas.add(ferramenta);
@@ -88,10 +88,10 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("UPDATE tb_ferramenta SET Nome = ?, Marca = ?, Unidade = ?, Aluguel = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE tb_ferramentas SET nome = ?, marca = ?, Custo = ?, Aluguel = ? WHERE id = ?");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
-            stmt.setDouble(3, f.getUnidade());
+            stmt.setDouble(3, f.getCusto());
             stmt.setDouble(4, f.getAluguel());
             stmt.setInt(5, f.getId()); //pra pegar o id
 
@@ -112,7 +112,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("DELETE FROM tb_ferramenta WHERE id = ?");
+            stmt = con.prepareStatement("DELETE FROM tb_ferramentas WHERE id = ?");
             stmt.setInt(1, f.getId()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
@@ -136,7 +136,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
         List<Ferramenta> produtos = new ArrayList<>(); //cria uma lista pra adicionar os produtos
 
         try { //pesquisar se colocar palavra completa
-            stmt = con.prepareStatement("SELECT * FROM tb_ferramenta WHERE descricao LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM tb_ferramentas WHERE descricao LIKE ?");
             stmt.setString(1, "%"+desc+"%");
             rs = stmt.executeQuery();
 
@@ -147,7 +147,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
                 ferramenta.setId(rs.getInt("id"));
                 ferramenta.setNome(rs.getString("descricao"));
                 ferramenta.setMarca(rs.getString("Marca"));
-                ferramenta.setUnidade(rs.getDouble("Unidade"));
+                ferramenta.setCusto(rs.getDouble("Custo"));
                 ferramenta.setAluguel(rs.getDouble("Aluguel"));
                 produtos.add(ferramenta);
             }
@@ -170,10 +170,10 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramenta (Nome,Marca,Unidade, Aluguel) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel) VALUES (?,?,?,?)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
-            stmt.setDouble(3, f.getUnidade());
+            stmt.setDouble(3, f.getCusto());
             stmt.setDouble(4, f.getAluguel());
 
             stmt.executeUpdate(); //atualiza

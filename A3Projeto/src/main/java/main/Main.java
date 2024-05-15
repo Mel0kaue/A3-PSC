@@ -4,7 +4,8 @@
  */
 package main;
 
-import view.jFrmCadastroAmigo;
+import view2.jFrmCadastroAmigo;
+import view2.jFrmPrincipal;
 
 /**
  *
@@ -12,7 +13,7 @@ import view.jFrmCadastroAmigo;
  */
 public class Main {
     public static void main(String[] args) {
-                new jFrmCadastroAmigo().setVisible(true);
+                new jFrmPrincipal().setVisible(true);
 
     }
 }

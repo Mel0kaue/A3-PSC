@@ -1,4 +1,4 @@
-package view;
+package view2;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -148,6 +148,8 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(jFrmCadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

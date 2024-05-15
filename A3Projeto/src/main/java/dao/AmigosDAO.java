@@ -24,7 +24,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         String sql = "INSERT INTO AMIGO (NOME, TELEFONE) VALUES (?,?)";
 
         try {
-            if (this.conexao.conectar()) {
+            
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
 
                 sentenca.setString(1, amigo.getNome());
@@ -33,7 +33,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
                 sentenca.execute();
                 sentenca.close();
                 this.conexao.getConnection().close();
-            }
+            
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -45,7 +45,6 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         String sql = "UPDATE AMIGO SET NOME = ?, TELEFONE = ? WHERE IDAMIGO = ?";
         
         try{
-            if(this.conexao.conectar()){
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
                 
                 sentenca.setString(1, amigo.getNome());
@@ -54,7 +53,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
                 sentenca.execute();
                 sentenca.close();
                 this.conexao.getConnection().close();
-            }
+            
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -65,13 +64,11 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         String sql = "DELETE FROM AMIGO"; //deleta a tabela inteira
         
         try {
-            if (this.conexao.conectar()){
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
                 
                 sentenca.execute();
                 sentenca.close();
                 this.conexao.getConnection().close();
-            }
         } catch (SQLException ex){
             throw new RuntimeException(ex);
         }
@@ -81,7 +78,6 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         String sql = "DELETE FROM AMIGO WHERE IDAMIGO = ?"; //deleta uma pessoa da tabela
         
         try {
-            if (this.conexao.conectar()){
                 
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
                 
@@ -90,7 +86,6 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
                 sentenca.execute();
                 sentenca.close();
                 this.conexao.getConnection().close();
-            }
         } catch (SQLException ex){
             throw new RuntimeException(ex);
         }
@@ -103,7 +98,6 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         String sql = "SELECT * FROM AMIGO ORDER BY IDAMIGO";
         
         try{
-            if (this.conexao.conectar()){
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
                 
                 ResultSet resultadoSentenca = sentenca.executeQuery();
@@ -117,7 +111,6 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
                     
                     listaAmigos.add(amigo);
                     
-                }
                 sentenca.close();
                 this.conexao.getConnection().close();
             }

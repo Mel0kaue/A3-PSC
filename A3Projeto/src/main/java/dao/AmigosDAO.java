@@ -77,7 +77,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         }
     }
     
-    public void ecluirID(int id){ 
+    public void excluirID(int id){ 
         String sql = "DELETE FROM AMIGO WHERE IDAMIGO = ?"; //deleta uma pessoa da tabela
         
         try {

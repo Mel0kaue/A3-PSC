@@ -38,9 +38,9 @@ public class Amigo {
         this.IdAmigo = IdAmigo;
     }
 
-    public ArrayList<Amigo> getMinhaLista() {
+    /*public ArrayList<Amigo> getMinhaLista() {
         return AmigosDAO.getMinhaLista();
-    }
+    }*/
 
     
     

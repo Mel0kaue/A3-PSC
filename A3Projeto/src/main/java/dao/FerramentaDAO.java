@@ -132,7 +132,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
     public List<Ferramenta> readForDesc(String desc) { //pesquisa
 
         //gerando conexão
-        Connection con = ConexaoBancoDados.getConnection(); //pegando o método da classe ConnectionFactory
+        Connection con = ConexaoBancoDados.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -169,7 +169,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
     @Override
     public void inserir(Ferramenta f) {
 
-        Connection con = ConexaoBancoDados.getConnection();//pegando o método da classe ConnectionFactory
+        Connection con = ConexaoBancoDados.getConnection();
         PreparedStatement stmt = null;
 
         try {

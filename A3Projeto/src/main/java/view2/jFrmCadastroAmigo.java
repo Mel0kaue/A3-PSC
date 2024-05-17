@@ -1,8 +1,13 @@
 package view2;
 
+import dao.AmigosDAO;
+import dao.FerramentaDAO;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Amigo;
+import model.Ferramenta;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,16 +25,17 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
     public jFrmCadastroAmigo() {
         initComponents();
         this.objetoAmigo = new Amigo(); // carrega objeto aluno
-        this.carregaTabela(); //carrega a tabela
+        this.readJtable(); //carrega a tabela
     }
     
-    public void carregaTabela() {
+    public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableCadastroAmigos.getModel();
-        modelo.setNumRows(0);//posiciona na primeira linha da tabela
-        //carrega a lista de objetos aluno
-        ArrayList<Amigo> minhalista = objetoAmigo.getMinhaLista();
+        modelo.setNumRows(0); //posiciona na primeira linha da tabela
+        
+        AmigosDAO adao =  new AmigosDAO();
 
-        for (Amigo a : minhalista) {
+        for (Amigo a : adao.read()) {
+            
             modelo.addRow(new Object[]{
                 a.getIdAmigo(),
                 a.getNome(),
@@ -50,10 +56,13 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCadastroAmigos = new javax.swing.JTable();
-        jTextNome = new javax.swing.JTextField();
-        jTextTelefone = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtTelefone = new javax.swing.JTextField();
         lblTelefone = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
+        btnAdicionarAmigo = new javax.swing.JButton();
+        btnExcluirAmigo = new javax.swing.JButton();
+        btnAlterarAmigo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar amigos");
@@ -85,6 +94,32 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
         lblNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNome.setText("Nome:");
 
+        btnAdicionarAmigo.setText("Adicionar");
+        btnAdicionarAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarAmigoActionPerformed(evt);
+            }
+        });
+        btnAdicionarAmigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAdicionarAmigoKeyPressed(evt);
+            }
+        });
+
+        btnExcluirAmigo.setText("Excluir");
+        btnExcluirAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirAmigoActionPerformed(evt);
+            }
+        });
+
+        btnAlterarAmigo.setText("Alterar");
+        btnAlterarAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarAmigoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,29 +127,43 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTelefone)
                             .addComponent(lblNome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAdicionarAmigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAlterarAmigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExcluirAmigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTelefone))
-                .addGap(51, 51, 51)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNome))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTelefone)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnAdicionarAmigo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAlterarAmigo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluirAmigo)))
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -122,6 +171,105 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dados() {
+
+        Amigo amg = new Amigo(); //instancia produto
+        AmigosDAO dao = new AmigosDAO(); //conecta sql
+
+        //atualiza os valores
+        amg.setNome(txtNome.getText());
+        amg.setTelefone(Integer.parseInt(txtTelefone.getText()));
+
+
+        //insere novo objeto dentro da tabela
+        dao.create(amg);
+
+        //limpando os campos
+        txtNome.setText("");
+        txtTelefone.setText("");
+
+
+        //atualizando tabela
+        readJtable();
+    }
+    private void btnAdicionarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarAmigoActionPerformed
+
+        Amigo amg = new Amigo(); //instancia produto
+        AmigosDAO dao = new AmigosDAO(); //conecta sql
+
+        //atualiza os valores
+        amg.setNome(txtNome.getText());
+        amg.setTelefone(Integer.parseInt(txtTelefone.getText()));
+   
+        dao.create(amg);
+
+        //limpando os campos
+        txtNome.setText("");
+        txtTelefone.setText("");
+
+
+        //atualizando tabela
+        readJtable();
+    }//GEN-LAST:event_btnAdicionarAmigoActionPerformed
+
+    private void btnAdicionarAmigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarAmigoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            dados();
+        }
+    }//GEN-LAST:event_btnAdicionarAmigoKeyPressed
+
+    private void btnExcluirAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirAmigoActionPerformed
+
+        if (jTableCadastroAmigos.getSelectedRow() != -1) {
+
+            Amigo amg = new Amigo();
+            AmigosDAO dao = new AmigosDAO();
+
+            amg.setIdAmigo((int) jTableCadastroAmigos.getValueAt(jTableCadastroAmigos.getSelectedRow(), 0));
+
+            //deleta objeto da tabela
+            dao.delete(amg);
+
+            //limpa os campos
+            txtNome.setText("");
+            txtTelefone.setText("");
+
+
+            //atualizando tabela
+            readJtable();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para excluir.");
+        }
+    }//GEN-LAST:event_btnExcluirAmigoActionPerformed
+
+    private void btnAlterarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarAmigoActionPerformed
+
+        if (jTableCadastroAmigos.getSelectedRow() != -1) {
+
+            Amigo amg = new Amigo(); //instancia amigo
+            AmigosDAO dao = new AmigosDAO(); //conecta sql
+
+            //atualiza os valores
+            amg.setNome(txtNome.getText());
+            amg.setTelefone(Integer.parseInt(txtTelefone.getText()));
+            amg.setIdAmigo((int)jTableCadastroAmigos.getValueAt(jTableCadastroAmigos.getSelectedRow(), 0)); //pega id na tabela 0
+
+
+            //update nos dados
+            dao.update(amg);
+
+            //limpando os campos
+            txtNome.setText("");
+            txtTelefone.setText("");
+
+
+            //atualizando tabela
+            readJtable();
+        }
+    }//GEN-LAST:event_btnAlterarAmigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,11 +310,14 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionarAmigo;
+    private javax.swing.JButton btnAlterarAmigo;
+    private javax.swing.JButton btnExcluirAmigo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCadastroAmigos;
-    private javax.swing.JTextField jTextNome;
-    private javax.swing.JTextField jTextTelefone;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTelefone;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

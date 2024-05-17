@@ -61,8 +61,8 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     //Método que atualiza a tabela com os valores adicionados
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
-
         modelo.setNumRows(0);
+        
         FerramentaDAO fdao = new FerramentaDAO();
 
         for (Ferramenta f : fdao.read()) {

@@ -22,16 +22,18 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
     public void create(Ferramenta f) {
 
-        Connection con = ConexaoBancoDados.getConnection();//pegando o método da classe ConnectionFactory
+        Connection con = ConexaoBancoDados.getConnection();
         PreparedStatement stmt = null;
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel, Quantidade) VALUES (?,?,?,?,?)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
             stmt.setDouble(4, f.getAluguel());
+            stmt.setInt(5, f.getQuantidade());
+            
 
             stmt.executeUpdate(); //atualiza
 
@@ -48,7 +50,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
     public List<Ferramenta> read() { //lista
 
         //gerando conexão
-        Connection con = ConexaoBancoDados.getConnection(); //pegando o método da classe ConnectionFactory
+        Connection con = ConexaoBancoDados.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -67,6 +69,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
                 ferramenta.setMarca(rs.getString("marca"));
                 ferramenta.setCusto(rs.getDouble("Custo"));
                 ferramenta.setAluguel(rs.getDouble("Aluguel"));
+                ferramenta.setQuantidade(rs.getInt("Quantidade"));
 
                 ferramentas.add(ferramenta);
             }
@@ -83,7 +86,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
     public void update(Ferramenta f) { //atualiza
 
-        Connection con = ConexaoBancoDados.getConnection(); //pegando o método da classe ConnectionFactory
+        Connection con = ConexaoBancoDados.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
@@ -107,11 +110,11 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
     }
     public void delete(Ferramenta f) { //deleta
 
-        Connection con = ConexaoBancoDados.getConnection(); //pegando o método da classe ConnectionFactory
+        Connection con = ConexaoBancoDados.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
-            //colocando dentro da tabela
+            
             stmt = con.prepareStatement("DELETE FROM tb_ferramentas WHERE id = ?");
             stmt.setInt(1, f.getId()); //pra pegar o id
 
@@ -149,6 +152,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
                 ferramenta.setMarca(rs.getString("Marca"));
                 ferramenta.setCusto(rs.getDouble("Custo"));
                 ferramenta.setAluguel(rs.getDouble("Aluguel"));
+                ferramenta.setQuantidade(rs.getInt("Quantidade"));
                 produtos.add(ferramenta);
             }
 
@@ -170,11 +174,12 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel, Quantidade) VALUES (?,?,?,?,?)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
             stmt.setDouble(4, f.getAluguel());
+            stmt.setInt(5, f.getQuantidade());
 
             stmt.executeUpdate(); //atualiza
 

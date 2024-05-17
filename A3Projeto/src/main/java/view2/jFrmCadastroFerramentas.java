@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
@@ -25,6 +26,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
      * Creates new form jFrmCadastroFerramentas
      */
     MaskFormatter mfCusto;
+    MaskFormatter mfAluguel;
 
     public jFrmCadastroFerramentas() {
 
@@ -34,14 +36,29 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             System.out.println("erro na criação da mascara");
         }
 
+        try {
+            mfAluguel = new MaskFormatter("R$##,##");
+        } catch (ParseException ex) {
+            System.out.println("erro na criação da mascara");
+        }
+
         initComponents();
 
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
         jTableCadastroFerramenta.setRowSorter(new TableRowSorter(modelo));
+        
+        //pra centraliazr a exibição dos valores na tabela
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+
+        // Aplicar o renderer às colunas desejadas (ID e Quantidade)
+        jTableCadastroFerramenta.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Coluna ID
+        jTableCadastroFerramenta.getColumnModel().getColumn(5).setCellRenderer(centerRenderer); // Coluna Quantidade
 
         readJtable();
     }
 
+    //Método que atualiza a tabela com os valores adicionados
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
 
@@ -54,8 +71,9 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 f.getId(),
                 f.getNome(),
                 f.getMarca(),
-                String.format("R$ %.2f",f.getCusto()  ),
-                "R$" + f.getAluguel()
+                String.format("R$ %.2f", f.getCusto()),
+                String.format("R$ %.2f", f.getAluguel()),
+                f.getQuantidade()
             });
 
         }
@@ -77,15 +95,16 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         lblMarca = new javax.swing.JLabel();
         txtInserirFerramenta = new javax.swing.JTextField();
         txtInserirMarca = new javax.swing.JTextField();
-        txtInserirUnidade = new javax.swing.JTextField();
         btnAdicionarFerramenta = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnAlterarFerramenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCadastroFerramenta = new javax.swing.JTable();
-        txtInserirAluguel = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtFormatCusto = new javax.swing.JFormattedTextField(mfCusto);
+        txtFormatAluguel = new javax.swing.JFormattedTextField(mfCusto);
+        txtFormatQuantidade = new javax.swing.JFormattedTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -120,17 +139,6 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         txtInserirMarca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtInserirMarcaKeyPressed(evt);
-            }
-        });
-
-        txtInserirUnidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInserirUnidadeActionPerformed(evt);
-            }
-        });
-        txtInserirUnidade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtInserirUnidadeKeyPressed(evt);
             }
         });
 
@@ -171,19 +179,9 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 "ID", "Ferramenta", "Marca", "Custo de Aquisição", "Aluguel", "Qtd"
             }
         ));
+        jTableCadastroFerramenta.setShowHorizontalLines(true);
+        jTableCadastroFerramenta.setShowVerticalLines(true);
         jScrollPane1.setViewportView(jTableCadastroFerramenta);
-
-        txtInserirAluguel.setToolTipText("");
-        txtInserirAluguel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInserirAluguelActionPerformed(evt);
-            }
-        });
-        txtInserirAluguel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtInserirAluguelKeyPressed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Aluguel:");
@@ -204,15 +202,50 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             }
         });
 
+        txtFormatAluguel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFormatAluguel.setValue(0.00);
+        txtFormatAluguel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFormatAluguelFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFormatAluguelFocusLost(evt);
+            }
+        });
+        txtFormatAluguel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFormatAluguelKeyPressed(evt);
+            }
+        });
+
+        txtFormatQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFormatQuantidade.setValue(0);
+        txtFormatQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFormatQuantidadeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFormatQuantidadeFocusLost(evt);
+            }
+        });
+        txtFormatQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFormatQuantidadeKeyPressed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Quantidade:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,10 +255,12 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                                     .addComponent(lblMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtInserirMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtInserirUnidade, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                    .addComponent(txtInserirAluguel, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                    .addComponent(jLabel2)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFormatAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(13, 13, 13))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(100, 100, 100)
                                 .addComponent(btnAdicionarFerramenta)
@@ -236,35 +271,37 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                                 .addGap(62, 62, 62)
                                 .addComponent(btnAlterarFerramenta))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel3))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFormatQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtInserirFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtInserirFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtInserirUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtInserirMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtInserirAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFormatAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFormatQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionarFerramenta)
@@ -272,14 +309,18 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                     .addComponent(btnExcluir))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /* dados() => mesmo método do botão adicionar, mas usado pra executar
+        a ação do botão ao pressionar enter
+     */
     private void dados() {
+
         Ferramenta f = new Ferramenta(); //instancia produto
         FerramentaDAO dao = new FerramentaDAO(); //conecta sql
 
@@ -287,24 +328,30 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         f.setNome(txtInserirFerramenta.getText());
         f.setMarca(txtInserirMarca.getText());
         f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-        f.setAluguel(Double.parseDouble(txtInserirAluguel.getText()));
+        f.setAluguel(Double.parseDouble(txtFormatAluguel.getText().replace(',', '.')));
+        f.setQuantidade(Integer.parseInt(txtFormatQuantidade.getText()));
+
+        //insere novo objeto dentro da tabela
         dao.create(f);
 
         //limpando os campos
         txtInserirFerramenta.setText("");
         txtInserirMarca.setText("");
         txtFormatCusto.setText("");
-        txtInserirAluguel.setText("");
+        txtFormatAluguel.setText("");
+        txtFormatQuantidade.setText("");
 
+        //atualizando tabela
         readJtable();
     }
 
     private void txtInserirFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirFerramentaActionPerformed
-        // TODO add your handling code here:
+        //label do botão ferramenta
     }//GEN-LAST:event_txtInserirFerramentaActionPerformed
 
+    // BOTAO ADICIONAR
     private void btnAdicionarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaActionPerformed
-        // BOTAO ADICIONAR
+
         Ferramenta f = new Ferramenta(); //instancia produto
         FerramentaDAO dao = new FerramentaDAO(); //conecta sql
 
@@ -312,20 +359,23 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         f.setNome(txtInserirFerramenta.getText());
         f.setMarca(txtInserirMarca.getText());
         f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-        f.setAluguel(Double.parseDouble(txtInserirAluguel.getText()));
+        f.setAluguel(Double.parseDouble(txtFormatAluguel.getText().replace(',', '.')));
+        f.setQuantidade(Integer.parseInt(txtFormatQuantidade.getText()));
         dao.create(f);
 
         //limpando os campos
         txtInserirFerramenta.setText("");
         txtInserirMarca.setText("");
         txtFormatCusto.setText("");
-        txtInserirAluguel.setText("");
+        txtFormatAluguel.setText("");
+        txtFormatQuantidade.setText("");
 
+        //atualizando tabela
         readJtable();
     }//GEN-LAST:event_btnAdicionarFerramentaActionPerformed
 
+    // BOTAO ALTERAR
     private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
-        // BOTAO ALTERAR
 
         if (jTableCadastroFerramenta.getSelectedRow() != -1) {
 
@@ -336,29 +386,26 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             f.setNome(txtInserirFerramenta.getText());
             f.setMarca(txtInserirMarca.getText());
             f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-            f.setAluguel(Double.parseDouble(txtInserirAluguel.getText()));
+            f.setAluguel(Double.parseDouble(txtFormatAluguel.getText().replace(',', '.')));
+            f.setQuantidade(Integer.parseInt(txtFormatQuantidade.getText()));
+
+            //update nos dados
             dao.update(f);
 
             //limpando os campos
             txtInserirFerramenta.setText("");
             txtInserirMarca.setText("");
             txtFormatCusto.setText("");
-            txtInserirAluguel.setText("");
+            txtFormatAluguel.setText("");
+            txtFormatQuantidade.setText("");
 
+            //atualizando tabela
             readJtable();
         }
     }//GEN-LAST:event_btnAlterarFerramentaActionPerformed
-
-    private void txtInserirAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirAluguelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtInserirAluguelActionPerformed
-
-    private void txtInserirUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirUnidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtInserirUnidadeActionPerformed
-
+    // BOTAO EXCLUIR
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // BOTAO EXCLUIR
+
         if (jTableCadastroFerramenta.getSelectedRow() != -1) {
 
             Ferramenta f = new Ferramenta();
@@ -366,13 +413,16 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
 
             f.setId((int) jTableCadastroFerramenta.getValueAt(jTableCadastroFerramenta.getSelectedRow(), 0));
 
+            //deleta objeto da tabela
             dao.delete(f);
 
             txtInserirFerramenta.setText("");
             txtInserirMarca.setText("");
             txtFormatCusto.setText("");
-            txtInserirAluguel.setText("");
+            txtFormatAluguel.setText("");
+            txtFormatQuantidade.setText("");
 
+            //atualizando tabela
             readJtable();
 
         } else {
@@ -382,37 +432,27 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void txtInserirMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirMarcaActionPerformed
-        // TODO add your handling code here:
+        // label do botao marca
     }//GEN-LAST:event_txtInserirMarcaActionPerformed
 
     private void txtInserirFerramentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirFerramentaKeyPressed
-        // TODO add your handling code here:
+        // ir pro próximo campo clicando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            //vai pro inserir marca
             txtInserirMarca.requestFocus();
         }
 
     }//GEN-LAST:event_txtInserirFerramentaKeyPressed
 
     private void txtInserirMarcaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirMarcaKeyPressed
-        // TODO add your handling code here:
+        // ir pro próximo campo clicando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            //vai pro inserir custo
             txtFormatCusto.requestFocus();
         }
     }//GEN-LAST:event_txtInserirMarcaKeyPressed
-
-    private void txtInserirUnidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirUnidadeKeyPressed
-        // TODO add your handling code here: (provavelmente vai ser excluido)
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtInserirAluguel.requestFocus();
-        }
-    }//GEN-LAST:event_txtInserirUnidadeKeyPressed
-
-    private void txtInserirAluguelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirAluguelKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnAdicionarFerramenta.requestFocus();
-        }
-    }//GEN-LAST:event_txtInserirAluguelKeyPressed
 
     private void btnAdicionarFerramentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaKeyPressed
         // TODO add your handling code here:
@@ -421,26 +461,79 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAdicionarFerramentaKeyPressed
 
+    //pro "0,00" que tava no campo sumir quando o usuario clicar
     private void txtFormatCustoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatCustoFocusGained
-        // TODO add your handling code here:
+
         if ("0,00".equals(txtFormatCusto.getText())) {
             txtFormatCusto.setText("");
         }
     }//GEN-LAST:event_txtFormatCustoFocusGained
 
     private void txtFormatCustoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormatCustoKeyPressed
-        // TODO add your handling code here:
+        // ir pro próximo campo clincando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtInserirAluguel.requestFocus();
+
+            //vai pro inserir aluguel
+            txtFormatAluguel.requestFocus();
         }
     }//GEN-LAST:event_txtFormatCustoKeyPressed
 
+    //pro "0" que tava no campo aparecer quando o usuario desclicar
     private void txtFormatCustoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatCustoFocusLost
-        // TODO add your handling code here:
+
         if ("".equals(txtFormatCusto.getText())) {
-                    txtFormatCusto.setValue(0.00);
-                }
+            txtFormatCusto.setValue(0.00);
+        }
     }//GEN-LAST:event_txtFormatCustoFocusLost
+
+    //pro "0,00" que tava no campo sumir quando o usuario clicar
+    private void txtFormatAluguelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatAluguelFocusGained
+        // TODO add your handling code here:
+        if ("0,00".equals(txtFormatAluguel.getText())) {
+            txtFormatAluguel.setText("");
+        }
+    }//GEN-LAST:event_txtFormatAluguelFocusGained
+
+    //pro "0,00" que tava no campo aparecer quando o usuario desclicar
+    private void txtFormatAluguelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatAluguelFocusLost
+
+        if ("".equals(txtFormatAluguel.getText())) {
+            txtFormatAluguel.setValue(0.00);
+        }
+    }//GEN-LAST:event_txtFormatAluguelFocusLost
+
+    private void txtFormatAluguelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormatAluguelKeyPressed
+        // ir pro próximo campo clicando Enter
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            //vai pro campo quantidade
+            txtFormatQuantidade.requestFocus();
+        }
+    }//GEN-LAST:event_txtFormatAluguelKeyPressed
+
+    //pro "0" que tava no campo sumir quando o usuario clicar
+    private void txtFormatQuantidadeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatQuantidadeFocusGained
+        if ("0".equals(txtFormatQuantidade.getText())) {
+            txtFormatQuantidade.setText("");
+        }
+    }//GEN-LAST:event_txtFormatQuantidadeFocusGained
+
+    //pro "0" que tava no campo aparecer quando o usuario desclicar
+    private void txtFormatQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatQuantidadeFocusLost
+        if ("".equals(txtFormatQuantidade.getText())) {
+            txtFormatQuantidade.setValue(0);
+        }
+    }//GEN-LAST:event_txtFormatQuantidadeFocusLost
+
+    private void txtFormatQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormatQuantidadeKeyPressed
+        // ir pro próximo campo clicando Enter
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            //vai pro botão adicionar
+            btnAdicionarFerramenta.requestFocus();
+        }
+
+    }//GEN-LAST:event_txtFormatQuantidadeKeyPressed
 
     /**
      * @param args the command line arguments
@@ -484,15 +577,16 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCadastroFerramenta;
     private javax.swing.JLabel lblFerramenta;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblUnidade;
+    private javax.swing.JFormattedTextField txtFormatAluguel;
     private javax.swing.JFormattedTextField txtFormatCusto;
-    private javax.swing.JTextField txtInserirAluguel;
+    private javax.swing.JFormattedTextField txtFormatQuantidade;
     private javax.swing.JTextField txtInserirFerramenta;
     private javax.swing.JTextField txtInserirMarca;
-    private javax.swing.JTextField txtInserirUnidade;
     // End of variables declaration//GEN-END:variables
 }

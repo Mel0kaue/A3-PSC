@@ -29,7 +29,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
             //colocando dentro da tabela
             stmt = con.prepareStatement("INSERT INTO tb_amigos (Nome,Telefone) VALUES (?,?)");
             stmt.setString(1, amg.getNome());
-            stmt.setInt(2, amg.getTelefone());
+            stmt.setString(2, amg.getTelefone());
 
             
 
@@ -64,7 +64,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
                 amigo.setIdAmigo(rs.getInt("id"));
                 amigo.setNome(rs.getString("Nome"));
-                amigo.setTelefone(rs.getInt("Telefone"));
+                amigo.setTelefone(rs.getString("Telefone"));
 
 
                 amigos.add(amigo);
@@ -89,7 +89,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
             //colocando dentro da tabela
             stmt = con.prepareStatement("UPDATE tb_amigos SET Nome = ?, Telefone = ? WHERE id = ?");
             stmt.setString(1, amg.getNome());
-            stmt.setInt(2, amg.getTelefone());
+            stmt.setString(2, amg.getTelefone());
             stmt.setInt(3, amg.getIdAmigo()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
@@ -103,30 +103,6 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
     }
     
-    public Amigo carregaAmigo(int idAmigo) { //----------------arrumar-----------------------
-        
-        Amigo objeto = new Amigo();
-        objeto.setIdAmigo(idAmigo);
-        
-        Connection con = ConexaoBancoDados.getConnection(); 
-        PreparedStatement stmt = null;
-        
-        try {
-            
-            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE id = " + idAmigo);
-            res.next();
-
-            objeto.setNome(res.getString("Nome"));
-            objeto.setTelefone(res.getInt("Telefone"));
-
-
-            stmt.close();            
-            
-        } catch (SQLException erro) {
-        }
-        return objeto;
-    }
-
     public void delete(Amigo amg) { //deleta
 
         Connection con = ConexaoBancoDados.getConnection(); 
@@ -168,7 +144,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
                 amigos.setIdAmigo(rs.getInt("id"));
                 amigos.setNome(rs.getString("Nome"));
-                amigos.setTelefone(rs.getInt("Telefone"));
+                amigos.setTelefone(rs.getString("Telefone"));
 
                 dadosAmigo.add(amigos);
             }
@@ -193,7 +169,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
             //colocando dentro da tabela
             stmt = con.prepareStatement("INSERT INTO tb_amigos (Nome,Telefone) VALUES (?,?)");
             stmt.setString(1, amg.getNome());
-            stmt.setInt(2, amg.getTelefone());
+            stmt.setString(2, amg.getTelefone());
 
 
             stmt.executeUpdate(); //atualiza

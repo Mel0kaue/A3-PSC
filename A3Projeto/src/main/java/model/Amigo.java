@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Amigo {
     
     public String nome;
-    public int telefone;
+    public String telefone;
     public int IdAmigo;
 
     public Amigo() {
@@ -22,11 +22,11 @@ public class Amigo {
         this.nome = nome;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 

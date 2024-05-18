@@ -46,7 +46,10 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
 
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
         jTableCadastroFerramenta.setRowSorter(new TableRowSorter(modelo));
-        
+
+        // Permitir seleção de múltiplas linhas
+        jTableCadastroFerramenta.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
         //pra centraliazr a exibição dos valores na tabela
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
@@ -62,7 +65,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
         modelo.setNumRows(0);
-        
+
         FerramentaDAO fdao = new FerramentaDAO();
 
         for (Ferramenta f : fdao.read()) {
@@ -181,6 +184,11 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         ));
         jTableCadastroFerramenta.setShowHorizontalLines(true);
         jTableCadastroFerramenta.setShowVerticalLines(true);
+        jTableCadastroFerramenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCadastroFerramentaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableCadastroFerramenta);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -407,26 +415,28 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
         if (jTableCadastroFerramenta.getSelectedRow() != -1) {
-
-            Ferramenta f = new Ferramenta();
+            int[] selectedRows = jTableCadastroFerramenta.getSelectedRows();
             FerramentaDAO dao = new FerramentaDAO();
 
-            f.setId((int) jTableCadastroFerramenta.getValueAt(jTableCadastroFerramenta.getSelectedRow(), 0));
+            for (int i = 0; i < selectedRows.length; i++) {
+                int modelIndex = jTableCadastroFerramenta.convertRowIndexToModel(selectedRows[i]);
+                int id = (int) jTableCadastroFerramenta.getModel().getValueAt(modelIndex, 0);
+                Ferramenta f = new Ferramenta();
+                f.setId(id);
+                dao.delete(f);
+            }
 
-            //deleta objeto da tabela
-            dao.delete(f);
-
+            // Limpar campos
             txtInserirFerramenta.setText("");
             txtInserirMarca.setText("");
             txtFormatCusto.setText("");
             txtFormatAluguel.setText("");
             txtFormatQuantidade.setText("");
 
-            //atualizando tabela
+            // Atualizar tabela
             readJtable();
-
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um produto para excluir.");
+            JOptionPane.showMessageDialog(null, "Selecione um ou mais produtos para excluir.");
         }
 
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -534,6 +544,23 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtFormatQuantidadeKeyPressed
+
+    private void jTableCadastroFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCadastroFerramentaMouseClicked
+        // TODO add your handling code here:
+        if (this.jTableCadastroFerramenta.getSelectedRow() != -1) {
+
+            String nome = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 1).toString();
+            String marca = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 2).toString();
+            String aquisicao = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 3).toString();
+            String aluguel = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 4).toString();
+
+            this.txtInserirFerramenta.setText(nome);
+            this.txtInserirMarca.setText(marca);
+            this.txtFormatCusto.setText(aquisicao);
+            this.txtFormatAluguel.setText(aluguel);
+
+        }
+    }//GEN-LAST:event_jTableCadastroFerramentaMouseClicked
 
     /**
      * @param args the command line arguments

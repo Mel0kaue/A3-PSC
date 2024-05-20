@@ -33,6 +33,7 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
 
         // Aplicar o renderer às colunas desejadas (ID e Quantidade)
         jTableCadastroAmigos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Coluna ID
+        jTableCadastroAmigos.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Coluna Telefone
 
         readJtable(); //carrega a tabela
     }

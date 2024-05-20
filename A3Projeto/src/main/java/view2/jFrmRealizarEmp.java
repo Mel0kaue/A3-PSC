@@ -9,11 +9,13 @@ import dao.EmprestimosDAO;
 import dao.FerramentaDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
@@ -27,9 +29,8 @@ import model.Ferramenta;
  */
 public class jFrmRealizarEmp extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jFrmRealizarEmp
-     */
+    private List<Integer> listaIds = new ArrayList<>();
+
     MaskFormatter mfData;
 
     public jFrmRealizarEmp() {
@@ -48,9 +49,18 @@ public class jFrmRealizarEmp extends javax.swing.JFrame {
         // Permitir seleção de múltiplas linhas
         jTableEmprestimos.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        carregarFerramentas();
+        //pra centraliazr a exibição dos valores na tabela
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+
+        // Aplicar o renderer às colunas desejadas (ID e Quantidade)
+        jTableEmprestimos.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Coluna emprestimo
+        jTableEmprestimos.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Coluna devolução
+
         carregarAmigos();
+        carregarFerramentas();
         readJtable();
+
     }
 
     //puxando ferramentas do bd
@@ -87,13 +97,16 @@ public class jFrmRealizarEmp extends javax.swing.JFrame {
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) jTableEmprestimos.getModel();
         modelo.setNumRows(0);
+        listaIds.clear();
 
         EmprestimosDAO edao = new EmprestimosDAO();
 
         for (Emprestimos e : edao.read()) {
 
+            listaIds.add(e.getID());
+
             modelo.addRow(new Object[]{
-                e.getID(),
+                //e.getID(),
                 e.getAmigoEsc(),
                 e.getFerramentaEsc(),
                 e.getDataEms(),
@@ -311,6 +324,12 @@ public class jFrmRealizarEmp extends javax.swing.JFrame {
         Date dataEmp = convertStringToDate(dataEmpStr);
         Date dataDev = convertStringToDate(dataDevStr);
 
+        // Verifica se as datas foram convertidas corretamente
+        if (dataEmp == null || dataDev == null) {
+            JOptionPane.showMessageDialog(this, "Formato de data inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         Emprestimos e = new Emprestimos(); //instancia produto
         EmprestimosDAO dao = new EmprestimosDAO(); //conecta sql
 
@@ -352,23 +371,31 @@ public class jFrmRealizarEmp extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
-        if (jTableEmprestimos.getSelectedRow() != -1) {
-            int[] selectedRows = jTableEmprestimos.getSelectedRows();
-            EmprestimosDAO dao = new EmprestimosDAO();
+        int[] selectedRows = jTableEmprestimos.getSelectedRows();
+        if (selectedRows.length == 0) {
+            JOptionPane.showMessageDialog(this, "Selecione ao menos uma linha para excluir.");
+            return;
+        }
 
-            for (int i = 0; i < selectedRows.length; i++) {
-                int modelIndex = jTableEmprestimos.convertRowIndexToModel(selectedRows[i]);
-                int id = (int) jTableEmprestimos.getModel().getValueAt(modelIndex, 0);
+        EmprestimosDAO dao = new EmprestimosDAO();
+
+        for (int i = 0; i < selectedRows.length; i++) {
+            int modelRow = jTableEmprestimos.convertRowIndexToModel(selectedRows[i]);
+
+            if (modelRow >= 0 && modelRow < listaIds.size()) {
+                int id = listaIds.get(modelRow);
+
                 Emprestimos e = new Emprestimos();
                 e.setID(id);
                 dao.delete(e);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir. Índice inválido.");
+                return;
             }
-
-            // Atualizar tabela
-            readJtable();
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um ou mais produtos para excluir.");
         }
+        
+        //atualizando tabela
+        readJtable();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**

@@ -27,7 +27,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_amigos (Nome,Telefone) VALUES (?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_amigos (nome,telefone) VALUES (?,?)");
             stmt.setString(1, amg.getNome());
             stmt.setString(2, amg.getTelefone());
 
@@ -62,9 +62,9 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
                 Amigo amigo = new Amigo();
 
-                amigo.setIdAmigo(rs.getInt("id"));
-                amigo.setNome(rs.getString("Nome"));
-                amigo.setTelefone(rs.getString("Telefone"));
+                amigo.setIdAmigo(rs.getInt("ID"));
+                amigo.setNome(rs.getString("nome"));
+                amigo.setTelefone(rs.getString("telefone"));
 
 
                 amigos.add(amigo);
@@ -87,7 +87,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("UPDATE tb_amigos SET Nome = ?, Telefone = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE tb_amigos SET nome = ?, telefone = ? WHERE ID = ?");
             stmt.setString(1, amg.getNome());
             stmt.setString(2, amg.getTelefone());
             stmt.setInt(3, amg.getIdAmigo()); //pra pegar o id
@@ -110,7 +110,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
         try {
             
-            stmt = con.prepareStatement("DELETE FROM tb_amigos WHERE id = ?");
+            stmt = con.prepareStatement("DELETE FROM tb_amigos WHERE ID = ?");
             stmt.setInt(1, amg.getIdAmigo()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
@@ -134,7 +134,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         List<Amigo> dadosAmigo = new ArrayList<>(); //cria uma lista pra adicionar os produtos
 
         try { //pesquisar sem colocar palavra completa
-            stmt = con.prepareStatement("SELECT * FROM tb_amigos WHERE Nome LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM tb_amigos WHERE nome LIKE ?");
             stmt.setString(1, "%"+desc+"%");
             rs = stmt.executeQuery();
 
@@ -142,9 +142,9 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
                 Amigo amigos = new Amigo();
 
-                amigos.setIdAmigo(rs.getInt("id"));
-                amigos.setNome(rs.getString("Nome"));
-                amigos.setTelefone(rs.getString("Telefone"));
+                amigos.setIdAmigo(rs.getInt("ID"));
+                amigos.setNome(rs.getString("nome"));
+                amigos.setTelefone(rs.getString("telefone"));
 
                 dadosAmigo.add(amigos);
             }
@@ -167,7 +167,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_amigos (Nome,Telefone) VALUES (?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_amigos (nome,telefone) VALUES (?,?)");
             stmt.setString(1, amg.getNome());
             stmt.setString(2, amg.getTelefone());
 

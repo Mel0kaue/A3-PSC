@@ -27,12 +27,11 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel, Quantidade) VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,custo) VALUES (?,?,?)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
-            stmt.setDouble(4, f.getAluguel());
-            stmt.setInt(5, f.getQuantidade());
+  
             
 
             stmt.executeUpdate(); //atualiza
@@ -64,12 +63,11 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
                 Ferramenta ferramenta = new Ferramenta();
 
-                ferramenta.setId(rs.getInt("id"));
+                ferramenta.setId(rs.getInt("ID"));
                 ferramenta.setNome(rs.getString("nome"));
                 ferramenta.setMarca(rs.getString("marca"));
-                ferramenta.setCusto(rs.getDouble("Custo"));
-                ferramenta.setAluguel(rs.getDouble("Aluguel"));
-                ferramenta.setQuantidade(rs.getInt("Quantidade"));
+                ferramenta.setCusto(rs.getDouble("custo"));
+       
 
                 ferramentas.add(ferramenta);
             }
@@ -91,12 +89,11 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("UPDATE tb_ferramentas SET nome = ?, marca = ?, Custo = ?, Aluguel = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE tb_ferramentas SET nome = ?, marca = ?, custo = ? WHERE ID = ?");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
-            stmt.setDouble(4, f.getAluguel());
-            stmt.setInt(5, f.getId()); //pra pegar o id
+            stmt.setInt(4, f.getId()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
 
@@ -115,7 +112,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             
-            stmt = con.prepareStatement("DELETE FROM tb_ferramentas WHERE id = ?");
+            stmt = con.prepareStatement("DELETE FROM tb_ferramentas WHERE ID = ?");
             stmt.setInt(1, f.getId()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
@@ -151,8 +148,7 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
                 ferramenta.setNome(rs.getString("descricao"));
                 ferramenta.setMarca(rs.getString("Marca"));
                 ferramenta.setCusto(rs.getDouble("Custo"));
-                ferramenta.setAluguel(rs.getDouble("Aluguel"));
-                ferramenta.setQuantidade(rs.getInt("Quantidade"));
+         
                 produtos.add(ferramenta);
             }
 
@@ -174,12 +170,11 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,Custo, Aluguel, Quantidade) VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,custo) VALUES (?,?,?)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
-            stmt.setDouble(4, f.getAluguel());
-            stmt.setInt(5, f.getQuantidade());
+      
 
             stmt.executeUpdate(); //atualiza
 

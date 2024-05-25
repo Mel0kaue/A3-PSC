@@ -26,7 +26,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
      * Creates new form jFrmCadastroFerramentas
      */
     MaskFormatter mfCusto;
-    MaskFormatter mfAluguel;
+
 
     public jFrmCadastroFerramentas() {
 
@@ -36,11 +36,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             System.out.println("erro na criação da mascara");
         }
 
-        try {
-            mfAluguel = new MaskFormatter("R$##,##");
-        } catch (ParseException ex) {
-            System.out.println("erro na criação da mascara");
-        }
+
 
         initComponents();
 
@@ -56,7 +52,6 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
 
         // Aplicar o renderer às colunas desejadas (ID e Quantidade)
         jTableCadastroFerramenta.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Coluna ID
-        jTableCadastroFerramenta.getColumnModel().getColumn(5).setCellRenderer(centerRenderer); // Coluna Quantidade
 
         readJtable();
     }
@@ -75,8 +70,8 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 f.getNome(),
                 f.getMarca(),
                 String.format("R$ %.2f", f.getCusto()),
-                String.format("R$ %.2f", f.getAluguel()),
-                f.getQuantidade()
+
+ 
             });
 
         }
@@ -103,11 +98,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         btnAlterarFerramenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCadastroFerramenta = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         txtFormatCusto = new javax.swing.JFormattedTextField(mfCusto);
-        txtFormatAluguel = new javax.swing.JFormattedTextField(mfCusto);
-        txtFormatQuantidade = new javax.swing.JFormattedTextField();
-        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -173,13 +164,13 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
 
         jTableCadastroFerramenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Ferramenta", "Marca", "Custo de Aquisição", "Aluguel", "Qtd"
+                "ID", "Ferramenta", "Marca", "Custo de Aquisição"
             }
         ));
         jTableCadastroFerramenta.setShowHorizontalLines(true);
@@ -190,9 +181,6 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTableCadastroFerramenta);
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Aluguel:");
 
         txtFormatCusto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFormatCusto.setValue(0.00);
@@ -209,41 +197,6 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 txtFormatCustoKeyPressed(evt);
             }
         });
-
-        txtFormatAluguel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        txtFormatAluguel.setValue(0.00);
-        txtFormatAluguel.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtFormatAluguelFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtFormatAluguelFocusLost(evt);
-            }
-        });
-        txtFormatAluguel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFormatAluguelKeyPressed(evt);
-            }
-        });
-
-        txtFormatQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        txtFormatQuantidade.setValue(0);
-        txtFormatQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtFormatQuantidadeFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtFormatQuantidadeFocusLost(evt);
-            }
-        });
-        txtFormatQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFormatQuantidadeKeyPressed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Quantidade:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,26 +217,16 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                                     .addComponent(txtInserirMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
                                     .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFormatAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(13, 13, 13))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(100, 100, 100)
                                 .addComponent(btnAdicionarFerramenta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnExcluir)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(btnAlterarFerramenta))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFormatQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(62, 62, 62)
+                        .addComponent(btnAlterarFerramenta)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -301,15 +244,9 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                         .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))))
+                        .addGap(38, 38, 38)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtInserirMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFormatAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFormatQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtInserirMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionarFerramenta)
@@ -336,8 +273,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         f.setNome(txtInserirFerramenta.getText());
         f.setMarca(txtInserirMarca.getText());
         f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-        f.setAluguel(Double.parseDouble(txtFormatAluguel.getText().replace(',', '.')));
-        f.setQuantidade(Integer.parseInt(txtFormatQuantidade.getText()));
+   
 
         //insere novo objeto dentro da tabela
         dao.create(f);
@@ -346,8 +282,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         txtInserirFerramenta.setText("");
         txtInserirMarca.setText("");
         txtFormatCusto.setText("");
-        txtFormatAluguel.setText("");
-        txtFormatQuantidade.setText("");
+
 
         //atualizando tabela
         readJtable();
@@ -367,16 +302,14 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         f.setNome(txtInserirFerramenta.getText());
         f.setMarca(txtInserirMarca.getText());
         f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-        f.setAluguel(Double.parseDouble(txtFormatAluguel.getText().replace(',', '.')));
-        f.setQuantidade(Integer.parseInt(txtFormatQuantidade.getText()));
+    
         dao.create(f);
 
         //limpando os campos
         txtInserirFerramenta.setText("");
         txtInserirMarca.setText("");
         txtFormatCusto.setText("");
-        txtFormatAluguel.setText("");
-        txtFormatQuantidade.setText("");
+
 
         //atualizando tabela
         readJtable();
@@ -394,8 +327,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             f.setNome(txtInserirFerramenta.getText());
             f.setMarca(txtInserirMarca.getText());
             f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-            f.setAluguel(Double.parseDouble(txtFormatAluguel.getText().replace(',', '.')));
-            f.setQuantidade(Integer.parseInt(txtFormatQuantidade.getText()));
+         
 
             //update nos dados
             dao.update(f);
@@ -404,8 +336,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             txtInserirFerramenta.setText("");
             txtInserirMarca.setText("");
             txtFormatCusto.setText("");
-            txtFormatAluguel.setText("");
-            txtFormatQuantidade.setText("");
+        
 
             //atualizando tabela
             readJtable();
@@ -430,8 +361,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             txtInserirFerramenta.setText("");
             txtInserirMarca.setText("");
             txtFormatCusto.setText("");
-            txtFormatAluguel.setText("");
-            txtFormatQuantidade.setText("");
+         
 
             // Atualizar tabela
             readJtable();
@@ -483,8 +413,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         // ir pro próximo campo clincando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            //vai pro inserir aluguel
-            txtFormatAluguel.requestFocus();
+     
         }
     }//GEN-LAST:event_txtFormatCustoKeyPressed
 
@@ -497,54 +426,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFormatCustoFocusLost
 
     //pro "0,00" que tava no campo sumir quando o usuario clicar
-    private void txtFormatAluguelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatAluguelFocusGained
-        // TODO add your handling code here:
-        if ("0,00".equals(txtFormatAluguel.getText())) {
-            txtFormatAluguel.setText("");
-        }
-    }//GEN-LAST:event_txtFormatAluguelFocusGained
-
     //pro "0,00" que tava no campo aparecer quando o usuario desclicar
-    private void txtFormatAluguelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatAluguelFocusLost
-
-        if ("".equals(txtFormatAluguel.getText())) {
-            txtFormatAluguel.setValue(0.00);
-        }
-    }//GEN-LAST:event_txtFormatAluguelFocusLost
-
-    private void txtFormatAluguelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormatAluguelKeyPressed
-        // ir pro próximo campo clicando Enter
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            //vai pro campo quantidade
-            txtFormatQuantidade.requestFocus();
-        }
-    }//GEN-LAST:event_txtFormatAluguelKeyPressed
-
-    //pro "0" que tava no campo sumir quando o usuario clicar
-    private void txtFormatQuantidadeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatQuantidadeFocusGained
-        if ("0".equals(txtFormatQuantidade.getText())) {
-            txtFormatQuantidade.setText("");
-        }
-    }//GEN-LAST:event_txtFormatQuantidadeFocusGained
-
-    //pro "0" que tava no campo aparecer quando o usuario desclicar
-    private void txtFormatQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatQuantidadeFocusLost
-        if ("".equals(txtFormatQuantidade.getText())) {
-            txtFormatQuantidade.setValue(0);
-        }
-    }//GEN-LAST:event_txtFormatQuantidadeFocusLost
-
-    private void txtFormatQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormatQuantidadeKeyPressed
-        // ir pro próximo campo clicando Enter
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            //vai pro botão adicionar
-            btnAdicionarFerramenta.requestFocus();
-        }
-
-    }//GEN-LAST:event_txtFormatQuantidadeKeyPressed
-
     private void jTableCadastroFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCadastroFerramentaMouseClicked
         // TODO add your handling code here:
         if (this.jTableCadastroFerramenta.getSelectedRow() != -1) {
@@ -552,12 +434,11 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             String nome = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 1).toString();
             String marca = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 2).toString();
             String aquisicao = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 3).toString();
-            String aluguel = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 4).toString();
 
             this.txtInserirFerramenta.setText(nome);
             this.txtInserirMarca.setText(marca);
             this.txtFormatCusto.setText(aquisicao);
-            this.txtFormatAluguel.setText(aluguel);
+        
 
         }
     }//GEN-LAST:event_jTableCadastroFerramentaMouseClicked
@@ -603,16 +484,12 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterarFerramenta;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCadastroFerramenta;
     private javax.swing.JLabel lblFerramenta;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblUnidade;
-    private javax.swing.JFormattedTextField txtFormatAluguel;
     private javax.swing.JFormattedTextField txtFormatCusto;
-    private javax.swing.JFormattedTextField txtFormatQuantidade;
     private javax.swing.JTextField txtInserirFerramenta;
     private javax.swing.JTextField txtInserirMarca;
     // End of variables declaration//GEN-END:variables

@@ -14,8 +14,7 @@ public class Ferramenta {
     private String Nome;
     private String Marca;
     private Double Custo;
-    private Double Aluguel;
-    private int Quantidade;
+
 
     public int getId() {
         return id;
@@ -49,22 +48,7 @@ public class Ferramenta {
         this.Custo = Custo;
     }
 
-    public Double getAluguel() {
-        return Aluguel;
-    }
-
-    public void setAluguel(Double Aluguel) {
-        this.Aluguel = Aluguel;
-    }
-
-    public int getQuantidade() {
-        return Quantidade;
-    }
-
-    public void setQuantidade(int Quantidade) {
-        this.Quantidade = Quantidade;
-    }
-    
+ 
     
     
     

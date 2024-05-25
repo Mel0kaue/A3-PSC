@@ -10,24 +10,50 @@ import java.util.logging.Logger;
 
 public class ConexaoBancoDados {
     
-    private static String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static String URL = "jdbc:mysql://localhost:3306/bd_a3";
-    private static String USER = "root";
-    private static String PASS = "Unisul@1520";
-
-    public static Connection getConnection() { //criando conexão
-
+    // Propriedades da conexão
+    private static String DRIVER = "com.mysql.cj.jdbc.Driver"; // Caminho do MySQL
+    private static String URL = "jdbc:mysql://localhost:3306/bd_a3"; // Nome do banco de dados
+    private static String USER = "root"; // Usuário do banco de dados
+    private static String PASS = "Unisul@1520"; // Senha do banco de dados
+    
+    // Criando a conexão
+    public static Connection getConnection() { 
+        Connection conn = null;
         try {
 
             Class.forName(DRIVER);
-            return DriverManager.getConnection(URL, USER, PASS);
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("erro de conexão: ", ex);
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            
+            if (conn != null) {
+                System.out.println("Banco conectado!");
+                return conn;
+            } 
+            else {
+                System.out.println("-> -> -> Banco NÂO conectado!");
+            }
+        } 
+        catch (ClassNotFoundException e) {
+            System.out.println("O Driver JDBC nao foi encontrado!");
+            e.printStackTrace();
         }
+        catch (SQLException e) {
+            if (e.getMessage().contains("Unknown database")) {
+                System.out.println("O DataBase não existe!");
+                e.printStackTrace();
+            } 
+            else if (e.getMessage().contains("Access denied")) {
+                System.out.println("Os dados do usuário login e senha estao incorretos!");
+                e.printStackTrace();
+            } 
+            else { 
+                System.out.println("Erro na conexao!" + e.getMessage());
+                e.printStackTrace();
+            }       
+        }
+        return conn;
     }
 
-    //aqui começa uma sobrecarga fechando as conexões
+    // Sobrecargas de fechamento do Banco
     public static void closeConnection(Connection con) {
 
         try { //se a conexão tiver aberta, feche
@@ -63,14 +89,11 @@ public class ConexaoBancoDados {
 
             if (rs != null) {
                 rs.close();
-
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(ConexaoBancoDados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-
 } 
 

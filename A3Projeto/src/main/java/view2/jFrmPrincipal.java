@@ -77,7 +77,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblHistEmpr, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(623, 623, 623)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,6 +125,11 @@ public class jFrmPrincipal extends javax.swing.JFrame {
         jMenu3.add(jSeparator3);
 
         jMenuRelatorioEmp.setText("Relatório de Empréstimos");
+        jMenuRelatorioEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRelatorioEmpActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuRelatorioEmp);
 
         jMenuBar1.add(jMenu3);
@@ -186,6 +191,11 @@ public class jFrmPrincipal extends javax.swing.JFrame {
         jFrmRelatorioFerramentas relFerram = new jFrmRelatorioFerramentas();
         relFerram.setVisible(true);
     }//GEN-LAST:event_jMenuRelatórioFerramActionPerformed
+
+    private void jMenuRelatorioEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioEmpActionPerformed
+        jFrmRelatorioEmp relEmp = new jFrmRelatorioEmp();
+        relEmp.setVisible(true);
+    }//GEN-LAST:event_jMenuRelatorioEmpActionPerformed
 
     /**
      * @param args the command line arguments

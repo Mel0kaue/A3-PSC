@@ -30,7 +30,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="jTextTotGasto" min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="txtTotalGasto" min="-2" pref="99" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="lblHistCompras" min="-2" max="-2" attributes="0"/>
@@ -38,7 +38,7 @@
                       <Component id="lblTotGasto" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="49" pref="42" max="32767" attributes="0"/>
+              <EmptySpace min="49" pref="59" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,7 +53,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="jTextTotGasto" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTotalGasto" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
           </Group>
@@ -80,10 +80,10 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
+                <Column editable="true" title="ID" type="java.lang.Object"/>
                 <Column editable="true" title="Nome" type="java.lang.Object"/>
                 <Column editable="true" title="Marca" type="java.lang.Object"/>
                 <Column editable="true" title="Valor" type="java.lang.Object"/>
-                <Column editable="true" title="Qtd" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -122,12 +122,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tot. Gasto:"/>
+        <Property name="text" type="java.lang.String" value="Total Gasto:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextTotGasto">
+    <Component class="javax.swing.JTextField" name="txtTotalGasto">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextTotGastoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTotalGastoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

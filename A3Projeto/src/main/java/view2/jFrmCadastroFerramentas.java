@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view2;
 
 import dao.FerramentaDAO;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -22,11 +16,11 @@ import model.Ferramenta;
  */
 public class jFrmCadastroFerramentas extends javax.swing.JFrame {
 
+    private Ferramenta objetoFerramenta;
     /**
      * Creates new form jFrmCadastroFerramentas
      */
     MaskFormatter mfCusto;
-
 
     public jFrmCadastroFerramentas() {
 
@@ -35,8 +29,6 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         } catch (ParseException ex) {
             System.out.println("erro na criação da mascara");
         }
-
-
 
         initComponents();
 
@@ -69,11 +61,9 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 f.getId(),
                 f.getNome(),
                 f.getMarca(),
+                // f.getCusto(),
                 String.format("R$ %.2f", f.getCusto()),
-
- 
             });
-
         }
 
     }
@@ -88,42 +78,30 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        lblFerramenta = new javax.swing.JLabel();
         lblUnidade = new javax.swing.JLabel();
-        lblMarca = new javax.swing.JLabel();
-        txtInserirFerramenta = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         txtInserirMarca = new javax.swing.JTextField();
+        lblFerramenta = new javax.swing.JLabel();
+        lblMarca = new javax.swing.JLabel();
+        txtInserirMarcaa = new javax.swing.JTextField();
         btnAdicionarFerramenta = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnAlterarFerramenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCadastroFerramenta = new javax.swing.JTable();
         txtFormatCusto = new javax.swing.JFormattedTextField(mfCusto);
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtInserirNome = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar ferramentas");
-
-        lblFerramenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFerramenta.setText("Ferramenta:");
-
         lblUnidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblUnidade.setText("Custo de aq:");
+        lblUnidade.setText("Custo");
 
-        lblMarca.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblMarca.setText("Marca:");
-
-        txtInserirFerramenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInserirFerramentaActionPerformed(evt);
-            }
-        });
-        txtInserirFerramenta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtInserirFerramentaKeyPressed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Custo");
 
         txtInserirMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +114,42 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             }
         });
 
-        btnAdicionarFerramenta.setText("Adicionar");
+        lblFerramenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblFerramenta.setText("Ferramenta:");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar ferramentas");
+        setBackground(new java.awt.Color(239, 35, 60));
+
+        lblMarca.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMarca.setText("Marca:");
+
+        txtInserirMarcaa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInserirMarcaaActionPerformed(evt);
+            }
+        });
+        txtInserirMarcaa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtInserirMarcaaKeyPressed(evt);
+            }
+        });
+
+        btnAdicionarFerramenta.setBackground(new java.awt.Color(64, 61, 57));
+        btnAdicionarFerramenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdicionarFerramenta.setForeground(new java.awt.Color(22, 219, 101));
+        btnAdicionarFerramenta.setText("Cadastrar");
+        btnAdicionarFerramenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)));
+        btnAdicionarFerramenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnAdicionarFerramentaFocusGained(evt);
+            }
+        });
+        btnAdicionarFerramenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdicionarFerramentaMouseClicked(evt);
+            }
+        });
         btnAdicionarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarFerramentaActionPerformed(evt);
@@ -148,14 +161,22 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setText("Excluir");
+        btnExcluir.setBackground(new java.awt.Color(64, 61, 57));
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(195, 47, 39));
+        btnExcluir.setText("Deletar");
+        btnExcluir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
             }
         });
 
-        btnAlterarFerramenta.setText("Alterar");
+        btnAlterarFerramenta.setBackground(new java.awt.Color(64, 61, 57));
+        btnAlterarFerramenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAlterarFerramenta.setForeground(new java.awt.Color(246, 170, 28));
+        btnAlterarFerramenta.setText("Editar");
+        btnAlterarFerramenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)));
         btnAlterarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarFerramentaActionPerformed(evt);
@@ -198,63 +219,85 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText(" ");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Nome:");
+
+        txtInserirNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInserirNomeActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Custo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblFerramenta, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                        .addComponent(txtInserirFerramenta, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-                                    .addComponent(lblMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtInserirMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(13, 13, 13))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(btnAdicionarFerramenta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExcluir)))
-                        .addGap(62, 62, 62)
-                        .addComponent(btnAlterarFerramenta)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtInserirNome, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAdicionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtInserirMarcaa, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAlterarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtInserirFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtInserirNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMarca)
+                            .addComponent(txtInserirMarcaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtInserirMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdicionarFerramenta)
-                    .addComponent(btnAlterarFerramenta)
-                    .addComponent(btnExcluir))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAdicionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAlterarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
 
         pack();
@@ -270,73 +313,137 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         FerramentaDAO dao = new FerramentaDAO(); //conecta sql
 
         //atualiza os valores
-        f.setNome(txtInserirFerramenta.getText());
-        f.setMarca(txtInserirMarca.getText());
+        f.setNome(txtInserirNome.getText());
+        f.setMarca(txtInserirMarcaa.getText());
         f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-   
 
         //insere novo objeto dentro da tabela
         dao.create(f);
 
         //limpando os campos
-        txtInserirFerramenta.setText("");
-        txtInserirMarca.setText("");
+        txtInserirNome.setText("");
+        txtInserirMarcaa.setText("");
         txtFormatCusto.setText("");
-
 
         //atualizando tabela
         readJtable();
     }
 
-    private void txtInserirFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirFerramentaActionPerformed
+    private void txtInserirMarcaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirMarcaaActionPerformed
         //label do botão ferramenta
-    }//GEN-LAST:event_txtInserirFerramentaActionPerformed
+    }//GEN-LAST:event_txtInserirMarcaaActionPerformed
 
     // BOTAO ADICIONAR
     private void btnAdicionarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaActionPerformed
+        String nome = "";
+        String marca = "";
+        double preco = 0.0;
+        String textoPreco = "";
 
-        Ferramenta f = new Ferramenta(); //instancia produto
-        FerramentaDAO dao = new FerramentaDAO(); //conecta sql
+        try {
+            if (this.txtInserirNome.getText().length() <= 2) {
+                JOptionPane.showMessageDialog(null, "O campo Nome deve ter no mínimo 3 caracteres.");
+            } else {
+                nome = this.txtInserirNome.getText();
+            }
 
-        //atualiza os valores
-        f.setNome(txtInserirFerramenta.getText());
-        f.setMarca(txtInserirMarca.getText());
-        f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-    
-        dao.create(f);
-
-        //limpando os campos
-        txtInserirFerramenta.setText("");
-        txtInserirMarca.setText("");
-        txtFormatCusto.setText("");
-
-
-        //atualizando tabela
-        readJtable();
-    }//GEN-LAST:event_btnAdicionarFerramentaActionPerformed
-
-    // BOTAO ALTERAR
-    private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
-
-        if (jTableCadastroFerramenta.getSelectedRow() != -1) {
+            if (this.txtInserirMarcaa.getText().length() <= 2) {
+                JOptionPane.showMessageDialog(null, "O campo Marca deve ter no mínimo 3 caracteres.");
+            } else {
+                marca = this.txtInserirMarcaa.getText();
+            }
+            
+            if (this.txtFormatCusto.getText().length() <= 0) {
+                JOptionPane.showMessageDialog(null, "O campo Custo deve ter pelo menos 1 caracterer!");
+            } else {
+                textoPreco = this.txtFormatCusto.getText();
+                textoPreco = textoPreco.replace(",", ".");
+                preco = Double.parseDouble(textoPreco); // transformando um dado do tipo String em double.
+            }
 
             Ferramenta f = new Ferramenta(); //instancia produto
             FerramentaDAO dao = new FerramentaDAO(); //conecta sql
 
             //atualiza os valores
-            f.setNome(txtInserirFerramenta.getText());
-            f.setMarca(txtInserirMarca.getText());
-            f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
-         
+            f.setNome(nome);
+            f.setMarca(marca);
+            if (preco <= 0.0) {
+                JOptionPane.showMessageDialog(null, "O valor não pode ser 0");
+            } else {
+                f.setCusto(preco);
+            }
+
+            if (dao.create(f)) {
+//                JOptionPane.showMessageDialog(null, "Ferramenta cadastrada!");
+
+                // limpa campos da interface
+                this.txtInserirNome.setText("");
+                this.txtInserirMarcaa.setText("");
+                this.txtFormatCusto.setText("");
+
+                //atualizando tabela
+                readJtable();
+            } else {
+                this.setVisible(false);
+            }
+        } catch (Exception ex) {
+            System.out.println("erro ao cadastrar ferramenta " + ex);
+        }
+    }//GEN-LAST:event_btnAdicionarFerramentaActionPerformed
+
+    // BOTAO ALTERAR
+    private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
+
+        int id = 0;
+        String nome = "";
+        String marca = "";
+        double preco = 0.0;
+
+        if (this.txtInserirNome.getText().length() <= 2) {
+            JOptionPane.showMessageDialog(null, "O campo nome deve ter pelo menos 3 caracteres!");
+        } else {
+            nome = this.txtInserirNome.getText();
+        }
+
+        if (this.txtInserirMarcaa.getText().length() <= 2) {
+            JOptionPane.showMessageDialog(null, "O campo marca deve ter pelo menos 3 caracteres!");
+        } else {
+            marca = this.txtInserirMarcaa.getText();
+        }
+
+        if (this.txtFormatCusto.getText().length() <= 0) {
+            JOptionPane.showMessageDialog(null, "O campo marca deve ter pelo menos 1 caracterer!");
+        }
+
+        String textoPreco = this.txtFormatCusto.getText();
+        textoPreco = textoPreco.replace("R$ ", " ");
+        textoPreco = textoPreco.replace(",", ".");
+        preco = Double.parseDouble(textoPreco); // transformando um dado do tipo String em double.
+
+        if (this.jTableCadastroFerramenta.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione uma Ferramenta para Alterar");
+        } else {
+            id = Integer.parseInt(this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 0).toString());
+        }
+
+        if (jTableCadastroFerramenta.getSelectedRow() != -1) {
+
+            Ferramenta f = new Ferramenta(); //instancia ferramenta
+            FerramentaDAO dao = new FerramentaDAO(); //conecta sql
+
+            //atualiza os valores
+            f.setNome(nome);
+            f.setMarca(marca);
+            f.setCusto(preco);
+            f.setId(id);
 
             //update nos dados
             dao.update(f);
 
             //limpando os campos
-            txtInserirFerramenta.setText("");
-            txtInserirMarca.setText("");
-            txtFormatCusto.setText("");
-        
+            this.txtInserirMarcaa.setText("");
+            this.txtInserirNome.setText("");
+            this.txtFormatCusto.setText("");
 
             //atualizando tabela
             readJtable();
@@ -358,10 +465,9 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             }
 
             // Limpar campos
-            txtInserirFerramenta.setText("");
-            txtInserirMarca.setText("");
-            txtFormatCusto.setText("");
-         
+            this.txtInserirMarcaa.setText("");
+            this.txtInserirNome.setText("");
+            this.txtFormatCusto.setText("");
 
             // Atualizar tabela
             readJtable();
@@ -375,15 +481,14 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         // label do botao marca
     }//GEN-LAST:event_txtInserirMarcaActionPerformed
 
-    private void txtInserirFerramentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirFerramentaKeyPressed
+    private void txtInserirMarcaaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirMarcaaKeyPressed
         // ir pro próximo campo clicando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             //vai pro inserir marca
             txtInserirMarca.requestFocus();
         }
-
-    }//GEN-LAST:event_txtInserirFerramentaKeyPressed
+    }//GEN-LAST:event_txtInserirMarcaaKeyPressed
 
     private void txtInserirMarcaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirMarcaKeyPressed
         // ir pro próximo campo clicando Enter
@@ -413,16 +518,15 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         // ir pro próximo campo clincando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-     
         }
     }//GEN-LAST:event_txtFormatCustoKeyPressed
 
     //pro "0" que tava no campo aparecer quando o usuario desclicar
     private void txtFormatCustoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatCustoFocusLost
 
-        if ("".equals(txtFormatCusto.getText())) {
-            txtFormatCusto.setValue(0.00);
-        }
+//        if ("".equals(txtFormatCusto.getText())) {
+//            txtFormatCusto.setValue(0.00);
+//        }
     }//GEN-LAST:event_txtFormatCustoFocusLost
 
     //pro "0,00" que tava no campo sumir quando o usuario clicar
@@ -434,14 +538,25 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             String nome = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 1).toString();
             String marca = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 2).toString();
             String aquisicao = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 3).toString();
-
-            this.txtInserirFerramenta.setText(nome);
-            this.txtInserirMarca.setText(marca);
-            this.txtFormatCusto.setText(aquisicao);
-        
-
+            
+            String aquisicaoModificada = aquisicao.replace("R$ ", "");
+            this.txtInserirNome.setText(nome);
+            this.txtInserirMarcaa.setText(marca);
+            this.txtFormatCusto.setText(aquisicaoModificada);
         }
     }//GEN-LAST:event_jTableCadastroFerramentaMouseClicked
+
+    private void txtInserirNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInserirNomeActionPerformed
+
+    private void btnAdicionarFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdicionarFerramentaMouseClicked
+
+    private void btnAdicionarFerramentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdicionarFerramentaFocusGained
 
     /**
      * @param args the command line arguments
@@ -484,13 +599,18 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterarFerramenta;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCadastroFerramenta;
     private javax.swing.JLabel lblFerramenta;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblUnidade;
     private javax.swing.JFormattedTextField txtFormatCusto;
-    private javax.swing.JTextField txtInserirFerramenta;
     private javax.swing.JTextField txtInserirMarca;
+    private javax.swing.JTextField txtInserirMarcaa;
+    private javax.swing.JTextField txtInserirNome;
     // End of variables declaration//GEN-END:variables
 }

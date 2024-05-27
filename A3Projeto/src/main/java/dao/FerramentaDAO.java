@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import conexaobd.ConexaoBancoDados;
@@ -17,10 +12,16 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Ferramenta;
 
+/**
+ *
+ * @author josue
+ */
+public class FerramentaDAO {
+    
+    public static List<Ferramenta> MinhaLista = new ArrayList<>(); // Cria uma lista pra adicionar as ferramentas
 
-public class FerramentaDAO implements DaoGenerico<Ferramenta>{
-
-    public void create(Ferramenta f) {
+    public boolean create(Ferramenta f) {
+        boolean result = false;
 
         Connection con = ConexaoBancoDados.getConnection();
         PreparedStatement stmt = null;
@@ -32,57 +33,59 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
   
-            
-
             stmt.executeUpdate(); //atualiza
 
             JOptionPane.showMessageDialog(null, "salvo com sucesso!"); //se der certo
+            
+            return result = true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex); //se der errado
+            return result;
         } finally {
             ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
         }
-
     }
 
     public List<Ferramenta> read() { //lista
+    
+        MinhaLista.clear(); // importante limpar a lista antes de retornar com os dados buscados.
 
         //gerando conexão
         Connection con = ConexaoBancoDados.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Ferramenta> ferramentas = new ArrayList<>(); //cria uma lista pra adicionar os produtos
-
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_ferramentas");
-            rs = stmt.executeQuery();
+            if (con != null) {
+                stmt = con.prepareStatement("SELECT * FROM tb_ferramentas");
+                rs = stmt.executeQuery();
 
-            while (rs.next()) {
+                while (rs.next()) {
 
-                Ferramenta ferramenta = new Ferramenta();
+                    Ferramenta ferramenta = new Ferramenta();
 
-                ferramenta.setId(rs.getInt("ID"));
-                ferramenta.setNome(rs.getString("nome"));
-                ferramenta.setMarca(rs.getString("marca"));
-                ferramenta.setCusto(rs.getDouble("custo"));
+                    ferramenta.setId(rs.getInt("ID"));
+                    ferramenta.setNome(rs.getString("nome"));
+                    ferramenta.setMarca(rs.getString("marca"));
+                    ferramenta.setCusto(rs.getDouble("custo"));
        
-
-                ferramentas.add(ferramenta);
+                    MinhaLista.add(ferramenta);
+                }
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(FerramentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
             ConexaoBancoDados.closeConnection(con, stmt, rs); //fecha conexão
         }
 
-        return ferramentas;
-
+        return MinhaLista;
     }
 
-    public void update(Ferramenta f) { //atualiza
+    public boolean update(Ferramenta f) { //atualiza
+        boolean result = false;
+
 
         Connection con = ConexaoBancoDados.getConnection(); 
         PreparedStatement stmt = null;
@@ -98,8 +101,10 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
             stmt.executeUpdate(); //atualiza
 
             JOptionPane.showMessageDialog(null, "atualizado com sucesso!"); //se der certo
+            return result = true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex); //se der errado
+            return result;
         } finally {
             ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
         }
@@ -111,7 +116,6 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
         PreparedStatement stmt = null;
 
         try {
-            
             stmt = con.prepareStatement("DELETE FROM tb_ferramentas WHERE ID = ?");
             stmt.setInt(1, f.getId()); //pra pegar o id
 
@@ -123,7 +127,6 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
         } finally {
             ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
         }
-
     }
     
     public List<Ferramenta> readForDesc(String desc) { //pesquisa
@@ -159,47 +162,5 @@ public class FerramentaDAO implements DaoGenerico<Ferramenta>{
         }
 
         return produtos;
-
     }
-
-    @Override
-    public void inserir(Ferramenta f) {
-
-        Connection con = ConexaoBancoDados.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,custo) VALUES (?,?,?)");
-            stmt.setString(1, f.getNome());
-            stmt.setString(2, f.getMarca());
-            stmt.setDouble(3, f.getCusto());
-      
-
-            stmt.executeUpdate(); //atualiza
-
-            JOptionPane.showMessageDialog(null, "salvo com sucesso!"); //se der certo
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex); //se der errado
-        } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
-        }
-    }
-
-    @Override
-    public void alterar(Ferramenta obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Ferramenta> consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

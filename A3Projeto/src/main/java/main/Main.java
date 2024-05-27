@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package main;
 
-import view2.jFrmCadastroAmigo;
 import view2.jFrmPrincipal;
 
 /**
@@ -13,7 +8,6 @@ import view2.jFrmPrincipal;
  */
 public class Main {
     public static void main(String[] args) {
-                new jFrmPrincipal().setVisible(true);
-
+        new jFrmPrincipal().setVisible(true);
     }
 }

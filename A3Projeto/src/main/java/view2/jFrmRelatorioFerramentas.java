@@ -1,12 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view2;
+
+import dao.FerramentaDAO;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import model.Ferramenta;
 
 /**
  *
- * @author kauem
+ * @author josue
  */
 public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
 
@@ -15,7 +16,29 @@ public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
      */
     public jFrmRelatorioFerramentas() {
         initComponents();
+        
+        DefaultTableModel modelo = (DefaultTableModel) this.jTableHistCompras.getModel();
+        jTableHistCompras.setRowSorter(new TableRowSorter(modelo));
+        
+        readJTable();
     }
+    
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) this.jTableHistCompras.getModel();
+        modelo.setNumRows(0);
+        
+        FerramentaDAO fdao = new FerramentaDAO();
+        
+        for (Ferramenta f: fdao.read()) {
+            
+            modelo.addRow(new Object[]{
+                f.getId(),
+                f.getNome(),
+                f.getMarca(),
+                f.getCusto(),
+            });
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,7 +53,7 @@ public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHistCompras = new javax.swing.JTable();
         lblTotGasto = new javax.swing.JLabel();
-        jTextTotGasto = new javax.swing.JTextField();
+        txtTotalGasto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de ferramentas");
@@ -46,17 +69,17 @@ public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome", "Marca", "Valor", "Qtd"
+                "ID", "Nome", "Marca", "Valor"
             }
         ));
         jScrollPane1.setViewportView(jTableHistCompras);
 
         lblTotGasto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblTotGasto.setText("Tot. Gasto:");
+        lblTotGasto.setText("Total Gasto:");
 
-        jTextTotGasto.addActionListener(new java.awt.event.ActionListener() {
+        txtTotalGasto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextTotGastoActionPerformed(evt);
+                txtTotalGastoActionPerformed(evt);
             }
         });
 
@@ -70,12 +93,12 @@ public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(jTextTotGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTotalGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblHistCompras)
                         .addGap(326, 326, 326)
                         .addComponent(lblTotGasto)))
-                .addGap(42, 42, Short.MAX_VALUE))
+                .addGap(49, 59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +110,7 @@ public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextTotGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotalGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
 
@@ -95,9 +118,9 @@ public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextTotGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextTotGastoActionPerformed
+    private void txtTotalGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalGastoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextTotGastoActionPerformed
+    }//GEN-LAST:event_txtTotalGastoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,8 +163,8 @@ public class jFrmRelatorioFerramentas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableHistCompras;
-    private javax.swing.JTextField jTextTotGasto;
     private javax.swing.JLabel lblHistCompras;
     private javax.swing.JLabel lblTotGasto;
+    private javax.swing.JTextField txtTotalGasto;
     // End of variables declaration//GEN-END:variables
 }

@@ -75,7 +75,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" pref="46" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtFormatCusto" min="-2" pref="179" max="-2" attributes="0"/>
+                          <Component id="txtFormatCusto" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnExcluir" min="-2" pref="107" max="-2" attributes="0"/>
                       </Group>
@@ -89,7 +89,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="txtInserirNome" min="-2" pref="179" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnAdicionarFerramenta" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Component id="btnCadastrarFerramenta" min="-2" pref="107" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="txtInserirMarcaa" min="-2" pref="179" max="-2" attributes="0"/>
@@ -131,7 +131,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnAdicionarFerramenta" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btnCadastrarFerramenta" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnAlterarFerramenta" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -160,7 +160,7 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInserirMarcaaKeyPressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAdicionarFerramenta">
+    <Component class="javax.swing.JButton" name="btnCadastrarFerramenta">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="39" green="3d" red="40" type="rgb"/>
@@ -181,10 +181,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="btnAdicionarFerramentaFocusGained"/>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAdicionarFerramentaMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarFerramentaActionPerformed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnAdicionarFerramentaKeyPressed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="btnCadastrarFerramentaFocusGained"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCadastrarFerramentaMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarFerramentaActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnCadastrarFerramentaKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnExcluir">
@@ -325,6 +325,7 @@
     <Component class="javax.swing.JTextField" name="txtInserirNome">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtInserirNomeActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInserirNomeKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">

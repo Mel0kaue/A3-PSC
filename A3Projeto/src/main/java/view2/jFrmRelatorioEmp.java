@@ -27,33 +27,15 @@ public class jFrmRelatorioEmp extends javax.swing.JFrame {
     private void initComponents() {
 
         lblEmpAtivos = new javax.swing.JLabel();
-        lblEmpPendentes = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableEmpPendentes = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEmpAtivos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de empréstimos");
 
-        lblEmpAtivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEmpAtivos.setText("Emp. Ativos:");
-
-        lblEmpPendentes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEmpPendentes.setText("Emp. Pendentes:");
-
-        jTableEmpPendentes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nome", "Telefone", "Produto", "Devolução"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableEmpPendentes);
+        lblEmpAtivos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEmpAtivos.setText("Histórico de Empréstimos:");
 
         jTableEmpAtivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,38 +45,37 @@ public class jFrmRelatorioEmp extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome", "Telefone", "Produto", "Valor"
+                "Nome", "Ferramenta", "Data", "Status"
             }
         ));
         jScrollPane2.setViewportView(jTableEmpAtivos);
+
+        jButton1.setText("Registrar Devolução");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEmpAtivos)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEmpPendentes)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblEmpAtivos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmpPendentes)
-                    .addComponent(lblEmpAtivos))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblEmpAtivos)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,11 +119,9 @@ public class jFrmRelatorioEmp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableEmpAtivos;
-    private javax.swing.JTable jTableEmpPendentes;
     private javax.swing.JLabel lblEmpAtivos;
-    private javax.swing.JLabel lblEmpPendentes;
     // End of variables declaration//GEN-END:variables
 }

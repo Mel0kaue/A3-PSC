@@ -62,8 +62,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 f.getNome(),
                 f.getMarca(),
                 // f.getCusto(),
-                String.format("R$ %.2f", f.getCusto()),
-            });
+                String.format("R$ %.2f", f.getCusto()),});
         }
 
     }
@@ -84,7 +83,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         lblFerramenta = new javax.swing.JLabel();
         lblMarca = new javax.swing.JLabel();
         txtInserirMarcaa = new javax.swing.JTextField();
-        btnAdicionarFerramenta = new javax.swing.JButton();
+        btnCadastrarFerramenta = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnAlterarFerramenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -135,29 +134,29 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             }
         });
 
-        btnAdicionarFerramenta.setBackground(new java.awt.Color(64, 61, 57));
-        btnAdicionarFerramenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdicionarFerramenta.setForeground(new java.awt.Color(22, 219, 101));
-        btnAdicionarFerramenta.setText("Cadastrar");
-        btnAdicionarFerramenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)));
-        btnAdicionarFerramenta.addFocusListener(new java.awt.event.FocusAdapter() {
+        btnCadastrarFerramenta.setBackground(new java.awt.Color(64, 61, 57));
+        btnCadastrarFerramenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCadastrarFerramenta.setForeground(new java.awt.Color(22, 219, 101));
+        btnCadastrarFerramenta.setText("Cadastrar");
+        btnCadastrarFerramenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)));
+        btnCadastrarFerramenta.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                btnAdicionarFerramentaFocusGained(evt);
+                btnCadastrarFerramentaFocusGained(evt);
             }
         });
-        btnAdicionarFerramenta.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCadastrarFerramenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAdicionarFerramentaMouseClicked(evt);
+                btnCadastrarFerramentaMouseClicked(evt);
             }
         });
-        btnAdicionarFerramenta.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarFerramentaActionPerformed(evt);
+                btnCadastrarFerramentaActionPerformed(evt);
             }
         });
-        btnAdicionarFerramenta.addKeyListener(new java.awt.event.KeyAdapter() {
+        btnCadastrarFerramenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnAdicionarFerramentaKeyPressed(evt);
+                btnCadastrarFerramentaKeyPressed(evt);
             }
         });
 
@@ -230,6 +229,11 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                 txtInserirNomeActionPerformed(evt);
             }
         });
+        txtInserirNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtInserirNomeKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Custo:");
@@ -248,7 +252,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
@@ -260,7 +264,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(txtInserirNome, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAdicionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnCadastrarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(txtInserirMarcaa, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -290,7 +294,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAdicionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastrarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAlterarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -334,7 +338,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtInserirMarcaaActionPerformed
 
     // BOTAO ADICIONAR
-    private void btnAdicionarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaActionPerformed
+    private void btnCadastrarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFerramentaActionPerformed
         String nome = "";
         String marca = "";
         double preco = 0.0;
@@ -352,7 +356,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             } else {
                 marca = this.txtInserirMarcaa.getText();
             }
-            
+
             if (this.txtFormatCusto.getText().length() <= 0) {
                 JOptionPane.showMessageDialog(null, "O campo Custo deve ter pelo menos 1 caracterer!");
             } else {
@@ -389,7 +393,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println("erro ao cadastrar ferramenta " + ex);
         }
-    }//GEN-LAST:event_btnAdicionarFerramentaActionPerformed
+    }//GEN-LAST:event_btnCadastrarFerramentaActionPerformed
 
     // BOTAO ALTERAR
     private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
@@ -456,21 +460,24 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             int[] selectedRows = jTableCadastroFerramenta.getSelectedRows();
             FerramentaDAO dao = new FerramentaDAO();
 
-            for (int i = 0; i < selectedRows.length; i++) {
-                int modelIndex = jTableCadastroFerramenta.convertRowIndexToModel(selectedRows[i]);
-                int id = (int) jTableCadastroFerramenta.getModel().getValueAt(modelIndex, 0);
-                Ferramenta f = new Ferramenta();
-                f.setId(id);
-                dao.delete(f);
+            int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir?", "Confirmação de exclusão", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                for (int i = 0; i < selectedRows.length; i++) {
+                    int modelIndex = jTableCadastroFerramenta.convertRowIndexToModel(selectedRows[i]);
+                    int id = (int) jTableCadastroFerramenta.getModel().getValueAt(modelIndex, 0);
+                    Ferramenta f = new Ferramenta();
+                    f.setId(id);
+                    dao.delete(f);
+                }
+
+                // Limpar campos
+                this.txtInserirMarcaa.setText("");
+                this.txtInserirNome.setText("");
+                this.txtFormatCusto.setText("");
+
+                // Atualizar tabela
+                readJtable();
             }
-
-            // Limpar campos
-            this.txtInserirMarcaa.setText("");
-            this.txtInserirNome.setText("");
-            this.txtFormatCusto.setText("");
-
-            // Atualizar tabela
-            readJtable();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um ou mais produtos para excluir.");
         }
@@ -486,7 +493,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             //vai pro inserir marca
-            txtInserirMarca.requestFocus();
+            txtFormatCusto.requestFocus();
         }
     }//GEN-LAST:event_txtInserirMarcaaKeyPressed
 
@@ -499,12 +506,12 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtInserirMarcaKeyPressed
 
-    private void btnAdicionarFerramentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaKeyPressed
+    private void btnCadastrarFerramentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarFerramentaKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             dados();
         }
-    }//GEN-LAST:event_btnAdicionarFerramentaKeyPressed
+    }//GEN-LAST:event_btnCadastrarFerramentaKeyPressed
 
     //pro "0,00" que tava no campo sumir quando o usuario clicar
     private void txtFormatCustoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatCustoFocusGained
@@ -518,6 +525,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         // ir pro próximo campo clincando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
+            btnCadastrarFerramenta.requestFocus();
         }
     }//GEN-LAST:event_txtFormatCustoKeyPressed
 
@@ -538,7 +546,7 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
             String nome = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 1).toString();
             String marca = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 2).toString();
             String aquisicao = this.jTableCadastroFerramenta.getValueAt(this.jTableCadastroFerramenta.getSelectedRow(), 3).toString();
-            
+
             String aquisicaoModificada = aquisicao.replace("R$ ", "");
             this.txtInserirNome.setText(nome);
             this.txtInserirMarcaa.setText(marca);
@@ -550,13 +558,21 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtInserirNomeActionPerformed
 
-    private void btnAdicionarFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaMouseClicked
+    private void btnCadastrarFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarFerramentaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdicionarFerramentaMouseClicked
+    }//GEN-LAST:event_btnCadastrarFerramentaMouseClicked
 
-    private void btnAdicionarFerramentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaFocusGained
+    private void btnCadastrarFerramentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnCadastrarFerramentaFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdicionarFerramentaFocusGained
+    }//GEN-LAST:event_btnCadastrarFerramentaFocusGained
+
+    private void txtInserirNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirNomeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            //vai pro inserir custo
+            txtInserirMarcaa.requestFocus();
+        }
+    }//GEN-LAST:event_txtInserirNomeKeyPressed
 
     /**
      * @param args the command line arguments
@@ -595,8 +611,8 @@ public class jFrmCadastroFerramentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionarFerramenta;
     private javax.swing.JButton btnAlterarFerramenta;
+    private javax.swing.JButton btnCadastrarFerramenta;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

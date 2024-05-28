@@ -1,6 +1,6 @@
-package main;
+package Principal;
 
-import view2.jFrmPrincipal;
+import visao.jFrmPrincipal;
 
 /**
  *

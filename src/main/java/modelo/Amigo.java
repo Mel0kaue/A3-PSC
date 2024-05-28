@@ -1,4 +1,4 @@
-package model;
+package modelo;
 
 import dao.AmigosDAO;
 import java.util.ArrayList;

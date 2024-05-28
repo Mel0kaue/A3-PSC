@@ -1,6 +1,6 @@
 package dao;
 
-import conexaobd.ConexaoBancoDados;
+import conexao.ConexaoBancoDados;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Amigo;
-import model.Ferramenta;
+import modelo.Amigo;
+import modelo.Ferramenta;
 
 /**
  *

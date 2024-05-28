@@ -1,4 +1,4 @@
-package view2;
+package visao;
 
 import dao.AmigosDAO;
 import dao.FerramentaDAO;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import model.Amigo;
-import model.Ferramenta;
+import modelo.Amigo;
+import modelo.Ferramenta;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

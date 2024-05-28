@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view2;
+package visao;
 
 import dao.AmigosDAO;
 import dao.EmprestimosDAO;
@@ -19,9 +19,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
-import model.Amigo;
-import model.Emprestimos;
-import model.Ferramenta;
+import modelo.Amigo;
+import modelo.Emprestimos;
+import modelo.Ferramenta;
 
 /**
  *

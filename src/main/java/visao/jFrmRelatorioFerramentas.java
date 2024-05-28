@@ -1,9 +1,9 @@
-package view2;
+package visao;
 
 import dao.FerramentaDAO;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.Ferramenta;
+import modelo.Ferramenta;
 
 /**
  *

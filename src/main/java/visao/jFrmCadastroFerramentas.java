@@ -1,4 +1,4 @@
-package view2;
+package visao;
 
 import dao.FerramentaDAO;
 import java.awt.event.KeyEvent;
@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
-import model.Ferramenta;
+import modelo.Ferramenta;
 
 /**
  *

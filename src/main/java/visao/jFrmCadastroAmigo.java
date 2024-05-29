@@ -112,11 +112,13 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
         });
 
         lblTelefone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblTelefone.setText("Telefone:");
+        lblTelefone.setText("Telefone");
 
         lblNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblNome.setText("Nome:");
+        lblNome.setText("Nome");
 
+        btnAdicionarAmigo.setBackground(new java.awt.Color(64, 61, 57));
+        btnAdicionarAmigo.setForeground(new java.awt.Color(22, 219, 101));
         btnAdicionarAmigo.setText("Adicionar");
         btnAdicionarAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +131,8 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
             }
         });
 
+        btnExcluirAmigo.setBackground(new java.awt.Color(64, 61, 57));
+        btnExcluirAmigo.setForeground(new java.awt.Color(195, 47, 39));
         btnExcluirAmigo.setText("Excluir");
         btnExcluirAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +140,8 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
             }
         });
 
+        btnAlterarAmigo.setBackground(new java.awt.Color(64, 61, 57));
+        btnAlterarAmigo.setForeground(new java.awt.Color(246, 170, 28));
         btnAlterarAmigo.setText("Alterar");
         btnAlterarAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,43 +169,44 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTelefone)
-                            .addComponent(lblNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                            .addComponent(jFormatTelefone))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdicionarAmigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAlterarAmigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExcluirAmigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(jFormatTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTelefone)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 352, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnExcluirAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnAlterarAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAdicionarAmigo)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(35, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(btnAdicionarAmigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAlterarAmigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluirAmigo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTelefone)
-                            .addComponent(jFormatTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
+                .addComponent(lblNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(lblTelefone)
+                .addGap(6, 6, 6)
+                .addComponent(jFormatTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExcluirAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAlterarAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionarAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -256,21 +263,24 @@ public class jFrmCadastroAmigo extends javax.swing.JFrame {
         if (jTableCadastroAmigos.getSelectedRow() != -1) {
             int[] selectedRows = jTableCadastroAmigos.getSelectedRows();
             AmigosDAO dao = new AmigosDAO();
+            
+            int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir?", "Confirmação de exclusão", JOptionPane.YES_NO_OPTION);
+            
+            if(resposta == JOptionPane.YES_OPTION) {
+                for (int i = 0; i < selectedRows.length; i++) {
+                    int modelIndex = jTableCadastroAmigos.convertRowIndexToModel(selectedRows[i]);
+                    int id = (int) jTableCadastroAmigos.getModel().getValueAt(modelIndex, 0);
+                    Amigo amg = new Amigo();
+                    amg.setIdAmigo(id);
+                    dao.delete(amg);
 
-            for (int i = 0; i < selectedRows.length; i++) {
-                int modelIndex = jTableCadastroAmigos.convertRowIndexToModel(selectedRows[i]);
-                int id = (int) jTableCadastroAmigos.getModel().getValueAt(modelIndex, 0);
-                Amigo amg = new Amigo();
-                amg.setIdAmigo(id);
-                dao.delete(amg);
+                    //limpa os campos
+                    txtNome.setText("");
+                    jFormatTelefone.setText("");
 
-                //limpa os campos
-                txtNome.setText("");
-                jFormatTelefone.setText("");
-
-                //atualizando tabela
-                readJtable();
-
+                    //atualizando tabela
+                    readJtable();
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um produto para excluir.");

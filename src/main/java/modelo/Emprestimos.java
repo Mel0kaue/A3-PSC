@@ -1,6 +1,7 @@
 package modelo;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -11,9 +12,17 @@ public class Emprestimos {
     public int ID;
     public String amigoEsc;
     public String ferramentaEsc;
-    public Date dataEms;
-    public Date dataDev;
+    public String status;
+    public Date data;
 
+    public Emprestimos() {
+        this.amigoEsc = amigoEsc;
+        this.ferramentaEsc = ferramentaEsc;
+        this.status = "Ativo";
+    }
+    
+    
+    
     // Getters e setters
     public int getID() {
         return ID;
@@ -39,21 +48,25 @@ public class Emprestimos {
         this.ferramentaEsc = ferramentaEsc;
     }
 
-    public Date getDataEms() {
-        return dataEms;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDataEms(Date dataEms) {
-        this.dataEms = dataEms;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Date getDataDev() {
-        return dataDev;
+    public Date getData() {
+        return data;
     }
 
-    public void setDataDev(Date dataDev) {
-        this.dataDev = dataDev;
+    public void setData(Date data) {
+        this.data = data;
     }
+
+
+    
+    
 
     
 }

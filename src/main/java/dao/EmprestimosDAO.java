@@ -22,22 +22,19 @@ import modelo.Ferramenta;
  */
 public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
 
-    public void create(Emprestimos e,String dataEmprestimoStr, String dataDevolucaoStr) throws ParseException {
+    public void create(Emprestimos e) throws ParseException {
 
         Connection con = ConexaoBancoDados.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            // Converter datas de String para java.sql.Date
-            Date dataEmprestimo = convertStringToDate(dataEmprestimoStr);
-            Date dataDevolucao = convertStringToDate(dataDevolucaoStr);
-            
+   
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_emprestimos(Amigo,Ferramenta,dataEmissao, dataDevolucao) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_emprestimos(amigo,ferramenta,Status, data) VALUES (?,?,?, NOW())");
             stmt.setString(1, e.getAmigoEsc());
             stmt.setString(2, e.getFerramentaEsc());
-            stmt.setDate(3, dataEmprestimo);
-            stmt.setDate(4, dataDevolucao);
+            stmt.setString(3, e.getStatus());
+
 
             stmt.executeUpdate(); //atualiza
 
@@ -49,17 +46,6 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
             ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
         }
 
-    }
-    
-    private Date convertStringToDate(String dateStr) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    java.util.Date date = null;
-    try {
-        date = formatter.parse(dateStr);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-    return new java.sql.Date(date.getTime());
     }
 
     public List<Emprestimos> read() { //lista
@@ -80,10 +66,10 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
                 Emprestimos emprestimo = new Emprestimos();
 
                 emprestimo.setID(rs.getInt("ID"));
-                emprestimo.setAmigoEsc(rs.getString("Amigo"));
-                emprestimo.setFerramentaEsc(rs.getString("Ferramenta"));
-                emprestimo.setDataEms(rs.getDate("dataEmissao"));
-                emprestimo.setDataDev(rs.getDate("dataDevolucao"));
+                emprestimo.setAmigoEsc(rs.getString("amigo"));
+                emprestimo.setFerramentaEsc(rs.getString("ferramenta"));
+                emprestimo.setStatus(rs.getString("Status"));
+                emprestimo.setData(rs.getDate("data"));
                
                 emprestimos.add(emprestimo);
             }
@@ -98,20 +84,21 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
 
     }
     
-    /*public void update(Emprestimos e) { //atualiza
+    public void updateStatus(Emprestimos e) { //atualiza o status
 
         Connection con = ConexaoBancoDados.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("UPDATE tb_emprestimos SET Amigo = ?, Ferramenta = ?, dataEmissao = ?, dataDevolucao = ? WHERE ID = ?");
+            stmt = con.prepareStatement("UPDATE tb_emprestimos SET amigo = ?, ferramenta = ?, Status = ?, data = NOW() WHERE ID = ?");
             stmt.setString(1, e.getAmigoEsc());
             stmt.setString(2, e.getFerramentaEsc());
-            stmt.setDate(3, e.getDataEms());
-            stmt.setDate(4, e.getDataDev());
+            stmt.setString(3, e.getStatus());
+            stmt.setInt(4, e.getID());
+          
 
-            stmt.setInt(5, e.getID()); //pra pegar o id
+            stmt.setInt(4, e.getID()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
 
@@ -122,7 +109,7 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
             ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
         }
 
-    }*/
+    }
     
     public void delete(Emprestimos e) { //deleta
 

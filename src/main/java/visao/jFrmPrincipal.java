@@ -202,7 +202,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuRelatórioFerramActionPerformed
 
     private void jMenuRelatorioEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioEmpActionPerformed
-        jFrmRelatorioEmp relEmp = new jFrmRelatorioEmp();
+        jFrmRelatorioEmpr relEmp = new jFrmRelatorioEmpr();
         relEmp.setVisible(true);
     }//GEN-LAST:event_jMenuRelatorioEmpActionPerformed
 

@@ -91,14 +91,9 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("UPDATE tb_emprestimos SET amigo = ?, ferramenta = ?, Status = ?, data = NOW() WHERE ID = ?");
-            stmt.setString(1, e.getAmigoEsc());
-            stmt.setString(2, e.getFerramentaEsc());
-            stmt.setString(3, e.getStatus());
-            stmt.setInt(4, e.getID());
-          
-
-            stmt.setInt(4, e.getID()); //pra pegar o id
+            stmt = con.prepareStatement("UPDATE tb_emprestimos SET Status = ? WHERE ID = ?");
+            stmt.setString(1, e.getStatus());
+            stmt.setInt(2, e.getID()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
 

@@ -197,7 +197,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuRelatórioFerramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatórioFerramActionPerformed
         // TODO add your handling code here:
-        jFrmRelatorioFerramentas relFerram = new jFrmRelatorioFerramentas();
+        VerFerramentas relFerram = new VerFerramentas();
         relFerram.setVisible(true);
     }//GEN-LAST:event_jMenuRelatórioFerramActionPerformed
 

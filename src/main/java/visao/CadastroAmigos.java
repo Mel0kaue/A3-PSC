@@ -106,6 +106,9 @@ public class CadastroAmigos extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTableCadastroAmigos);
+        if (jTableCadastroAmigos.getColumnModel().getColumnCount() > 0) {
+            jTableCadastroAmigos.getColumnModel().getColumn(0).setMaxWidth(55);
+        }
 
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

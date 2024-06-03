@@ -28,11 +28,11 @@ import modelo.Ferramenta;
  *
  * @author kauem
  */
-public class jFrmRealizarEmpr extends javax.swing.JFrame {
+public class RealizarEmprestimo extends javax.swing.JFrame {
 
     private List<Integer> listaIds = new ArrayList<>();
 
-    public jFrmRealizarEmpr() {
+    public RealizarEmprestimo() {
 
         initComponents();
 
@@ -255,7 +255,7 @@ public class jFrmRealizarEmpr extends javax.swing.JFrame {
             try {
                 dao.create(e);
             } catch (ParseException ex) {
-                Logger.getLogger(jFrmRealizarEmpr.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             //atualizando tabela
@@ -317,14 +317,18 @@ public class jFrmRealizarEmpr extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrmRealizarEmpr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrmRealizarEmpr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrmRealizarEmpr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrmRealizarEmpr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -333,7 +337,7 @@ public class jFrmRealizarEmpr extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrmRealizarEmpr().setVisible(true);
+                new RealizarEmprestimo().setVisible(true);
             }
         });
     }

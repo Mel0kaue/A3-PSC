@@ -146,10 +146,4 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
     public ArrayList<Emprestimos> consultar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
-    
-    
-    
-    
 }

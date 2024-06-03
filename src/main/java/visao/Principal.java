@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author kauem
  */
-public class jFrmPrincipal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form jFrmPrincipal
      */
-    public jFrmPrincipal() {
+    public Principal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
     }
@@ -78,7 +78,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblHistEmpr, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(623, 623, 623)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +163,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 574, Short.MAX_VALUE))
+                .addGap(0, 191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,13 +177,13 @@ public class jFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuCadastrarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarAmigoActionPerformed
         // TODO add your handling code here:
-        CadastroAmigos amg = new CadastroAmigos();
+        CadastroAmigo amg = new CadastroAmigo();
         amg.setVisible(true);
     }//GEN-LAST:event_jMenuCadastrarAmigoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        jFrmRealizarEmpr emp = new jFrmRealizarEmpr();
+        RealizarEmprestimo emp = new RealizarEmprestimo();
         emp.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -197,19 +197,19 @@ public class jFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuRelatórioFerramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatórioFerramActionPerformed
         // TODO add your handling code here:
-        VerFerramentas relFerram = new VerFerramentas();
+        VerFerramenta relFerram = new VerFerramenta();
         relFerram.setVisible(true);
     }//GEN-LAST:event_jMenuRelatórioFerramActionPerformed
 
     private void jMenuRelatorioEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioEmpActionPerformed
-        jFrmRelatorioEmpr relEmp = new jFrmRelatorioEmpr();
+        RelatorioEmprestimo relEmp = new RelatorioEmprestimo();
         relEmp.setVisible(true);
     }//GEN-LAST:event_jMenuRelatorioEmpActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
-        VerAmigos amigoInterface = new VerAmigos();
+        VerAmigo amigoInterface = new VerAmigo();
         amigoInterface.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -230,21 +230,23 @@ public class jFrmPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrmPrincipal().setVisible(true);
+                new Principal().setVisible(true);
             }
         });
     }

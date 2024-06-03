@@ -1,5 +1,4 @@
 package principal;
-import visao.jFrmPrincipal;
 
 /**
  *
@@ -7,6 +6,6 @@ import visao.jFrmPrincipal;
  */
 public class Principal {
     public static void main(String[] args) {
-        new jFrmPrincipal().setVisible(true);
+        new visao.Principal().setVisible(true);
     }
 }

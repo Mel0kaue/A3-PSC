@@ -37,13 +37,14 @@ public class jFrmPrincipal extends javax.swing.JFrame {
         jTableHistEmpr = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuCadastrarAmigo = new javax.swing.JMenuItem();
         jMenuCadastrarFerramenta = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuCadastrarAmigo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuRelatórioFerram = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuRelatorioEmp = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -77,7 +78,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblHistEmpr, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(623, 623, 623)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,6 +95,14 @@ public class jFrmPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastro");
 
+        jMenuCadastrarAmigo.setText("Cadastrar Amigo");
+        jMenuCadastrarAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastrarAmigoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuCadastrarAmigo);
+
         jMenuCadastrarFerramenta.setText("Cadastrar Ferramenta");
         jMenuCadastrarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,17 +112,17 @@ public class jFrmPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuCadastrarFerramenta);
         jMenu1.add(jSeparator2);
 
-        jMenuCadastrarAmigo.setText("Cadastrar Amigo");
-        jMenuCadastrarAmigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCadastrarAmigoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuCadastrarAmigo);
-
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Gerenciar");
+
+        jMenuItem1.setText("Relatório de Amigos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
 
         jMenuRelatórioFerram.setText("Relatório de Ferramentas");
         jMenuRelatórioFerram.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +131,6 @@ public class jFrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuRelatórioFerram);
-        jMenu3.add(jSeparator3);
 
         jMenuRelatorioEmp.setText("Relatório de Empréstimos");
         jMenuRelatorioEmp.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +139,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuRelatorioEmp);
+        jMenu3.add(jSeparator3);
 
         jMenuBar1.add(jMenu3);
 
@@ -168,7 +177,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuCadastrarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarAmigoActionPerformed
         // TODO add your handling code here:
-        jFrmCadastroAmigo amg = new jFrmCadastroAmigo();
+        CadastroAmigos amg = new CadastroAmigos();
         amg.setVisible(true);
     }//GEN-LAST:event_jMenuCadastrarAmigoActionPerformed
 
@@ -181,7 +190,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuCadastrarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarFerramentaActionPerformed
         // TODO add your handling code here:
-        jFrmCadastroFerramentas ferram = new jFrmCadastroFerramentas();
+        CadastroAmigos ferram = new CadastroAmigos();
         ferram.setVisible(true);
         
     }//GEN-LAST:event_jMenuCadastrarFerramentaActionPerformed
@@ -196,6 +205,13 @@ public class jFrmPrincipal extends javax.swing.JFrame {
         jFrmRelatorioEmp relEmp = new jFrmRelatorioEmp();
         relEmp.setVisible(true);
     }//GEN-LAST:event_jMenuRelatorioEmpActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        VerAmigos amigoInterface = new VerAmigos();
+        amigoInterface.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,6 +256,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCadastrarAmigo;
     private javax.swing.JMenuItem jMenuCadastrarFerramenta;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuRelatorioEmp;
     private javax.swing.JMenuItem jMenuRelatórioFerram;

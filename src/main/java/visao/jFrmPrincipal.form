@@ -16,6 +16,14 @@
             <Property name="text" type="java.lang.String" value="Cadastro"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuCadastrarAmigo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Amigo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadastrarAmigoActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuCadastrarFerramenta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Ferramenta"/>
@@ -26,14 +34,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuCadastrarAmigo">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar Amigo"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadastrarAmigoActionPerformed"/>
-              </Events>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
@@ -41,6 +41,14 @@
             <Property name="text" type="java.lang.String" value="Gerenciar"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Amigos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuRelat&#xf3;rioFerram">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Ferramentas"/>
@@ -49,8 +57,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuRelat&#xf3;rioFerramActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuRelatorioEmp">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Empr&#xe9;stimos"/>
@@ -58,6 +64,8 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuRelatorioEmpActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -190,7 +190,7 @@ public class jFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuCadastrarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarFerramentaActionPerformed
         // TODO add your handling code here:
-        CadastroAmigos ferram = new CadastroAmigos();
+        CadastroFerramenta ferram = new CadastroFerramenta();
         ferram.setVisible(true);
         
     }//GEN-LAST:event_jMenuCadastrarFerramentaActionPerformed

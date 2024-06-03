@@ -163,4 +163,28 @@ public class FerramentaDAO {
 
         return produtos;
     }
+    
+    // método que soma todos os valores das ferramentas
+    public static double somarValores() {
+        double soma = 0.0;
+        String sql = "SELECT * FROM bd_a3.tb_ferramentas";
+        
+        Connection con = ConexaoBancoDados.getConnection(); 
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            // Itera pelos resultados e soma os valores
+            while (rs.next()) {
+                double valor = rs.getDouble("custo");
+                soma += valor;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return soma;
+    }
 }

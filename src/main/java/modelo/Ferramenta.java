@@ -11,6 +11,11 @@ public class Ferramenta {
     private String Marca;
     private Double Custo;
 
+    public Ferramenta() {
+        this.Nome = Nome;
+        this.Marca = Marca;
+        this.Custo = Custo;
+    }
 
     public int getId() {
         return id;

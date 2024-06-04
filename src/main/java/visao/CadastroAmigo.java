@@ -1,14 +1,10 @@
 package visao;
 
 import dao.AmigoDAO;
-import dao.FerramentaDAO;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
-import modelo.Ferramenta;
 /**
  *
  * @author josue

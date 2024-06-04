@@ -1,11 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package visao;
-
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author kauem
@@ -176,27 +169,23 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuCadastrarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarAmigoActionPerformed
-        // TODO add your handling code here:
         CadastroAmigo amg = new CadastroAmigo();
         amg.setVisible(true);
     }//GEN-LAST:event_jMenuCadastrarAmigoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
         RealizarEmprestimo emp = new RealizarEmprestimo();
         emp.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuCadastrarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarFerramentaActionPerformed
-        // TODO add your handling code here:
         CadastroFerramenta ferram = new CadastroFerramenta();
         ferram.setVisible(true);
         
     }//GEN-LAST:event_jMenuCadastrarFerramentaActionPerformed
 
     private void jMenuRelatórioFerramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatórioFerramActionPerformed
-        // TODO add your handling code here:
         RelatorioFerramenta relFerram = new RelatorioFerramenta();
         relFerram.setVisible(true);
     }//GEN-LAST:event_jMenuRelatórioFerramActionPerformed
@@ -207,8 +196,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuRelatorioEmpActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        
         RelatorioAmigo amigoInterface = new RelatorioAmigo();
         amigoInterface.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed

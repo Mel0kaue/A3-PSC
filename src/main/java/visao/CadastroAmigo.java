@@ -9,11 +9,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 import modelo.Ferramenta;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 /**
  *
  * @author josue
@@ -24,30 +19,28 @@ public class CadastroAmigo extends javax.swing.JFrame {
 
         initComponents();
 
-        //pra centraliazr a exibição dos valores na tabela
+        //Centralizar valores
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 
         // Permitir seleção de múltiplas linhas
         jTableCadastroAmigos.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        // Aplicar o renderer às colunas desejadas (ID e Quantidade)
-        jTableCadastroAmigos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Coluna ID
-        jTableCadastroAmigos.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Coluna Telefone
+        //Centraliza colunas desejadas
+        jTableCadastroAmigos.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Coluna Telefone
 
-        readJtable(); //carrega a tabela
+        readJtable(); 
     }
 
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableCadastroAmigos.getModel();
-        modelo.setNumRows(0); //posiciona na primeira linha da tabela
+        modelo.setNumRows(0); 
 
         AmigoDAO adao = new AmigoDAO();
 
         for (Amigo a : adao.read()) {
 
             modelo.addRow(new Object[]{
-                a.getIdAmigo(),
                 a.getNome(),
                 a.getTelefone()
             });
@@ -71,27 +64,26 @@ public class CadastroAmigo extends javax.swing.JFrame {
         lblTelefone = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         btnAdicionarAmigo = new javax.swing.JButton();
-        btnExcluirAmigo = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jFormatTelefone = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar amigos");
 
         jTableCadastroAmigos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ID", "Nome", "Telefone"
+                "Nome", "Telefone"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -106,9 +98,6 @@ public class CadastroAmigo extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTableCadastroAmigos);
-        if (jTableCadastroAmigos.getColumnModel().getColumnCount() > 0) {
-            jTableCadastroAmigos.getColumnModel().getColumn(0).setMaxWidth(55);
-        }
 
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -122,9 +111,9 @@ public class CadastroAmigo extends javax.swing.JFrame {
         lblNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNome.setText("Nome");
 
-        btnAdicionarAmigo.setBackground(new java.awt.Color(64, 61, 57));
+        btnAdicionarAmigo.setBackground(new java.awt.Color(255, 255, 255));
         btnAdicionarAmigo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAdicionarAmigo.setForeground(new java.awt.Color(22, 219, 101));
+        btnAdicionarAmigo.setForeground(new java.awt.Color(0, 204, 0));
         btnAdicionarAmigo.setText("Cadastrar");
         btnAdicionarAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,13 +126,13 @@ public class CadastroAmigo extends javax.swing.JFrame {
             }
         });
 
-        btnExcluirAmigo.setBackground(new java.awt.Color(64, 61, 57));
-        btnExcluirAmigo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnExcluirAmigo.setForeground(new java.awt.Color(195, 47, 39));
-        btnExcluirAmigo.setText("Cancelar");
-        btnExcluirAmigo.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(195, 47, 39));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirAmigoActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -161,67 +150,49 @@ public class CadastroAmigo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Cadastrar Amigos");
 
-        jButton1.setBackground(new java.awt.Color(195, 47, 39));
-        jButton1.setText("X");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(lblTelefone)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                                .addComponent(jFormatTelefone, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 57, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnExcluirAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdicionarAmigo)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
-                        .addGap(249, 249, 249))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap())))
+                        .addGap(192, 192, 192))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAdicionarAmigo))
+                    .addComponent(lblNome)
+                    .addComponent(lblTelefone)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jFormatTelefone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(2, 2, 2)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
+                .addGap(25, 25, 25)
                 .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTelefone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFormatTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExcluirAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdicionarAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,29 +201,25 @@ public class CadastroAmigo extends javax.swing.JFrame {
 
     private void dados() {
 
-        Amigo amg = new Amigo(); //instancia produto
-        AmigoDAO dao = new AmigoDAO(); //conecta sql
+        Amigo amg = new Amigo(); 
+        AmigoDAO dao = new AmigoDAO(); 
 
-        //atualiza os valores
         amg.setNome(txtNome.getText());
         amg.setTelefone(jFormatTelefone.getText());
 
-        //insere novo objeto dentro da tabela
         dao.create(amg);
 
         //limpando os campos
         txtNome.setText("");
         jFormatTelefone.setText("");
 
-        //atualizando tabela
         readJtable();
     }
     private void btnAdicionarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarAmigoActionPerformed
 
-        Amigo amg = new Amigo(); //instancia produto
-        AmigoDAO dao = new AmigoDAO(); //conecta sql
+        Amigo amg = new Amigo(); 
+        AmigoDAO dao = new AmigoDAO(); 
 
-        //atualiza os valores
         amg.setNome(txtNome.getText());
         amg.setTelefone(jFormatTelefone.getText());
 
@@ -262,50 +229,20 @@ public class CadastroAmigo extends javax.swing.JFrame {
         txtNome.setText("");
         jFormatTelefone.setText("");
 
-        //atualizando tabela
         readJtable();
     }//GEN-LAST:event_btnAdicionarAmigoActionPerformed
 
     private void btnAdicionarAmigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarAmigoKeyPressed
-        // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             dados();
         }
     }//GEN-LAST:event_btnAdicionarAmigoKeyPressed
 
-    private void btnExcluirAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirAmigoActionPerformed
-
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
-//        if (jTableCadastroAmigos.getSelectedRow() != -1) {
-//            int[] selectedRows = jTableCadastroAmigos.getSelectedRows();
-//            AmigoDAO dao = new AmigoDAO();
-//            
-//            int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir?", "Confirmação de exclusão", JOptionPane.YES_NO_OPTION);
-//            
-//            if(resposta == JOptionPane.YES_OPTION) {
-//                for (int i = 0; i < selectedRows.length; i++) {
-//                    int modelIndex = jTableCadastroAmigos.convertRowIndexToModel(selectedRows[i]);
-//                    int id = (int) jTableCadastroAmigos.getModel().getValueAt(modelIndex, 0);
-//                    Amigo amg = new Amigo();
-//                    amg.setIdAmigo(id);
-//                    dao.delete(amg);
-//
-//                    //limpa os campos
-//                    txtNome.setText("");
-//                    jFormatTelefone.setText("");
-//
-//                    //atualizando tabela
-//                    readJtable();
-//                }
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Selecione um produto para excluir.");
-//        }
-    }//GEN-LAST:event_btnExcluirAmigoActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    //preencher os campos ao selecionar objeto na tabela
     private void jTableCadastroAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCadastroAmigosMouseClicked
-        // TODO add your handling code here:
         if (this.jTableCadastroAmigos.getSelectedRow() != -1) {
 
             String nome = this.jTableCadastroAmigos.getValueAt(this.jTableCadastroAmigos.getSelectedRow(), 1).toString();
@@ -313,33 +250,21 @@ public class CadastroAmigo extends javax.swing.JFrame {
 
             this.txtNome.setText(nome);
             this.jFormatTelefone.setText(telefone);
-
         }
     }//GEN-LAST:event_jTableCadastroAmigosMouseClicked
 
     private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
-        // ir pro próximo campo clicando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            //vai pro inserir custo
             jFormatTelefone.requestFocus();
         }
     }//GEN-LAST:event_txtNomeKeyPressed
 
     private void jFormatTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormatTelefoneKeyPressed
-        // ir pro próximo campo clicando Enter
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            //vai pro botão Adicionar
             btnAdicionarAmigo.requestFocus();
         }
 
     }//GEN-LAST:event_jFormatTelefoneKeyPressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,8 +318,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarAmigo;
-    private javax.swing.JButton btnExcluirAmigo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JFormattedTextField jFormatTelefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollBar jScrollBar1;

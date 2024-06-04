@@ -11,7 +11,6 @@ import modelo.Ferramenta;
  * @author josue
  */
 public class RelatorioFerramenta extends javax.swing.JFrame {
-
     /**
      * Creates new form jFrmRelatórioFerramentas
      */
@@ -27,7 +26,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableHistCompras.getModel();
         modelo.setNumRows(0); // 
-        String totalGasto = this.txtTotalGasto.getText();
         
         FerramentaDAO fdao = new FerramentaDAO();
         
@@ -63,7 +61,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(txtPaneGasto);
 
@@ -149,14 +146,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
 
         jLabel4.setText("Valor");
 
-        jButton1.setBackground(new java.awt.Color(195, 47, 39));
-        jButton1.setText("X");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,20 +185,13 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
                 .addContainerGap(94, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblHistCompras)
-                        .addGap(152, 152, 152))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap())))
+                .addComponent(lblHistCompras)
+                .addGap(152, 152, 152))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(9, 9, 9)
+                .addGap(42, 42, 42)
                 .addComponent(lblHistCompras)
                 .addGap(40, 40, 40)
                 .addComponent(lblTotGasto)
@@ -243,11 +225,9 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTotalGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalGastoActionPerformed
-        Ferramenta objetoFerramen = new Ferramenta();
     }//GEN-LAST:event_txtTotalGastoActionPerformed
 
     private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
-        // TODO add your handling code here:
         
         int id = 0;
         String nome = "";
@@ -286,13 +266,11 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
             Ferramenta f = new Ferramenta(); //instancia ferramenta
             FerramentaDAO dao = new FerramentaDAO(); //conecta sql
 
-            //atualiza os valores
             f.setNome(nome);
             f.setMarca(marca);
             f.setCusto(preco);
             f.setId(id);
 
-            //update nos dados
             dao.update(f);
 
             //limpando os campos
@@ -301,17 +279,14 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
             this.txtInserirNome.setText("");
             this.txtFormatCusto.setText("");
 
-            //atualizando tabela
             readJTable();
         }
     }//GEN-LAST:event_btnAlterarFerramentaActionPerformed
 
     private void inputIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIdActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_inputIdActionPerformed
 
     private void jTableHistComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHistComprasMouseClicked
-        // TODO add your handling code here:
         
         if (this.jTableHistCompras.getSelectedRow() != -1) {
             
@@ -328,7 +303,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableHistComprasMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
         
         if (jTableHistCompras.getSelectedRow() != -1) {
             int[] selectedRows = jTableHistCompras.getSelectedRows();
@@ -350,7 +324,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
                 this.txtInserirNome.setText("");
                 this.txtFormatCusto.setText("");
 
-                // Atualizar tabela
                 readJTable();
             }
         } else {
@@ -359,17 +332,9 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-        
         double soma = FerramentaDAO.somarValores();
         String somaTxt = Double.toString(soma);
         this.txtTotalGasto.setText(somaTxt);
@@ -445,7 +410,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterarFerramenta;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JTextField inputId;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

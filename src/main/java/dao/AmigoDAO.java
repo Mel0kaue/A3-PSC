@@ -31,8 +31,6 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
             stmt.setString(1, amg.getNome());
             stmt.setString(2, amg.getTelefone());
 
-            
-
             stmt.executeUpdate(); //atualiza
 
             JOptionPane.showMessageDialog(null, "salvo com sucesso!"); //se der certo

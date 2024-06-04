@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package visao;
 
 import dao.AmigoDAO;
@@ -39,49 +35,22 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTableEmprestimos.getModel();
         jTableEmprestimos.setRowSorter(new TableRowSorter(modelo));
 
-        // Permitir seleção de múltiplas linhas
+        //Permitir seleção de múltiplas linhas
         jTableEmprestimos.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        //pra centraliazr a exibição dos valores na tabela
+        //Centralizar valores
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 
-        // Aplicar o renderer às colunas desejadas (ID e Quantidade)
-        jTableEmprestimos.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Coluna emprestimo
-
-        LocalDate data = LocalDate.now();
+        //Cetralizando colunas desejadas 
+        jTableEmprestimos.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Coluna data
+        jTableEmprestimos.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Coluna status
 
         carregarAmigos();
         carregarFerramenta();
-        //carregarFerramentas();
         readJtable();
-        //readJTableFerr();
-
     }
 
-    /*puxando ferramentas do bd
-    private void carregarFerramentas() {
-        FerramentaDAO ferramentaDAO = new FerramentaDAO();
-        List<Ferramenta> ferramentas = ferramentaDAO.read();
-
-        readJTableFerr();
-    }*/
-
-    /*public void readJTableFerr() {
-        DefaultTableModel modelo = (DefaultTableModel) this.jTableFerramentas.getModel();
-        modelo.setNumRows(0);
-
-        FerramentaDAO fdao = new FerramentaDAO();
-
-        for (Ferramenta f : fdao.read()) {
-
-            modelo.addRow(new Object[]{
-                f.getNome(),
-                f.getMarca(),});
-        }
-    }*/
-
-    //puxando ferramentas do bd
     private void carregarFerramenta() {
         FerramentaDAO ferramentaDAO = new FerramentaDAO();
         List<Ferramenta> ferramentas = ferramentaDAO.read();
@@ -96,7 +65,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         List<Amigo> amigos = amigosDAO.read();
 
         for (Amigo amigo : amigos) {
-            jComboBoxAmiguitos.addItem(amigo.getNome());
+            jComboBoxAmigos.addItem(amigo.getNome());
         }
     }
 
@@ -112,7 +81,6 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
             listaIds.add(e.getID());
 
             modelo.addRow(new Object[]{
-                //e.getID(),
                 e.getAmigoEsc(),
                 e.getFerramentaEsc(),
                 e.getData(),
@@ -135,7 +103,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         lblFerramenta = new javax.swing.JLabel();
         lblAmigo = new javax.swing.JLabel();
         btnRealizarEmp = new javax.swing.JButton();
-        jComboBoxAmiguitos = new javax.swing.JComboBox<>();
+        jComboBoxAmigos = new javax.swing.JComboBox<>();
         btnExcluir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEmprestimos = new javax.swing.JTable();
@@ -150,7 +118,9 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         lblAmigo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblAmigo.setText("Amigo:");
 
+        btnRealizarEmp.setBackground(new java.awt.Color(255, 255, 255));
         btnRealizarEmp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRealizarEmp.setForeground(new java.awt.Color(0, 153, 0));
         btnRealizarEmp.setText("Realizar Empréstimo");
         btnRealizarEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,14 +128,16 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxAmiguitos.setToolTipText("");
-        jComboBoxAmiguitos.setName(""); // NOI18N
-        jComboBoxAmiguitos.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxAmigos.setToolTipText("");
+        jComboBoxAmigos.setName(""); // NOI18N
+        jComboBoxAmigos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxAmiguitosActionPerformed(evt);
+                jComboBoxAmigosActionPerformed(evt);
             }
         });
 
+        btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +182,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAmigo)
-                            .addComponent(jComboBoxAmiguitos, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBoxAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -223,7 +195,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
                     .addComponent(lblAmigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxAmiguitos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,32 +212,22 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
 
 
     private void btnRealizarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmpActionPerformed
-        // TODO add your handling code here:
+        Emprestimo e = new Emprestimo(); 
+        EmprestimoDAO dao = new EmprestimoDAO(); 
 
-        //if (jTableFerramentas.getSelectedRow() != -1) {
+        e.setFerramentaEsc((String) jComboBoxFerramenta.getSelectedItem());
+        e.setAmigoEsc((String) jComboBoxAmigos.getSelectedItem());
 
-            Emprestimo e = new Emprestimo(); //instancia produto
-            EmprestimoDAO dao = new EmprestimoDAO(); //conecta sql
-
-            //atualiza os valores
-            //e.setFerramentaEsc((String) jTableFerramentas.getValueAt(jTableFerramentas.getSelectedRow(), 0)); //pega id na tabela 0
-            e.setFerramentaEsc((String) jComboBoxFerramenta.getSelectedItem());
-            e.setAmigoEsc((String) jComboBoxAmiguitos.getSelectedItem());
-
-            try {
-                dao.create(e);
-            } catch (ParseException ex) {
-                Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            //atualizando tabela
-            readJtable();
-        //}
+        try {
+            dao.create(e);
+        } catch (ParseException ex) {
+            Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        readJtable();
     }//GEN-LAST:event_btnRealizarEmpActionPerformed
 
-    private void jComboBoxAmiguitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAmiguitosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxAmiguitosActionPerformed
+    private void jComboBoxAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAmigosActionPerformed
+    }//GEN-LAST:event_jComboBoxAmigosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
@@ -291,8 +253,6 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
                 return;
             }
         }
-
-        //atualizando tabela
         readJtable();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -345,7 +305,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnRealizarEmp;
-    private javax.swing.JComboBox<String> jComboBoxAmiguitos;
+    private javax.swing.JComboBox<String> jComboBoxAmigos;
     private javax.swing.JComboBox<String> jComboBoxFerramenta;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableEmprestimos;

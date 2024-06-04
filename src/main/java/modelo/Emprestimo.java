@@ -7,7 +7,7 @@ import java.time.LocalDate;
  *
  * @author kauem
  */
-public class Emprestimos {
+public class Emprestimo {
     
     public int ID;
     public String amigoEsc;
@@ -15,7 +15,7 @@ public class Emprestimos {
     public String status;
     public Date data;
 
-    public Emprestimos() {
+    public Emprestimo() {
         this.amigoEsc = amigoEsc;
         this.ferramentaEsc = ferramentaEsc;
         this.status = "Ativo";

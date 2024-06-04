@@ -1,6 +1,6 @@
 package modelo;
 
-import dao.AmigosDAO;
+import dao.AmigoDAO;
 import java.util.ArrayList;
 
 public class Amigo {
@@ -39,7 +39,7 @@ public class Amigo {
     }
 
     /*public ArrayList<Amigo> getMinhaLista() {
-        return AmigosDAO.getMinhaLista();
+        return AmigoDAO.getMinhaLista();
     }*/
 
     

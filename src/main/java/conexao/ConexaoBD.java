@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ConexaoBancoDados {
+public class ConexaoBD {
     
     // Propriedades da conexão
     private static String DRIVER = "com.mysql.cj.jdbc.Driver"; // Caminho do MySQL
@@ -63,7 +63,7 @@ public class ConexaoBancoDados {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ConexaoBancoDados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -78,7 +78,7 @@ public class ConexaoBancoDados {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ConexaoBancoDados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,7 +92,7 @@ public class ConexaoBancoDados {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ConexaoBancoDados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 } 

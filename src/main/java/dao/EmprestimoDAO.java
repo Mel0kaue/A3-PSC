@@ -1,6 +1,6 @@
 package dao;
 
-import conexao.ConexaoBancoDados;
+import conexao.ConexaoBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,18 +13,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import modelo.Emprestimos;
+import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 /**
  *
  * @author kauem
  */
-public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
+public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
 
-    public void create(Emprestimos e) throws ParseException {
+    public void create(Emprestimo e) throws ParseException {
 
-        Connection con = ConexaoBancoDados.getConnection();
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -43,19 +43,19 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
 
     }
 
-    public List<Emprestimos> read() { //lista
+    public List<Emprestimo> read() { //lista
 
         //gerando conexão
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Emprestimos> emprestimos = new ArrayList<>(); //cria uma lista pra adicionar os produtos
+        List<Emprestimo> emprestimos = new ArrayList<>(); //cria uma lista pra adicionar os produtos
 
         try {
             stmt = con.prepareStatement("SELECT * FROM tb_emprestimos");
@@ -63,7 +63,7 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
 
             while (rs.next()) {
 
-                Emprestimos emprestimo = new Emprestimos();
+                Emprestimo emprestimo = new Emprestimo();
 
                 emprestimo.setID(rs.getInt("ID"));
                 emprestimo.setAmigoEsc(rs.getString("amigo"));
@@ -77,16 +77,16 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
         } catch (SQLException ex) {
             Logger.getLogger(FerramentaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt, rs); //fecha conexão
+            ConexaoBD.closeConnection(con, stmt, rs); //fecha conexão
         }
 
         return emprestimos;
 
     }
     
-    public void updateStatus(Emprestimos e) { //atualiza o status
+    public void updateStatus(Emprestimo e) { //atualiza o status
 
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
@@ -101,14 +101,14 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
 
     }
     
-    public void delete(Emprestimos e) { //deleta
+    public void delete(Emprestimo e) { //deleta
 
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
@@ -122,18 +122,18 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao xcluir: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
 
     }
     
     @Override
-    public void inserir(Emprestimos obj) {
+    public void inserir(Emprestimo obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void alterar(Emprestimos obj) {
+    public void alterar(Emprestimo obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -143,7 +143,7 @@ public class EmprestimosDAO implements DaoGenerico<Emprestimos>{
     }
 
     @Override
-    public ArrayList<Emprestimos> consultar() {
+    public ArrayList<Emprestimo> consultar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

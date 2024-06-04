@@ -1,6 +1,6 @@
 package visao;
 
-import dao.AmigosDAO;
+import dao.AmigoDAO;
 import dao.FerramentaDAO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,9 +12,9 @@ import modelo.Ferramenta;
  *
  * @author josue
  */
-public class VerAmigo extends javax.swing.JFrame {
+public class RelatorioAmigo extends javax.swing.JFrame {
     
-    public VerAmigo() {
+    public RelatorioAmigo() {
         initComponents();
         
         DefaultTableModel modelo = (DefaultTableModel) this.tabelaAmigos.getModel();
@@ -27,7 +27,7 @@ public class VerAmigo extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.tabelaAmigos.getModel();
         modelo.setNumRows(0); // 
         
-        AmigosDAO amigoDao = new AmigosDAO();
+        AmigoDAO amigoDao = new AmigoDAO();
         
         for (Amigo a: amigoDao.read()) {
             
@@ -202,7 +202,7 @@ public class VerAmigo extends javax.swing.JFrame {
         
         if (tabelaAmigos.getSelectedRow() != -1) {
             int[] selectedRows = tabelaAmigos.getSelectedRows();
-            AmigosDAO dao = new AmigosDAO();
+            AmigoDAO dao = new AmigoDAO();
 
             int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir?", "Confirmação de exclusão", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
@@ -255,7 +255,7 @@ public class VerAmigo extends javax.swing.JFrame {
         if (tabelaAmigos.getSelectedRow() != -1) {
 
             Amigo amigo = new Amigo(); //instancia ferramenta
-            AmigosDAO dao = new AmigosDAO(); //conecta sql
+            AmigoDAO dao = new AmigoDAO(); //conecta sql
 
             //atualiza os valores
             amigo.setNome(nome);
@@ -308,21 +308,23 @@ public class VerAmigo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VerAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VerAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VerAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VerAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VerAmigo().setVisible(true);
+                new RelatorioAmigo().setVisible(true);
             }
         });
     }

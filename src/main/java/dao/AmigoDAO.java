@@ -1,6 +1,6 @@
 package dao;
 
-import conexao.ConexaoBancoDados;
+import conexao.ConexaoBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,11 +18,11 @@ import modelo.Ferramenta;
  *
  * @author kauem
  */
-public class AmigosDAO implements DaoGenerico<Amigo> {
+public class AmigoDAO implements DAOGenerico<Amigo> {
 
     public void create(Amigo amg) {
 
-        Connection con = ConexaoBancoDados.getConnection();
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -40,7 +40,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
 
     }
@@ -48,7 +48,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
     public List<Amigo> read() { //lista
 
         //gerando conexão
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -71,9 +71,9 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AmigosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmigoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt, rs); //fecha conexão
+            ConexaoBD.closeConnection(con, stmt, rs); //fecha conexão
         }
 
         return amigos;
@@ -82,7 +82,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
 
     public void update(Amigo amg) { //atualiza
 
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
@@ -98,14 +98,14 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
 
     }
     
     public void delete(Amigo amg) { //deleta
 
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
@@ -119,7 +119,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao xcluir: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
 
     }
@@ -127,7 +127,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
     public List<Amigo> readForDesc(String desc) { //pesquisa
 
         //gerando conexão
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -152,7 +152,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
         } catch (SQLException ex) {
             Logger.getLogger(FerramentaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt, rs); //fecha conexão
+            ConexaoBD.closeConnection(con, stmt, rs); //fecha conexão
         }
 
         return dadosAmigo;
@@ -162,7 +162,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
     @Override
     public void inserir(Amigo amg) {
 
-        Connection con = ConexaoBancoDados.getConnection();
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -179,7 +179,7 @@ public class AmigosDAO implements DaoGenerico<Amigo> {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
     }
 

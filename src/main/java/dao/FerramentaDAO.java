@@ -1,6 +1,6 @@
 package dao;
 
-import conexao.ConexaoBancoDados;
+import conexao.ConexaoBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ public class FerramentaDAO {
     public boolean create(Ferramenta f) {
         boolean result = false;
 
-        Connection con = ConexaoBancoDados.getConnection();
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -43,7 +43,7 @@ public class FerramentaDAO {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex); //se der errado
             return result;
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
     }
 
@@ -52,7 +52,7 @@ public class FerramentaDAO {
         MinhaLista.clear(); // importante limpar a lista antes de retornar com os dados buscados.
 
         //gerando conexão
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -77,7 +77,7 @@ public class FerramentaDAO {
             Logger.getLogger(FerramentaDAO.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt, rs); //fecha conexão
+            ConexaoBD.closeConnection(con, stmt, rs); //fecha conexão
         }
 
         return MinhaLista;
@@ -87,7 +87,7 @@ public class FerramentaDAO {
         boolean result = false;
 
 
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
@@ -106,13 +106,13 @@ public class FerramentaDAO {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex); //se der errado
             return result;
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
 
     }
     public void delete(Ferramenta f) { //deleta
 
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
 
         try {
@@ -125,14 +125,14 @@ public class FerramentaDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao xcluir: " + ex); //se der errado
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
     }
     
     public List<Ferramenta> readForDesc(String desc) { //pesquisa
 
         //gerando conexão
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -158,7 +158,7 @@ public class FerramentaDAO {
         } catch (SQLException ex) {
             Logger.getLogger(FerramentaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            ConexaoBancoDados.closeConnection(con, stmt, rs); //fecha conexão
+            ConexaoBD.closeConnection(con, stmt, rs); //fecha conexão
         }
 
         return produtos;
@@ -169,7 +169,7 @@ public class FerramentaDAO {
         double soma = 0.0;
         String sql = "SELECT * FROM bd_a3.tb_ferramentas";
         
-        Connection con = ConexaoBancoDados.getConnection(); 
+        Connection con = ConexaoBD.getConnection(); 
         PreparedStatement stmt = null;
         
         try {

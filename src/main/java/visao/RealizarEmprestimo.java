@@ -4,8 +4,8 @@
  */
 package visao;
 
-import dao.AmigosDAO;
-import dao.EmprestimosDAO;
+import dao.AmigoDAO;
+import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 import modelo.Amigo;
-import modelo.Emprestimos;
+import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 /**
@@ -92,7 +92,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
     }
 
     private void carregarAmigos() {
-        AmigosDAO amigosDAO = new AmigosDAO();
+        AmigoDAO amigosDAO = new AmigoDAO();
         List<Amigo> amigos = amigosDAO.read();
 
         for (Amigo amigo : amigos) {
@@ -105,9 +105,9 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         modelo.setNumRows(0);
         listaIds.clear();
 
-        EmprestimosDAO edao = new EmprestimosDAO();
+        EmprestimoDAO edao = new EmprestimoDAO();
 
-        for (Emprestimos e : edao.read()) {
+        for (Emprestimo e : edao.read()) {
 
             listaIds.add(e.getID());
 
@@ -244,8 +244,8 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
 
         //if (jTableFerramentas.getSelectedRow() != -1) {
 
-            Emprestimos e = new Emprestimos(); //instancia produto
-            EmprestimosDAO dao = new EmprestimosDAO(); //conecta sql
+            Emprestimo e = new Emprestimo(); //instancia produto
+            EmprestimoDAO dao = new EmprestimoDAO(); //conecta sql
 
             //atualiza os valores
             //e.setFerramentaEsc((String) jTableFerramentas.getValueAt(jTableFerramentas.getSelectedRow(), 0)); //pega id na tabela 0
@@ -275,7 +275,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
             return;
         }
 
-        EmprestimosDAO dao = new EmprestimosDAO();
+        EmprestimoDAO dao = new EmprestimoDAO();
 
         for (int i = 0; i < selectedRows.length; i++) {
             int modelRow = jTableEmprestimos.convertRowIndexToModel(selectedRows[i]);
@@ -283,7 +283,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
             if (modelRow >= 0 && modelRow < listaIds.size()) {
                 int id = listaIds.get(modelRow);
 
-                Emprestimos e = new Emprestimos();
+                Emprestimo e = new Emprestimo();
                 e.setID(id);
                 dao.delete(e);
             } else {

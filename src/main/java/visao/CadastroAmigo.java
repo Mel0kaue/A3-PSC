@@ -1,6 +1,6 @@
 package visao;
 
-import dao.AmigosDAO;
+import dao.AmigoDAO;
 import dao.FerramentaDAO;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableCadastroAmigos.getModel();
         modelo.setNumRows(0); //posiciona na primeira linha da tabela
 
-        AmigosDAO adao = new AmigosDAO();
+        AmigoDAO adao = new AmigoDAO();
 
         for (Amigo a : adao.read()) {
 
@@ -231,7 +231,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
     private void dados() {
 
         Amigo amg = new Amigo(); //instancia produto
-        AmigosDAO dao = new AmigosDAO(); //conecta sql
+        AmigoDAO dao = new AmigoDAO(); //conecta sql
 
         //atualiza os valores
         amg.setNome(txtNome.getText());
@@ -250,7 +250,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
     private void btnAdicionarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarAmigoActionPerformed
 
         Amigo amg = new Amigo(); //instancia produto
-        AmigosDAO dao = new AmigosDAO(); //conecta sql
+        AmigoDAO dao = new AmigoDAO(); //conecta sql
 
         //atualiza os valores
         amg.setNome(txtNome.getText());
@@ -278,7 +278,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
         this.dispose();
 //        if (jTableCadastroAmigos.getSelectedRow() != -1) {
 //            int[] selectedRows = jTableCadastroAmigos.getSelectedRows();
-//            AmigosDAO dao = new AmigosDAO();
+//            AmigoDAO dao = new AmigoDAO();
 //            
 //            int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir?", "Confirmação de exclusão", JOptionPane.YES_NO_OPTION);
 //            

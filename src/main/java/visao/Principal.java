@@ -197,7 +197,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuRelatórioFerramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatórioFerramActionPerformed
         // TODO add your handling code here:
-        VerFerramenta relFerram = new VerFerramenta();
+        RelatorioFerramenta relFerram = new RelatorioFerramenta();
         relFerram.setVisible(true);
     }//GEN-LAST:event_jMenuRelatórioFerramActionPerformed
 
@@ -209,7 +209,7 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
-        VerAmigo amigoInterface = new VerAmigo();
+        RelatorioAmigo amigoInterface = new RelatorioAmigo();
         amigoInterface.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

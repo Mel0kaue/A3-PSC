@@ -4,14 +4,14 @@
  */
 package visao;
 
-import dao.AmigosDAO;
-import dao.EmprestimosDAO;
+import dao.AmigoDAO;
+import dao.EmprestimoDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
-import modelo.Emprestimos;
+import modelo.Emprestimo;
 
 /**
  *
@@ -34,9 +34,9 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         modelo.setNumRows(0);
         listaIds.clear();
 
-        EmprestimosDAO edao = new EmprestimosDAO();
+        EmprestimoDAO edao = new EmprestimoDAO();
 
-        for (Emprestimos e : edao.read()) {
+        for (Emprestimo e : edao.read()) {
 
             listaIds.add(e.getID());
 
@@ -168,7 +168,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             return;
         }
 
-        EmprestimosDAO dao = new EmprestimosDAO();
+        EmprestimoDAO dao = new EmprestimoDAO();
 
         for (int i = 0; i < selectedRows.length; i++) {
             int modelRow = jTableEmp.convertRowIndexToModel(selectedRows[i]);
@@ -176,7 +176,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             if (modelRow >= 0 && modelRow < listaIds.size()) {
                 int id = listaIds.get(modelRow);
 
-                Emprestimos e = new Emprestimos();
+                Emprestimo e = new Emprestimo();
                 e.setID(id);
                 e.setStatus("Devolvido");
                 dao.updateStatus(e);
@@ -196,7 +196,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             return;
         }
 
-        EmprestimosDAO dao = new EmprestimosDAO();
+        EmprestimoDAO dao = new EmprestimoDAO();
 
         for (int i = 0; i < selectedRows.length; i++) {
             int modelRow = jTableEmp.convertRowIndexToModel(selectedRows[i]);
@@ -204,7 +204,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             if (modelRow >= 0 && modelRow < listaIds.size()) {
                 int id = listaIds.get(modelRow);
 
-                Emprestimos e = new Emprestimos();
+                Emprestimo e = new Emprestimo();
                 e.setID(id);
                 e.setStatus("Ativo");
                 dao.updateStatus(e);

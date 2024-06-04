@@ -2,7 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 
-public interface DaoGenerico<ObjetoGenerico> {
+public interface DAOGenerico<ObjetoGenerico> {
     
     public void inserir(ObjetoGenerico obj);
     

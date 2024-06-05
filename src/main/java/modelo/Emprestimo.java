@@ -14,11 +14,13 @@ public class Emprestimo {
     public String ferramentaEsc;
     public String status;
     public Date data;
+    public int quantidade;
 
     public Emprestimo() {
         this.amigoEsc = amigoEsc;
         this.ferramentaEsc = ferramentaEsc;
         this.status = "Ativo";
+        this.quantidade = 1;
     }
     
     
@@ -63,6 +65,15 @@ public class Emprestimo {
     public void setData(Date data) {
         this.data = data;
     }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
 
 
     

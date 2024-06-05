@@ -85,7 +85,6 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
                 e.getFerramentaEsc(),
                 e.getData(),
                 e.getStatus()
-
             });
 
         }
@@ -212,8 +211,8 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
 
 
     private void btnRealizarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmpActionPerformed
-        Emprestimo e = new Emprestimo(); 
-        EmprestimoDAO dao = new EmprestimoDAO(); 
+        Emprestimo e = new Emprestimo();
+        EmprestimoDAO dao = new EmprestimoDAO();
 
         e.setFerramentaEsc((String) jComboBoxFerramenta.getSelectedItem());
         e.setAmigoEsc((String) jComboBoxAmigos.getSelectedItem());

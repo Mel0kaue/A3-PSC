@@ -1,9 +1,12 @@
+
 package visao;
 
 import dao.AmigoDAO;
 import dao.EmprestimoDAO;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
@@ -13,6 +16,7 @@ import modelo.Emprestimo;
  *
  * @author kauem
  */
+
 public class RelatorioEmprestimo extends javax.swing.JFrame {
 
     private List<Integer> listaIds = new ArrayList<>();
@@ -23,6 +27,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
     public RelatorioEmprestimo() {
         initComponents();
         readJtable();
+        readTabelaQtd();
     }
 
     public void readJtable() {
@@ -47,6 +52,38 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         }
     }
 
+    public void readTabelaQtd() {
+        DefaultTableModel modelo = (DefaultTableModel) TabelaQuantidade.getModel();
+        modelo.setNumRows(0);
+
+        EmprestimoDAO edao = new EmprestimoDAO(); //instancia a classe DAO
+
+        // HashMap de id e quantidade
+        Map<String, Integer> mapaDeAmigos = new HashMap<>(); //cria um hashmap  
+        
+        for (Emprestimo e : edao.read()) { 
+            if (mapaDeAmigos.containsKey(e.getAmigoEsc())) { //se essa for a chave (o nome)
+            
+            int qtd = mapaDeAmigos.get(e.getAmigoEsc()); //cria a variavel qtd e armazena o valor da quantidade
+            mapaDeAmigos.put(e.getAmigoEsc(), ++qtd); //adiciona a quantidade dentro do hashmap
+
+            //testando
+            System.out.println("quantidade adicionada: " + qtd);
+            System.out.println("total: " + mapaDeAmigos.get(e.getAmigoEsc()));
+        } else {
+            mapaDeAmigos.put(e.getAmigoEsc(), e.getQuantidade()); //senão, mantém como tava
+            System.out.println("nada adicionado à quantidade");
+        }
+        }
+        
+        for (Map.Entry<String, Integer> entry : mapaDeAmigos.entrySet()){
+            modelo.addRow(new Object[]{ 
+                entry.getKey(),
+                entry.getValue()
+            });
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,7 +99,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableQuantidade = new javax.swing.JTable();
+        TabelaQuantidade = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de empréstimos");
@@ -97,7 +134,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jTableQuantidade.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaQuantidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -116,7 +153,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTableQuantidade);
+        jScrollPane1.setViewportView(TabelaQuantidade);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,59 +250,59 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RelatorioEmprestimo().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(RelatorioEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new RelatorioEmprestimo().setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaQuantidade;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableEmp;
-    private javax.swing.JTable jTableQuantidade;
     private javax.swing.JLabel lblEmpAtivos;
     // End of variables declaration//GEN-END:variables
 }

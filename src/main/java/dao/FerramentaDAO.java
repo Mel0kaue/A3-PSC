@@ -1,5 +1,6 @@
 package dao;
 
+import com.mysql.cj.jdbc.exceptions.ConnectionFeatureNotAvailableException;
 import conexao.ConexaoBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ import modelo.Ferramenta;
  * @author josue
  */
 public class FerramentaDAO {
-    
+
     public static List<Ferramenta> MinhaLista = new ArrayList<>(); // Cria uma lista pra adicionar as ferramentas
 
     public boolean create(Ferramenta f) {
@@ -28,15 +29,16 @@ public class FerramentaDAO {
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,custo) VALUES (?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tb_ferramentas (nome,marca,custo, quantidade) VALUES (?,?,?,?)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
-  
+            stmt.setInt(4, f.getQuantidade());
+
             stmt.executeUpdate(); //atualiza
 
             JOptionPane.showMessageDialog(null, "salvo com sucesso!"); //se der certo
-            
+
             return result = true;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -48,11 +50,11 @@ public class FerramentaDAO {
     }
 
     public List<Ferramenta> read() { //lista
-    
+
         MinhaLista.clear(); // importante limpar a lista antes de retornar com os dados buscados.
 
         //gerando conexão
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -69,7 +71,8 @@ public class FerramentaDAO {
                     ferramenta.setNome(rs.getString("nome"));
                     ferramenta.setMarca(rs.getString("marca"));
                     ferramenta.setCusto(rs.getDouble("custo"));
-       
+                    ferramenta.setQuantidade(rs.getInt("quantidade"));
+
                     MinhaLista.add(ferramenta);
                 }
             }
@@ -86,17 +89,17 @@ public class FerramentaDAO {
     public boolean update(Ferramenta f) { //atualiza
         boolean result = false;
 
-
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
             //colocando dentro da tabela
-            stmt = con.prepareStatement("UPDATE tb_ferramentas SET nome = ?, marca = ?, custo = ? WHERE ID = ?");
+            stmt = con.prepareStatement("UPDATE tb_ferramentas SET nome = ?, marca = ?, custo = ?, quantidade = ? WHERE ID = ?");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getMarca());
             stmt.setDouble(3, f.getCusto());
-            stmt.setInt(4, f.getId()); //pra pegar o id
+            stmt.setInt(4, f.getQuantidade());
+            stmt.setInt(5, f.getId()); //pra pegar o id
 
             stmt.executeUpdate(); //atualiza
 
@@ -110,9 +113,10 @@ public class FerramentaDAO {
         }
 
     }
+
     public void delete(Ferramenta f) { //deleta
 
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -123,16 +127,16 @@ public class FerramentaDAO {
 
             JOptionPane.showMessageDialog(null, "excluido com sucesso!"); //se der certo
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao xcluir: " + ex); //se der errado
+            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex); //se der errado
         } finally {
             ConexaoBD.closeConnection(con, stmt); //fecha a conexão
         }
     }
-    
+
     public List<Ferramenta> readForDesc(String desc) { //pesquisa
 
         //gerando conexão
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -140,7 +144,7 @@ public class FerramentaDAO {
 
         try { //pesquisar se colocar palavra completa
             stmt = con.prepareStatement("SELECT * FROM tb_ferramentas WHERE descricao LIKE ?");
-            stmt.setString(1, "%"+desc+"%");
+            stmt.setString(1, "%" + desc + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -151,7 +155,8 @@ public class FerramentaDAO {
                 ferramenta.setNome(rs.getString("descricao"));
                 ferramenta.setMarca(rs.getString("Marca"));
                 ferramenta.setCusto(rs.getDouble("Custo"));
-         
+                ferramenta.setQuantidade(rs.getInt("quantidade"));
+
                 produtos.add(ferramenta);
             }
 
@@ -163,15 +168,15 @@ public class FerramentaDAO {
 
         return produtos;
     }
-    
+
     // método que soma todos os valores das ferramentas
     public static double somarValores() {
         double soma = 0.0;
         String sql = "SELECT * FROM bd_a3.tb_ferramentas";
-        
-        Connection con = ConexaoBD.getConnection(); 
+
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
-        
+
         try {
             stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -187,4 +192,5 @@ public class FerramentaDAO {
 
         return soma;
     }
+
 }

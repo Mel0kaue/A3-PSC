@@ -213,6 +213,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
     private void btnRealizarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmpActionPerformed
         Emprestimo e = new Emprestimo();
         EmprestimoDAO dao = new EmprestimoDAO();
+        Ferramenta f = new Ferramenta();
 
         e.setFerramentaEsc((String) jComboBoxFerramenta.getSelectedItem());
         e.setAmigoEsc((String) jComboBoxAmigos.getSelectedItem());
@@ -222,6 +223,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        f.emprestar();
         readJtable();
     }//GEN-LAST:event_btnRealizarEmpActionPerformed
 

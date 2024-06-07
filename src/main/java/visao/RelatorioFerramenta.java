@@ -1,9 +1,15 @@
 package visao;
 
+import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 /**
@@ -11,6 +17,9 @@ import modelo.Ferramenta;
  * @author josue
  */
 public class RelatorioFerramenta extends javax.swing.JFrame {
+
+    private List<Ferramenta> listaFerramentas = new ArrayList<>();
+    Map<Integer, Ferramenta> mapaDeFerramentasPorld = new HashMap<>();
 
     /**
      * Creates new form jFrmRelatórioFerramentas
@@ -21,22 +30,41 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.tabelaFerramenta.getModel();
         tabelaFerramenta.setRowSorter(new TableRowSorter(modelo));
 
+        tabelaFerramenta.getColumnModel().getColumn(0).setMinWidth(0);
+        tabelaFerramenta.getColumnModel().getColumn(0).setMaxWidth(0);
+
         readJTable();
     }
 
     public void readJTable() {
-        DefaultTableModel modelo = (DefaultTableModel) this.tabelaFerramenta.getModel();
-        modelo.setNumRows(0); // 
+        DefaultTableModel modelo = (DefaultTableModel) tabelaFerramenta.getModel();
+        modelo.setNumRows(0);
 
         FerramentaDAO fdao = new FerramentaDAO();
+        List<Ferramenta> listFerramentas = fdao.read();
 
-        for (Ferramenta f : fdao.read()) {
+        // Mapa para armazenar as ferramentas já existentes na tabela
+        Map<String, Integer> ferramentasExistente = new HashMap<>();
 
-            modelo.addRow(new Object[]{
-                f.getId(),
-                f.getNome(),
-                f.getMarca(),
-                f.getCusto(),});
+        for (Ferramenta f : listFerramentas) {
+            // Gerar uma chave única com base no nome, marca e custo da ferramenta
+            String chave = f.getNome() + "-" + f.getMarca() + "-" + String.format("%.2f", f.getCusto());
+
+            if (ferramentasExistente.containsKey(chave)) {
+                // Se a ferramenta já existe na tabela, atualizar a quantidade
+                int indice = ferramentasExistente.get(chave);
+                int quantidadeAtual = (int) modelo.getValueAt(indice, 4);
+                modelo.setValueAt(quantidadeAtual + f.getQuantidade(), indice, 4);
+            } else {
+                modelo.addRow(new Object[]{
+                    f.getId(),
+                    f.getNome(),
+                    f.getMarca(),
+                    String.format("R$ %.2f", f.getCusto()),
+                    f.getQuantidade()
+                });
+                ferramentasExistente.put(chave, modelo.getRowCount() - 1); // Armazenar o índice da nova ferramenta
+            }
         }
     }
 
@@ -70,13 +98,13 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
 
         tabelaFerramenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Marca", "Valor"
+                "ID", "Nome", "Marca", "Valor", "Quantidade"
             }
         ));
         tabelaFerramenta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,7 +114,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaFerramenta);
         if (tabelaFerramenta.getColumnModel().getColumnCount() > 0) {
-            tabelaFerramenta.getColumnModel().getColumn(0).setMaxWidth(55);
+            tabelaFerramenta.getColumnModel().getColumn(0).setHeaderValue("ID");
         }
 
         lblTotGasto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -259,7 +287,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
             dao.update(f);
 
             //limpando os campos
-//            this.inputId.setText("");
             this.inputNome.setText("");
             this.inputMarca.setText("");
             this.inputValor.setText("");
@@ -271,13 +298,11 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     private void tabelaFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFerramentaMouseClicked
 
         if (this.tabelaFerramenta.getSelectedRow() != -1) {
-            
-            String id = this.tabelaFerramenta.getValueAt(this.tabelaFerramenta.getSelectedRow(), 0).toString();
+
             String nome = this.tabelaFerramenta.getValueAt(this.tabelaFerramenta.getSelectedRow(), 1).toString();
             String marca = this.tabelaFerramenta.getValueAt(this.tabelaFerramenta.getSelectedRow(), 2).toString();
             String aquisicao = this.tabelaFerramenta.getValueAt(this.tabelaFerramenta.getSelectedRow(), 3).toString().replace("R$ ", "");
 
-//            this.inputId.setText(id);
             this.inputNome.setText(nome);
             this.inputMarca.setText(marca);
             this.inputValor.setText(aquisicao);
@@ -286,29 +311,45 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
-        if (tabelaFerramenta.getSelectedRow() != -1) {
-            int[] selectedRows = tabelaFerramenta.getSelectedRows();
-            FerramentaDAO dao = new FerramentaDAO();
+        FerramentaDAO dao = new FerramentaDAO();
 
+        listaFerramentas = dao.read();
+        System.out.println("lista: " + listaFerramentas);
+
+        for (int i = 0; i < listaFerramentas.size(); i++) {
+            mapaDeFerramentasPorld.put(listaFerramentas.get(i).getId(), listaFerramentas.get(i));
+        }
+        if (tabelaFerramenta.getSelectedRow() != -1) { //se a linha selecionada for diferente de -1
+            int[] selectedRows = tabelaFerramenta.getSelectedRows(); //pega a linha selecionada
+
+            //pergunta de confirmação
             int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir?", "Confirmação de exclusão", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
+                //se confirmar 
                 for (int i = 0; i < selectedRows.length; i++) {
                     int modelIndex = tabelaFerramenta.convertRowIndexToModel(selectedRows[i]);
                     int id = (int) tabelaFerramenta.getModel().getValueAt(modelIndex, 0);
-                    Ferramenta f = new Ferramenta();
-                    f.setId(id);
-                    dao.delete(f);
+
+                    Ferramenta ferramenta = mapaDeFerramentasPorld.get(id);
+                    System.out.println("id: " + ferramenta.getId());
+
+                    if (ferramenta.getQuantidade() == 0) {
+                        dao.delete(ferramenta);
+                    } else { //se a quantidade for maior que 1, empresta (esse método diminui 1 de quatidade)
+                        ferramenta.emprestar();
+                        dao.update(ferramenta);
+                    }
+
+                    // Limpar campos
+                    this.inputMarca.setText("");
+                    this.inputNome.setText("");
+                    this.inputValor.setText("");
+
+                    readJTable();
                 }
-
-                // Limpar campos
-                this.inputMarca.setText("");
-                this.inputNome.setText("");
-                this.inputValor.setText("");
-
-                readJTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um ou mais produtos para excluir.");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um ou mais produtos para excluir.");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 

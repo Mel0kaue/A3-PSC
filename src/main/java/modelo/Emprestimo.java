@@ -2,7 +2,6 @@ package modelo;
 
 import java.sql.Date;
 import java.time.LocalDate;
-
 /**
  *
  * @author kauem

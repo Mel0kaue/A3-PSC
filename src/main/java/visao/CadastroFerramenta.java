@@ -398,6 +398,8 @@ public class CadastroFerramenta extends javax.swing.JFrame {
 
     private void btnAdicionarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaActionPerformed
 
+        FerramentaDAO dao = new FerramentaDAO();
+
         //carregando modelo da tabela
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
         modelo.setNumRows(0);
@@ -438,10 +440,16 @@ public class CadastroFerramenta extends javax.swing.JFrame {
             novaFerramenta.setCusto(custo);
             novaFerramenta.setQuantidade(quantidade);
 
-            FerramentaDAO dao = new FerramentaDAO();
-            dao.create(novaFerramenta);
+            Ferramenta ferramentaExistente = dao.getPorNome(nome);
+            if (ferramentaExistente!= null){
+                ferramentaExistente.setQuantidade(ferramentaExistente.getQuantidade()+ novaFerramenta.getQuantidade());
+                dao.update(ferramentaExistente);
+            } else {
 
-            String multiChave = novaFerramenta.getNome() + "-" + novaFerramenta.getMarca() + "-" + String.format("%.2f", novaFerramenta.getCusto()); //cria uma chave com nome, marca e custo
+            dao.create(novaFerramenta);
+            }
+            
+            /*String multiChave = novaFerramenta.getNome() + "-" + novaFerramenta.getMarca() + "-" + String.format("%.2f", novaFerramenta.getCusto()); //cria uma chave com nome, marca e custo
 
             if (mapaDeFerramentas.containsKey(multiChave)) {
                 Ferramenta ferramentaExistente = mapaDeFerramentas.get(multiChave); //ferramenta existente é a que tem a mesma chave
@@ -450,7 +458,7 @@ public class CadastroFerramenta extends javax.swing.JFrame {
                 mapaDeFerramentas.put(multiChave, novaFerramenta);
                 System.out.println("Adicionando ferramenta ao mapa: " + novaFerramenta.getNome() + ", " + novaFerramenta.getMarca() + ", " + novaFerramenta.getCusto() + ", " + novaFerramenta.getQuantidade());
 
-            }
+            }*/
             readJtable();
 
         } catch (Exception ex) {

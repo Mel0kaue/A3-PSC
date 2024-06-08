@@ -213,18 +213,34 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
     private void btnRealizarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmpActionPerformed
         Emprestimo e = new Emprestimo();
         EmprestimoDAO dao = new EmprestimoDAO();
-        Ferramenta f = new Ferramenta();
 
-        e.setFerramentaEsc((String) jComboBoxFerramenta.getSelectedItem());
-        e.setAmigoEsc((String) jComboBoxAmigos.getSelectedItem());
+        String nomeFerramenta = (String) jComboBoxFerramenta.getSelectedItem();
+        FerramentaDAO ferramentaDAO = new FerramentaDAO();
+        Ferramenta ferramenta = ferramentaDAO.getPorNome(nomeFerramenta);
 
-        try {
-            dao.create(e);
-        } catch (ParseException ex) {
-            Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+        if (ferramenta != null) {
+            int novaQuantidade = ferramenta.getQuantidade() - 1;
+            if (novaQuantidade >= 0) {
+                ferramenta.setQuantidade(novaQuantidade);
+
+                ferramentaDAO.update(ferramenta);
+                e.setFerramentaEsc(nomeFerramenta);
+                e.setAmigoEsc((String) jComboBoxAmigos.getSelectedItem());
+
+                try {
+                    dao.create(e);
+                } catch (ParseException ex) {
+                    Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                readJtable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Não há ferramentas suficientes disponíveis para empréstimo");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma ferramenta para pegar emprestada");
+
         }
-        f.emprestar();
-        readJtable();
     }//GEN-LAST:event_btnRealizarEmpActionPerformed
 
     private void jComboBoxAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAmigosActionPerformed

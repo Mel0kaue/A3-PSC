@@ -192,5 +192,33 @@ public class FerramentaDAO {
 
         return soma;
     }
+    
+    public Ferramenta getPorNome(String nome) {
+    Connection con = ConexaoBD.getConnection();
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    Ferramenta ferramenta = null;
+    
+    try {
+        stmt = con.prepareStatement("SELECT * FROM tb_ferramentas WHERE nome = ?");
+        stmt.setString(1, nome);
+        rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            ferramenta = new Ferramenta();
+            ferramenta.setId(rs.getInt("id")); // Substitua "id" pelo nome da coluna que contém o ID
+            ferramenta.setNome(rs.getString("nome"));
+            ferramenta.setMarca(rs.getString("marca"));
+            ferramenta.setCusto(rs.getDouble("custo"));
+            ferramenta.setQuantidade(rs.getInt("quantidade")); // Substitua "quantidade" pelo nome da coluna que contém a quantidade
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erro ao buscar ferramenta pelo nome: " + ex.getMessage());
+    } finally {
+        ConexaoBD.closeConnection(con, stmt, rs);
+    }
+    
+    return ferramenta;
+}
 
 }

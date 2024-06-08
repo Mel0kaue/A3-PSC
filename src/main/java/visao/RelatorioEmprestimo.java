@@ -218,7 +218,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
 
             if (modelRow >= 0 && modelRow < listaIds.size()) {
                 int id = listaIds.get(modelRow);
-                
+
                 String nome = (String) jTableEmp.getModel().getValueAt(modelRow, 1);
                 System.out.println("nome da ferramenta: " + nome);
 
@@ -226,7 +226,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                 e.setID(id);
                 e.setStatus("Devolvido");
                 dao.updateStatus(e);
-                
+
                 Ferramenta ferramenta = fdao.getPorNome(nome);
 
                 if (ferramenta != null) {
@@ -248,6 +248,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             return;
         }
         EmprestimoDAO dao = new EmprestimoDAO();
+        FerramentaDAO fdao = new FerramentaDAO();
 
         for (int i = 0; i < selectedRows.length; i++) {
             int modelRow = jTableEmp.convertRowIndexToModel(selectedRows[i]);
@@ -255,10 +256,19 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             if (modelRow >= 0 && modelRow < listaIds.size()) {
                 int id = listaIds.get(modelRow);
 
+                String nome = (String) jTableEmp.getModel().getValueAt(modelRow, 1);
+
                 Emprestimo e = new Emprestimo();
                 e.setID(id);
                 e.setStatus("Ativo");
                 dao.updateStatus(e);
+
+                Ferramenta ferramenta = fdao.getPorNome(nome);
+
+                if (ferramenta != null) {
+                    ferramenta.setQuantidade(ferramenta.getQuantidade() - 1);
+                    fdao.update(ferramenta);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao realizar a devolução. Índice inválido.");
                 return;

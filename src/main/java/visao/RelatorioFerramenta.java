@@ -335,7 +335,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
 
                     if (ferramenta.getQuantidade() == 0) {
                         dao.delete(ferramenta);
-                    } else { //se a quantidade for maior que 1, empresta (esse método diminui 1 de quatidade)
+                    } else { 
                         ferramenta.emprestar();
                         dao.update(ferramenta);
                     }

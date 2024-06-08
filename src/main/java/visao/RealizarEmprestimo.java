@@ -217,32 +217,47 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         EmprestimoDAO dao = new EmprestimoDAO();
 
         String nomeFerramenta = (String) jComboBoxFerramenta.getSelectedItem();
+        String nomeAmigo = (String) jComboBoxAmigos.getSelectedItem();
         FerramentaDAO ferramentaDAO = new FerramentaDAO();
         Ferramenta ferramenta = ferramentaDAO.getPorNome(nomeFerramenta);
 
+        //diminuir 1 da quantidade de ferramentas
         if (ferramenta != null) {
-            int novaQuantidade = ferramenta.getQuantidade() - 1;
-            if (novaQuantidade >= 0) {
-                ferramenta.setQuantidade(novaQuantidade);
-
+        if (ferramenta.getQuantidade() > 0) {
+            // Verificar se o amigo possui ferramentas não devolvidas
+            EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+            if (emprestimoDAO.amigoPossuiFerramentasNaoDevolvidas(nomeAmigo)) {
+                int resposta = JOptionPane.showConfirmDialog(null, "Este amigo possui ferramentas não devolvidas."+"\nTem certeza que deseja emprestar mesmo assim?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    ferramenta.setQuantidade(ferramenta.getQuantidade() - 1);
+                    ferramentaDAO.update(ferramenta);
+                    e.setFerramentaEsc(nomeFerramenta);
+                    e.setAmigoEsc(nomeAmigo);
+                    try {
+                        dao.create(e);
+                        readJtable();
+                    } catch (ParseException ex) {
+                        Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+                ferramenta.setQuantidade(ferramenta.getQuantidade() - 1);
                 ferramentaDAO.update(ferramenta);
                 e.setFerramentaEsc(nomeFerramenta);
-                e.setAmigoEsc((String) jComboBoxAmigos.getSelectedItem());
-
+                e.setAmigoEsc(nomeAmigo);
                 try {
                     dao.create(e);
+                    readJtable();
                 } catch (ParseException ex) {
                     Logger.getLogger(RealizarEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                readJtable();
-            } else {
-                JOptionPane.showMessageDialog(null, "Não há ferramentas suficientes disponíveis para empréstimo");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma ferramenta para pegar emprestada");
-
+            JOptionPane.showMessageDialog(null, "Não há ferramentas suficientes disponíveis para empréstimo");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "Selecione uma ferramenta para pegar emprestada");
+    }
     }//GEN-LAST:event_btnRealizarEmpActionPerformed
 
     private void jComboBoxAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAmigosActionPerformed

@@ -127,6 +127,53 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
 
     }
     
+    public boolean amigoPossuiFerramentasNaoDevolvidas(String nomeAmigo) {
+        Connection con = ConexaoBD.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT COUNT(*) FROM tb_emprestimos WHERE amigo = ? AND Status = 'Ativo'");
+            stmt.setString(1, nomeAmigo);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao verificar empréstimos não devolvidos: " + ex);
+        } finally {
+            ConexaoBD.closeConnection(con, stmt, rs);
+        }
+        return false;
+    }
+
+    public List<String> listarFerramentasNaoDevolvidasPorAmigo(String nomeAmigo) {
+        List<String> ferramentasNaoDevolvidas = new ArrayList<>();
+        Connection con = ConexaoBD.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT ferramenta FROM tb_emprestimos WHERE amigo = ? AND Status = 'Emprestado'");
+            stmt.setString(1, nomeAmigo);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String ferramenta = rs.getString("ferramenta");
+                ferramentasNaoDevolvidas.add(ferramenta);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao listar ferramentas não devolvidas: " + ex);
+        } finally {
+            ConexaoBD.closeConnection(con, stmt, rs);
+        }
+        return ferramentasNaoDevolvidas;
+    }
+    
     @Override
     public void inserir(Emprestimo obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

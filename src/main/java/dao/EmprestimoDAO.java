@@ -97,7 +97,6 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
 
             stmt.executeUpdate(); //atualiza
 
-            JOptionPane.showMessageDialog(null, "atualizado com sucesso!"); //se der certo
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex); //se der errado
         } finally {

@@ -330,21 +330,62 @@ public class CadastroFerramenta extends javax.swing.JFrame {
      */
     private void dados() {
 
-        Ferramenta f = new Ferramenta();
         FerramentaDAO dao = new FerramentaDAO();
 
-        f.setNome(txtInserirNome.getText());
-        f.setMarca(txtInserirMarcaa.getText());
-        f.setCusto(Double.parseDouble(txtFormatCusto.getText().replace(',', '.')));
+        //carregando modelo da tabela
+        DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
+        modelo.setNumRows(0);
 
-        dao.create(f);
+        //pegando dados de entrada
+        String nome = txtInserirNome.getText().trim();
+        String marca = txtInserirMarcaa.getText().trim();
+        String custoTexto = txtFormatCusto.getText().trim().replace("R$", "").replace(",", ".");
+        String quantidadeTexto = inputQuantidade.getText().trim();
 
-        //limpando os campos
-        txtInserirNome.setText("");
-        txtInserirMarcaa.setText("");
-        txtFormatCusto.setText("");
+        //tratando excessoes
+        try {
+            if (nome.isEmpty() || marca.isEmpty() || custoTexto.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "todos os campos devem ser preenchidos.");
+                return;
+            }
+            double custo;
+            try {
+                custo = Double.parseDouble(custoTexto);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Custo inválido.");
+                return;
+            }
 
-        readJtable();
+            int quantidade;
+            //se o usuario não inserir nenhum valor na quantidade, ela é 1
+            if (quantidadeTexto.isEmpty()) {
+                quantidade = 1;
+            } else {
+                quantidade = Integer.parseInt(quantidadeTexto);
+            }
+
+            Ferramenta novaFerramenta = new Ferramenta();
+            novaFerramenta.setNome(nome);
+            novaFerramenta.setMarca(marca);
+            novaFerramenta.setCusto(custo);
+            novaFerramenta.setQuantidade(quantidade);
+
+            Ferramenta ferramentaExistente = dao.getPorNome(nome);
+            if (ferramentaExistente != null) {
+                ferramentaExistente.setQuantidade(ferramentaExistente.getQuantidade() + novaFerramenta.getQuantidade());
+                dao.update(ferramentaExistente);
+            } else {
+
+                dao.create(novaFerramenta);
+            }
+
+            readJtable();
+
+        } catch (Exception ex) {
+            System.out.println("erro ao cadastrar ferramenta " + ex);
+        }
+
+
     }
 
     private void txtInserirMarcaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirMarcaaActionPerformed

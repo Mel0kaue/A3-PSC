@@ -274,24 +274,24 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
             id = Integer.parseInt(this.tabelaFerramenta.getValueAt(this.tabelaFerramenta.getSelectedRow(), 0).toString());
         }
 
-        if (tabelaFerramenta.getSelectedRow() != -1) {
+        FerramentaDAO dao = new FerramentaDAO();
+        Ferramenta ferramentaAtual = dao.getById(id);
 
-            Ferramenta f = new Ferramenta(); //instancia ferramenta
-            FerramentaDAO dao = new FerramentaDAO(); //conecta sql
+        if (ferramentaAtual != null) {
+            ferramentaAtual.setNome(nome);
+            ferramentaAtual.setMarca(marca);
+            ferramentaAtual.setCusto(preco);
 
-            f.setNome(nome);
-            f.setMarca(marca);
-            f.setCusto(preco);
-            f.setId(id);
+            dao.update(ferramentaAtual);
 
-            dao.update(f);
-
-            //limpando os campos
+            // Limpa os campos
             this.inputNome.setText("");
             this.inputMarca.setText("");
             this.inputValor.setText("");
 
             readJTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ferramenta não encontrada.");
         }
     }//GEN-LAST:event_btnAlterarFerramentaActionPerformed
 
@@ -335,7 +335,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
 
                     if (ferramenta.getQuantidade() == 0) {
                         dao.delete(ferramenta);
-                    } else { 
+                    } else {
                         ferramenta.emprestar();
                         dao.update(ferramenta);
                     }

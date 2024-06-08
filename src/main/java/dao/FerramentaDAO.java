@@ -220,5 +220,34 @@ public class FerramentaDAO {
     
     return ferramenta;
 }
+    
+    public Ferramenta getById(int id) {
+    Connection con = ConexaoBD.getConnection();
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    Ferramenta ferramenta = null;
+    
+    try {
+        stmt = con.prepareStatement("SELECT * FROM tb_ferramentas WHERE id = ?");
+        stmt.setInt(1, id);
+        rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            ferramenta = new Ferramenta();
+            ferramenta.setId(rs.getInt("id"));
+            ferramenta.setNome(rs.getString("nome"));
+            ferramenta.setMarca(rs.getString("marca"));
+            ferramenta.setCusto(rs.getDouble("custo"));
+            ferramenta.setQuantidade(rs.getInt("quantidade"));
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erro ao buscar ferramenta pelo ID: " + ex.getMessage());
+    } finally {
+        ConexaoBD.closeConnection(con, stmt, rs);
+    }
+    
+    return ferramenta;
+}
+
 
 }

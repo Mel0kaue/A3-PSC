@@ -227,7 +227,7 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
             // Verificar se o amigo possui ferramentas não devolvidas
             EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
             if (emprestimoDAO.amigoPossuiFerramentasNaoDevolvidas(nomeAmigo)) {
-                int resposta = JOptionPane.showConfirmDialog(null, "Este amigo possui ferramentas não devolvidas."+"\nTem certeza que deseja emprestar mesmo assim?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                int resposta = JOptionPane.showConfirmDialog(rootPane, "Este amigo possui ferramentas não devolvidas."+"\nTem certeza que deseja emprestar mesmo assim?", "Confirmação", JOptionPane.YES_NO_OPTION);
                 if (resposta == JOptionPane.YES_OPTION) {
                     ferramenta.setQuantidade(ferramenta.getQuantidade() - 1);
                     ferramentaDAO.update(ferramenta);

@@ -3,6 +3,8 @@ package visao;
 import dao.AmigoDAO;
 import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -233,6 +235,10 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                     ferramenta.setQuantidade(ferramenta.getQuantidade() + 1);
                     fdao.update(ferramenta);
                 }
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String dataHora = sdf.format(new Date());
+                JOptionPane.showMessageDialog(rootPane, "Devolução realizada em: "+ dataHora);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao realizar a devolução. Índice inválido.");
                 return;

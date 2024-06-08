@@ -56,7 +56,9 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         List<Ferramenta> ferramentas = ferramentaDAO.read();
 
         for (Ferramenta ferramenta : ferramentas) {
+            if(ferramenta.getQuantidade()>0){
             jComboBoxFerramenta.addItem(ferramenta.getNome());
+            }
         }
     }
 

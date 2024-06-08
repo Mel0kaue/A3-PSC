@@ -404,9 +404,7 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
         modelo.setNumRows(0);
 
-        Map<String, Ferramenta> mapaDeFerramentas = new HashMap<>(); //String = multichave, Ferramenta = pra polular a ferramenta
-
-        // Validar e capturar os dados de entrada
+        //pegando dados de entrada
         String nome = txtInserirNome.getText().trim();
         String marca = txtInserirMarcaa.getText().trim();
         String custoTexto = txtFormatCusto.getText().trim().replace("R$", "").replace(",", ".");
@@ -441,24 +439,14 @@ public class CadastroFerramenta extends javax.swing.JFrame {
             novaFerramenta.setQuantidade(quantidade);
 
             Ferramenta ferramentaExistente = dao.getPorNome(nome);
-            if (ferramentaExistente!= null){
-                ferramentaExistente.setQuantidade(ferramentaExistente.getQuantidade()+ novaFerramenta.getQuantidade());
+            if (ferramentaExistente != null) {
+                ferramentaExistente.setQuantidade(ferramentaExistente.getQuantidade() + novaFerramenta.getQuantidade());
                 dao.update(ferramentaExistente);
             } else {
 
-            dao.create(novaFerramenta);
+                dao.create(novaFerramenta);
             }
-            
-            /*String multiChave = novaFerramenta.getNome() + "-" + novaFerramenta.getMarca() + "-" + String.format("%.2f", novaFerramenta.getCusto()); //cria uma chave com nome, marca e custo
 
-            if (mapaDeFerramentas.containsKey(multiChave)) {
-                Ferramenta ferramentaExistente = mapaDeFerramentas.get(multiChave); //ferramenta existente é a que tem a mesma chave
-                ferramentaExistente.setQuantidade(ferramentaExistente.getQuantidade() + novaFerramenta.getQuantidade());//pega a quantidadde que ja tem e soma a nova
-            } else {
-                mapaDeFerramentas.put(multiChave, novaFerramenta);
-                System.out.println("Adicionando ferramenta ao mapa: " + novaFerramenta.getNome() + ", " + novaFerramenta.getMarca() + ", " + novaFerramenta.getCusto() + ", " + novaFerramenta.getQuantidade());
-
-            }*/
             readJtable();
 
         } catch (Exception ex) {

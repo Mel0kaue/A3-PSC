@@ -18,10 +18,11 @@ CREATE TABLE IF NOT EXISTS bd_a3.tb_ferramentas (
     nome VARCHAR(100) NOT NULL,
     marca VARCHAR(100) NOT NULL,
     custo DECIMAL(10,2) NOT NULL,
+    quantidade INT NOT NULL,
     PRIMARY KEY (ID),
     UNIQUE INDEX id_UNIQUE (ID ASC) VISIBLE)
     ENGINE = InnoDB
-    AUTO_INCREMENT = 34
+    AUTO_INCREMENT = 94
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci
 

@@ -54,7 +54,7 @@
 <h3>Pré-requisitos</h3>
 <h3>Antes de rodaro projeto, verifique se você tem os seguintes softwares instalados:</h3>
 
-- <h3><a href="https://www.oracle.com/br/java/technologies/downloads/#jdk21-windows">Java Development Kit (JDK) 21</a></h3>
+- <h3><a href="[https://www.oracle.com/br/java/technologies/downloads/#jdk21-windows](https://www.oracle.com/br/java/technologies/downloads/)">Java Development Kit (JDK) 22</a></h3>
 
 - <h3><a href="https://dev.mysql.com/downloads/mysql/">Banco MySQL Server</a></h3>
 

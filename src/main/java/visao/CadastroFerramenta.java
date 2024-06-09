@@ -48,6 +48,7 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         jTableCadastroFerramenta.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Coluna ferramenta
         jTableCadastroFerramenta.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Coluna marca
         jTableCadastroFerramenta.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Coluna valor
+        jTableCadastroFerramenta.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Coluna valor
 
         readJtable();
     }

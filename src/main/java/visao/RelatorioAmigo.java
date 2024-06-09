@@ -20,7 +20,6 @@ public class RelatorioAmigo extends javax.swing.JFrame {
         initComponents();
 
         DefaultTableModel modelo = (DefaultTableModel) this.tabelaAmigos.getModel();
-        modelo.addColumn("ID", new Object[0]);
         tabelaAmigos.setRowSorter(new TableRowSorter(modelo));
 
         tabelaAmigos.getColumnModel().getColumn(0).setMinWidth(0);
@@ -111,15 +110,16 @@ public class RelatorioAmigo extends javax.swing.JFrame {
 
         tabelaAmigos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nome", "Telefone"
+                "ID", "Nome", "Telefone"
             }
         ));
+        tabelaAmigos.setShowGrid(true);
         tabelaAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaAmigosMouseClicked(evt);

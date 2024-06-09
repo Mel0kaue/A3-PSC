@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import modelo.Emprestimo;
@@ -33,6 +34,12 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         tabelaFerramenta.getColumnModel().getColumn(0).setMinWidth(0);
         tabelaFerramenta.getColumnModel().getColumn(0).setMaxWidth(0);
 
+        //Centralizar valores
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+
+        //Cetralizando colunas desejadas 
+        tabelaFerramenta.getColumnModel().getColumn(4).setCellRenderer(centerRenderer); // Coluna status
         readJTable();
     }
 
@@ -66,6 +73,10 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
                 ferramentasExistente.put(chave, modelo.getRowCount() - 1); // Armazenar o índice da nova ferramenta
             }
         }
+        double total = FerramentaDAO.somarValores();
+        String totalTxt = Double.toString(total);
+
+        this.inputTotal.setText(totalTxt);
     }
 
     @SuppressWarnings("unchecked")
@@ -86,7 +97,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtTotalValor = new javax.swing.JTextField();
+        inputTotal = new javax.swing.JLabel();
 
         jScrollPane2.setViewportView(txtPaneGasto);
 
@@ -94,7 +105,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         setTitle("Relatório de ferramentas");
 
         lblHistCompras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblHistCompras.setText("HISTÓRICO DE FERRAMENTAS");
+        lblHistCompras.setText("RELATÓRIO DE FERRAMENTAS");
 
         tabelaFerramenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +118,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
                 "ID", "Nome", "Marca", "Valor", "Quantidade"
             }
         ));
+        tabelaFerramenta.setShowGrid(true);
         tabelaFerramenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaFerramentaMouseClicked(evt);
@@ -117,7 +129,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
             tabelaFerramenta.getColumnModel().getColumn(0).setHeaderValue("ID");
         }
 
-        lblTotGasto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTotGasto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTotGasto.setText("Total Gasto:");
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
@@ -155,19 +167,8 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Valor");
 
-        txtTotalValor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtTotalValorMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txtTotalValorMouseEntered(evt);
-            }
-        });
-        txtTotalValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalValorActionPerformed(evt);
-            }
-        });
+        inputTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        inputTotal.setText("0.0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,33 +180,30 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
                 .addGap(152, 152, 152))
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAlterarFerramenta))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnExcluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAlterarFerramenta))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(inputNome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inputMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(inputValor, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblTotGasto)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(66, 66, 66))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(inputNome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(inputValor, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(lblTotGasto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,11 +212,11 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
                 .addComponent(lblHistCompras)
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(lblTotGasto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTotalValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotGasto)
+                    .addComponent(inputTotal))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -233,7 +231,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterarFerramenta)
                     .addComponent(btnExcluir))
-                .addGap(47, 47, 47))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -275,7 +273,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         }
 
         FerramentaDAO dao = new FerramentaDAO();
-        Ferramenta ferramentaAtual = dao.getById(id);
+        Ferramenta ferramentaAtual = dao.getPorId(id);
 
         if (ferramentaAtual != null) {
             ferramentaAtual.setNome(nome);
@@ -353,30 +351,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void txtTotalValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalValorActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_txtTotalValorActionPerformed
-
-    private void txtTotalValorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTotalValorMouseClicked
-        // TODO add your handling code here:
-
-        double total = FerramentaDAO.somarValores();
-        String totalTxt = Double.toString(total);
-
-        this.txtTotalValor.setText(totalTxt);
-    }//GEN-LAST:event_txtTotalValorMouseClicked
-
-    private void txtTotalValorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTotalValorMouseEntered
-        // TODO add your handling code here:
-
-        double total = FerramentaDAO.somarValores();
-        String totalTxt = Double.toString(total);
-
-        this.txtTotalValor.setText(totalTxt);
-    }//GEN-LAST:event_txtTotalValorMouseEntered
-
     private void inputMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputMarcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputMarcaActionPerformed
@@ -452,6 +426,7 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JTextField inputMarca;
     private javax.swing.JTextField inputNome;
+    private javax.swing.JLabel inputTotal;
     private javax.swing.JTextField inputValor;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -462,6 +437,5 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     private javax.swing.JLabel lblTotGasto;
     private javax.swing.JTable tabelaFerramenta;
     private javax.swing.JTextPane txtPaneGasto;
-    private javax.swing.JTextField txtTotalValor;
     // End of variables declaration//GEN-END:variables
 }

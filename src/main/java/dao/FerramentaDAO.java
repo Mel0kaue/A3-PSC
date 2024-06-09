@@ -221,7 +221,7 @@ public class FerramentaDAO {
     return ferramenta;
 }
     
-    public Ferramenta getById(int id) {
+    public Ferramenta getPorId(int id) {
     Connection con = ConexaoBD.getConnection();
     PreparedStatement stmt = null;
     ResultSet rs = null;

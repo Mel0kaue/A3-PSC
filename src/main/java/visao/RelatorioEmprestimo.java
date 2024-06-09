@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 import modelo.Emprestimo;
@@ -28,6 +29,15 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
      */
     public RelatorioEmprestimo() {
         initComponents();
+        
+        //Centralizar valores
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+
+        //Cetralizando colunas desejadas 
+        TabelaQuantidade.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Coluna data
+        jTableEmp.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Coluna status
+        jTableEmp.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Coluna status
         readJtable();
         readTabelaQtd();
     }
@@ -108,7 +118,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         setTitle("Relatório de empréstimos");
 
         lblEmpAtivos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblEmpAtivos.setText("Histórico de Empréstimos:");
+        lblEmpAtivos.setText("RELATÓRIO DE EMPRÉSTIMOS");
 
         jTableEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,6 +131,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                 "Nome", "Ferramenta", "Data", "Status"
             }
         ));
+        jTableEmp.setShowGrid(true);
         jScrollPane2.setViewportView(jTableEmp);
 
         jButton1.setText("Registrar Devolução");
@@ -145,7 +156,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Nome", "Quantidade Emp."
+                "Nome", "Quantidade"
             }
         ) {
             Class[] types = new Class [] {
@@ -156,10 +167,18 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        TabelaQuantidade.setColumnSelectionAllowed(true);
+        TabelaQuantidade.setShowGrid(true);
+        TabelaQuantidade.setShowHorizontalLines(true);
+        TabelaQuantidade.setShowVerticalLines(true);
         jScrollPane1.setViewportView(TabelaQuantidade);
+        TabelaQuantidade.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (TabelaQuantidade.getColumnModel().getColumnCount() > 0) {
+            TabelaQuantidade.getColumnModel().getColumn(1).setPreferredWidth(14);
+        }
 
         lblEmpAtivos1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblEmpAtivos1.setText("Amigos:");
+        lblEmpAtivos1.setText("QUANTIDADE POR AMIGO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,33 +186,29 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblEmpAtivos)
-                        .addGap(111, 111, 111)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmpAtivos1))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmpAtivos)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblEmpAtivos1)))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmpAtivos)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmpAtivos1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)

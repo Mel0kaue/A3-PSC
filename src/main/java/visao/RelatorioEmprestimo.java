@@ -17,6 +17,7 @@ import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 /**
+ * Esta classe representa a interface gráfica para o relatório de empréstimos.
  *
  * @author kauem
  */
@@ -24,6 +25,9 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
 
     private List<Integer> listaIds = new ArrayList<>();
 
+    /**
+     * Cria um novo formulário RelatorioEmprestimo.
+     */
     public RelatorioEmprestimo() {
         initComponents();
 
@@ -39,6 +43,9 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         readTabelaQtd();
     }
 
+    /**
+     * Preenche a tabela de empréstimos.
+     */
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) jTableEmp.getModel();
         modelo.setNumRows(0);
@@ -61,6 +68,9 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Preenche a tabela de quantidade por amigo.
+     */
     public void readTabelaQtd() {
         DefaultTableModel modelo = (DefaultTableModel) TabelaQuantidade.getModel();
         modelo.setNumRows(0);
@@ -217,6 +227,12 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método executado quando o botão 1 é pressionado. Responsável por
+     * processar a devolução de ferramentas selecionadas.
+     *
+     * @param evt O evento de clique do botão.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int[] selectedRows = jTableEmp.getSelectedRows();
         if (selectedRows.length == 0) {
@@ -259,6 +275,12 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Método executado quando o botão 2 é pressionado. Responsável por
+     * processar a exclusão de empréstimos selecionados.
+     *
+     * @param evt O evento de clique do botão.
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int[] selectedRows = jTableEmp.getSelectedRows();
         if (selectedRows.length == 0) {

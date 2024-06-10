@@ -14,6 +14,8 @@ import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 /**
+ * Classe responsável por exibir o relatório de ferramentas. Permite visualizar,
+ * editar e excluir informações sobre as ferramentas cadastradas.
  *
  * @author josue
  */
@@ -22,6 +24,10 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     private List<Ferramenta> listaFerramentas = new ArrayList<>();
     Map<Integer, Ferramenta> mapaDeFerramentasPorld = new HashMap<>();
 
+    /**
+     * Construtor da classe RelatorioFerramenta. Inicializa os componentes da
+     * interface gráfica e configura a tabela de ferramentas.
+     */
     public RelatorioFerramenta() {
         initComponents();
 
@@ -40,6 +46,9 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         readJTable();
     }
 
+    /**
+     * Atualiza os dados na tabela de ferramentas.
+     */
     public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) tabelaFerramenta.getModel();
         modelo.setNumRows(0);
@@ -235,6 +244,12 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método executado quando o botão para alterar uma ferramenta é clicado.
+     * Responsável por atualizar as informações da ferramenta selecionada.
+     *
+     * @param evt O evento de clique do botão.
+     */
     private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
 
         int id = 0;
@@ -290,6 +305,13 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAlterarFerramentaActionPerformed
 
+    /**
+     * Método executado quando uma linha da tabela de ferramentas é clicada.
+     * Responsável por preencher os campos de edição com as informações da
+     * ferramenta selecionada.
+     *
+     * @param evt O evento de clique na tabela.
+     */
     private void tabelaFerramentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFerramentaMouseClicked
 
         if (this.tabelaFerramenta.getSelectedRow() != -1) {
@@ -304,6 +326,12 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaFerramentaMouseClicked
 
+    /**
+     * Método executado quando o botão para excluir uma ferramenta é clicado.
+     * Responsável por remover uma ferramenta da base de dados.
+     *
+     * @param evt O evento de clique do botão.
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
         FerramentaDAO dao = new FerramentaDAO();

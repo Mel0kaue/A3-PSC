@@ -21,13 +21,17 @@ import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 /**
- *
+ * Esta classe representa a interface para realizar empréstimos.
+ * 
  * @author kauem
  */
 public class RealizarEmprestimo extends javax.swing.JFrame {
 
     private List<Integer> listaIds = new ArrayList<>();
 
+    /**
+     * Construtor padrão da classe RealizarEmprestimo.
+     */
     public RealizarEmprestimo() {
 
         initComponents();
@@ -51,6 +55,9 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         readJtable();
     }
 
+    /**
+     * Carrega as ferramentas disponíveis no ComboBox.
+     */
     private void carregarFerramenta() {
         FerramentaDAO ferramentaDAO = new FerramentaDAO();
         List<Ferramenta> ferramentas = ferramentaDAO.read();
@@ -62,6 +69,9 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Carrega os amigos disponíveis no ComboBox.
+     */
     private void carregarAmigos() {
         AmigoDAO amigosDAO = new AmigoDAO();
         List<Amigo> amigos = amigosDAO.read();
@@ -71,6 +81,9 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
         }
     }
 
+     /**
+     * Atualiza a tabela de empréstimos.
+     */
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) jTableEmprestimos.getModel();
         modelo.setNumRows(0);
@@ -212,6 +225,11 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
+    /**
+     * Realiza a ação de empréstimo.
+     * 
+     * @param evt O evento associado ao botão.
+     */
     private void btnRealizarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmpActionPerformed
         Emprestimo e = new Emprestimo();
         EmprestimoDAO dao = new EmprestimoDAO();
@@ -263,6 +281,11 @@ public class RealizarEmprestimo extends javax.swing.JFrame {
     private void jComboBoxAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAmigosActionPerformed
     }//GEN-LAST:event_jComboBoxAmigosActionPerformed
 
+     /**
+     * Executa a ação de exclusão de empréstimos.
+     * 
+     * @param evt O evento associado ao botão.
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
         int[] selectedRows = jTableEmprestimos.getSelectedRows();

@@ -15,34 +15,45 @@ import modelo.Amigo;
 import modelo.Ferramenta;
 
 /**
+ * Classe responsável pelo acesso e manipulação dos dados dos amigos no banco de
+ * dados. Implementa a interface DAOGenerico para operações CRUD.
  *
- * @author kauem
+ * @autor kauem
  */
 public class AmigoDAO implements DAOGenerico<Amigo> {
 
+    /**
+     * Insere um novo amigo no banco de dados.
+     *
+     * @param amg O objeto Amigo a ser inserido.
+     */
     public void create(Amigo amg) {
 
         Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            //colocando dentro da tabela
             stmt = con.prepareStatement("INSERT INTO tb_amigos (nome,telefone) VALUES (?,?)");
             stmt.setString(1, amg.getNome());
             stmt.setString(2, amg.getTelefone());
 
-            stmt.executeUpdate(); //atualiza
+            stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "salvo com sucesso!"); //se der certo
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex); //se der errado
         } finally {
-            ConexaoBD.closeConnection(con, stmt); //fecha a conexão
+            ConexaoBD.closeConnection(con, stmt);
         }
 
     }
 
+    /**
+     * Retorna uma lista de todos os amigos no banco de dados.
+     *
+     * @return Lista de amigos.
+     */
     public List<Amigo> read() { //lista
 
         //gerando conexão
@@ -77,6 +88,11 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
 
     }
 
+    /**
+     * Atualiza os dados de um amigo no banco de dados.
+     *
+     * @param amg O objeto Amigo com os dados atualizados.
+     */
     public void update(Amigo amg) { //atualiza
 
         Connection con = ConexaoBD.getConnection();
@@ -100,6 +116,11 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
 
     }
 
+    /**
+     * Remove um amigo do banco de dados.
+     *
+     * @param amg O objeto Amigo a ser removido.
+     */
     public void delete(Amigo amg) { //deleta
 
         Connection con = ConexaoBD.getConnection();
@@ -121,6 +142,12 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
 
     }
 
+    /**
+     * Pesquisa e retorna uma lista de amigos com base na descrição fornecida.
+     *
+     * @param desc A descrição a ser pesquisada.
+     * @return Lista de amigos que correspondem à descrição.
+     */
     public List<Amigo> readForDesc(String desc) { //pesquisa
 
         //gerando conexão

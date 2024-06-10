@@ -9,13 +9,19 @@ import javax.swing.table.TableRowSorter;
 import modelo.Amigo;
 
 /**
- *
+ * Classe para exibir o relatório de amigos.
+ * Permite visualizar, editar e excluir amigos cadastrados.
+ * 
  * @author josue
  */
 public class RelatorioAmigo extends javax.swing.JFrame {
 
     private List<Integer> listaIds = new ArrayList<>();
 
+    
+    /**
+     * Cria um novo formulário RelatorioAmigo.
+     */
     public RelatorioAmigo() {
         initComponents();
 
@@ -28,6 +34,10 @@ public class RelatorioAmigo extends javax.swing.JFrame {
         readJTable();
     }
 
+    
+    /**
+     * Atualiza a tabela de amigos.
+     */
     public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) this.tabelaAmigos.getModel();
         modelo.setNumRows(0);
@@ -185,6 +195,10 @@ public class RelatorioAmigo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método executado quando o botão de excluir é clicado.
+     * @param evt O evento associado ao clique do botão.
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
         if (tabelaAmigos.getSelectedRow() != -1) {
@@ -212,6 +226,10 @@ public class RelatorioAmigo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    /**
+     * Método executado quando o botão de editar é clicado.
+     * @param evt O evento associado ao clique do botão.
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int id = 0;
         String nome = "";
@@ -254,6 +272,10 @@ public class RelatorioAmigo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+     /**
+     * Método executado quando uma linha da tabela de amigos é clicada.
+     * @param evt O evento associado ao clique na tabela.
+     */
     private void tabelaAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAmigosMouseClicked
         // TODO add your handling code here:
 
@@ -266,6 +288,10 @@ public class RelatorioAmigo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaAmigosMouseClicked
 
+    /**
+     * Método principal. Cria e exibe a interface gráfica.
+     * @param args Os argumentos da linha de comando.
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

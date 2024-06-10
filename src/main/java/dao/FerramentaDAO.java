@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import modelo.Ferramenta;
 
 /**
+ * Classe responsável pelo acesso e manipulação dos dados de ferramentas no
+ * banco de dados.
  *
  * @author josue
  */
@@ -21,6 +23,12 @@ public class FerramentaDAO {
 
     public static List<Ferramenta> MinhaLista = new ArrayList<>(); // Cria uma lista pra adicionar as ferramentas
 
+    /**
+     * Cria uma nova ferramenta no banco de dados.
+     *
+     * @param f O objeto Ferramenta a ser criado.
+     * @return true se a operação for bem-sucedida, false caso contrário.
+     */
     public boolean create(Ferramenta f) {
         boolean result = false;
 
@@ -49,6 +57,11 @@ public class FerramentaDAO {
         }
     }
 
+    /**
+     * Retorna uma lista de todas as ferramentas do banco de dados.
+     *
+     * @return Lista de ferramentas.
+     */
     public List<Ferramenta> read() { //lista
 
         MinhaLista.clear(); // importante limpar a lista antes de retornar com os dados buscados.
@@ -86,6 +99,12 @@ public class FerramentaDAO {
         return MinhaLista;
     }
 
+    /**
+     * Atualiza uma ferramenta no banco de dados.
+     *
+     * @param f O objeto Ferramenta com os dados atualizados.
+     * @return true se a operação for bem-sucedida, false caso contrário.
+     */
     public boolean update(Ferramenta f) { //atualiza
         boolean result = false;
 
@@ -114,6 +133,11 @@ public class FerramentaDAO {
 
     }
 
+    /**
+     * Deleta uma ferramenta do banco de dados.
+     *
+     * @param f O objeto Ferramenta a ser excluído.
+     */
     public void delete(Ferramenta f) { //deleta
 
         Connection con = ConexaoBD.getConnection();
@@ -133,6 +157,12 @@ public class FerramentaDAO {
         }
     }
 
+    /**
+     * Retorna uma lista de ferramentas com base em uma descrição fornecida.
+     *
+     * @param desc A descrição a ser pesquisada.
+     * @return Lista de ferramentas que correspondem à descrição.
+     */
     public List<Ferramenta> readForDesc(String desc) { //pesquisa
 
         //gerando conexão

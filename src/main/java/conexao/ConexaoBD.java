@@ -8,15 +8,23 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Classe responsável por gerenciar a conexão com o banco de dados MySql.
+ * @author kauem
+ */
 public class ConexaoBD {
     
     // Propriedades da conexão
-    private static String DRIVER = "com.mysql.cj.jdbc.Driver"; // Caminho do MySQL
-    private static String URL = "jdbc:mysql://localhost:3306/bd_a3"; // Nome do banco de dados
-    private static String USER = "root"; // Usuário do banco de dados
-    private static String PASS = "Unisul@1520"; // Senha do banco de dados
+    private static String DRIVER = "com.mysql.cj.jdbc.Driver"; 
+    private static String URL = "jdbc:mysql://localhost:3306/bd_a3"; 
+    private static String USER = "root"; 
+    private static String PASS = "Unisul@1520"; 
     
-    // Criando a conexão
+    /**
+     * Cria e retorna uma conexão com o banco de dados.
+     *
+     * @return Conexão com o banco de dados.
+     */
     public static Connection getConnection() { 
         Connection conn = null;
         try {
@@ -53,7 +61,11 @@ public class ConexaoBD {
         return conn;
     }
 
-    // Sobrecargas de fechamento do Banco
+    /**
+     * Fecha a conexão com o banco de dados.
+     *
+     * @param con A conexão a ser fechada.
+     */
     public static void closeConnection(Connection con) {
 
         try { //se a conexão tiver aberta, feche
@@ -67,6 +79,12 @@ public class ConexaoBD {
         }
     }
     
+    /**
+     * Fecha a conexão e o PreparedStatement.
+     *
+     * @param con A conexão a ser fechada.
+     * @param stmt O PreparedStatement a ser fechado.
+     */
     public static void closeConnection(Connection con, PreparedStatement stmt) {
 
         closeConnection(con);
@@ -82,6 +100,13 @@ public class ConexaoBD {
         }
     }
 
+    /**
+     * Fecha a conexão, o PreparedStatement e o ResultSet.
+     *
+     * @param con A conexão a ser fechada.
+     * @param stmt O PreparedStatement a ser fechado.
+     * @param rs O ResultSet a ser fechado.
+     */
     public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs) {
 
         closeConnection(con, stmt);

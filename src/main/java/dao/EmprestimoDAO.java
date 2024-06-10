@@ -17,11 +17,19 @@ import modelo.Emprestimo;
 import modelo.Ferramenta;
 
 /**
+ * Classe responsável pelo acesso e manipulação dos dados de empréstimos no
+ * banco de dados. Implementa a interface DAOGenerico para operações CRUD.
  *
- * @author kauem
+ * @autor kauem
  */
 public class EmprestimoDAO implements DAOGenerico<Emprestimo> {
 
+    /**
+     * Insere um novo empréstimo no banco de dados.
+     *
+     * @param e O objeto Emprestimo a ser inserido.
+     * @throws ParseException Se ocorrer um erro na conversão da data.
+     */
     public void create(Emprestimo e) throws ParseException {
 
         Connection con = ConexaoBD.getConnection();
@@ -47,6 +55,11 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo> {
 
     }
 
+    /**
+     * Retorna uma lista de todos os empréstimos no banco de dados.
+     *
+     * @return Lista de empréstimos.
+     */
     public List<Emprestimo> read() { //lista
 
         //gerando conexão
@@ -83,6 +96,11 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo> {
 
     }
 
+    /**
+     * Atualiza o status de um empréstimo no banco de dados.
+     *
+     * @param e O objeto Emprestimo com o status atualizado.
+     */
     public void updateStatus(Emprestimo e) { //atualiza o status
 
         Connection con = ConexaoBD.getConnection();
@@ -104,6 +122,11 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo> {
 
     }
 
+    /**
+     * Exclui um empréstimo do banco de dados.
+     *
+     * @param e O objeto Emprestimo a ser excluído.
+     */
     public void delete(Emprestimo e) { //deleta
 
         Connection con = ConexaoBD.getConnection();
@@ -125,6 +148,13 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo> {
 
     }
 
+    /**
+     * Verifica se um amigo possui ferramentas não devolvidas.
+     *
+     * @param nomeAmigo O nome do amigo a ser verificado.
+     * @return true se o amigo possui ferramentas não devolvidas, caso contrário
+     * false.
+     */
     public boolean amigoPossuiFerramentasNaoDevolvidas(String nomeAmigo) {
         Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
@@ -148,6 +178,12 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo> {
         return false;
     }
 
+    /**
+     * Lista as ferramentas não devolvidas por um amigo.
+     *
+     * @param nomeAmigo O nome do amigo.
+     * @return Lista de ferramentas não devolvidas.
+     */
     public List<String> listarFerramentasNaoDevolvidasPorAmigo(String nomeAmigo) {
         List<String> ferramentasNaoDevolvidas = new ArrayList<>();
         Connection con = ConexaoBD.getConnection();

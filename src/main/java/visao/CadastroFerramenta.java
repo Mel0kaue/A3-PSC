@@ -14,6 +14,7 @@ import javax.swing.text.MaskFormatter;
 import modelo.Ferramenta;
 
 /**
+ * Classe que representa a interface gráfica de cadastro de ferramentas.
  *
  * @author kauem
  */
@@ -21,6 +22,11 @@ public class CadastroFerramenta extends javax.swing.JFrame {
 
     MaskFormatter mfCusto;
 
+    /**
+     * Construtor da classe CadastroFerramenta.
+     *
+     * @author kauem
+     */
     public CadastroFerramenta() {
 
         try {
@@ -50,6 +56,10 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         readJtable();
     }
 
+    /**
+     * Método responsável por atualizar a tabela com os dados das ferramentas
+     * cadastradas.
+     */
     public void readJtable() {
         DefaultTableModel modelo = (DefaultTableModel) jTableCadastroFerramenta.getModel();
         modelo.setNumRows(0);
@@ -324,8 +334,8 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /* dados() => mesma função do botão adicionar, mas usado pra executar
-        a ação do botão ao pressionar enter
+    /**
+     * Método para cadastrar os dados de uma nova ferramenta.
      */
     private void dados() {
 
@@ -392,24 +402,44 @@ public class CadastroFerramenta extends javax.swing.JFrame {
     private void txtInserirMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInserirMarcaActionPerformed
     }//GEN-LAST:event_txtInserirMarcaActionPerformed
 
+    /**
+     * Ação ao pressionar a tecla "Enter" no campo de inserção de marca.
+     *
+     * @param evt evento de teclado
+     */
     private void txtInserirMarcaaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirMarcaaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtFormatCusto.requestFocus();
         }
     }//GEN-LAST:event_txtInserirMarcaaKeyPressed
 
+    /**
+     * Ação ao pressionar a tecla "Enter" no campo de inserção de marca.
+     *
+     * @param evt evento de teclado
+     */
     private void txtInserirMarcaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInserirMarcaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtFormatCusto.requestFocus();
         }
     }//GEN-LAST:event_txtInserirMarcaKeyPressed
 
+    /**
+     * Ação ao ganhar foco no campo de custo.
+     *
+     * @param evt evento de foco
+     */
     private void txtFormatCustoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormatCustoFocusGained
         if ("0,00".equals(txtFormatCusto.getText())) {
             txtFormatCusto.setText("");
         }
     }//GEN-LAST:event_txtFormatCustoFocusGained
 
+    /**
+     * Ação ao pressionar a tecla "Enter" no campo de custo.
+     *
+     * @param evt evento de teclado
+     */
     private void txtFormatCustoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormatCustoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnAdicionarFerramenta.requestFocus();
@@ -431,10 +461,20 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtInserirNomeKeyPressed
 
+    /**
+     * Ação ao pressionar o botão de cancelar.
+     *
+     * @param evt evento de ação
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Ação ao pressionar a tecla "Enter" no botão de adicionar ferramenta.
+     *
+     * @param evt evento de teclado
+     */
     private void btnAdicionarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarFerramentaActionPerformed
 
         FerramentaDAO dao = new FerramentaDAO();

@@ -22,9 +22,6 @@ public class RelatorioFerramenta extends javax.swing.JFrame {
     private List<Ferramenta> listaFerramentas = new ArrayList<>();
     Map<Integer, Ferramenta> mapaDeFerramentasPorld = new HashMap<>();
 
-    /**
-     * Creates new form jFrmRelatórioFerramentas
-     */
     public RelatorioFerramenta() {
         initComponents();
 

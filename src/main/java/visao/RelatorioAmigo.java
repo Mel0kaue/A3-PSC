@@ -236,7 +236,7 @@ public class RelatorioAmigo extends javax.swing.JFrame {
 
         if (tabelaAmigos.getSelectedRow() != -1) {
 
-            Amigo amg = new Amigo(); 
+            Amigo amg = new Amigo();
             AmigoDAO dao = new AmigoDAO();
 
             //atualiza os valores
@@ -256,11 +256,11 @@ public class RelatorioAmigo extends javax.swing.JFrame {
 
     private void tabelaAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAmigosMouseClicked
         // TODO add your handling code here:
-        
+
         if (this.tabelaAmigos.getSelectedRow() != -1) {
             String nome = this.tabelaAmigos.getValueAt(this.tabelaAmigos.getSelectedRow(), 1).toString();
             String telefone = this.tabelaAmigos.getValueAt(this.tabelaAmigos.getSelectedRow(), 2).toString();
-            
+
             this.inputNome.setText(nome);
             this.inputTelefone.setText(telefone);
         }

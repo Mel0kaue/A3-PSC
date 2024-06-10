@@ -46,7 +46,7 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
     public List<Amigo> read() { //lista
 
         //gerando conexão
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -64,7 +64,6 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
                 amigo.setNome(rs.getString("nome"));
                 amigo.setTelefone(rs.getString("telefone"));
 
-
                 amigos.add(amigo);
             }
 
@@ -80,7 +79,7 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
 
     public void update(Amigo amg) { //atualiza
 
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -100,14 +99,14 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
         }
 
     }
-    
+
     public void delete(Amigo amg) { //deleta
 
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            
+
             stmt = con.prepareStatement("DELETE FROM tb_amigos WHERE ID = ?");
             stmt.setInt(1, amg.getIdAmigo()); //pra pegar o id
 
@@ -121,11 +120,11 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
         }
 
     }
-    
+
     public List<Amigo> readForDesc(String desc) { //pesquisa
 
         //gerando conexão
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -133,7 +132,7 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
 
         try { //pesquisar sem colocar palavra completa
             stmt = con.prepareStatement("SELECT * FROM tb_amigos WHERE nome LIKE ?");
-            stmt.setString(1, "%"+desc+"%");
+            stmt.setString(1, "%" + desc + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -169,7 +168,6 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
             stmt.setString(1, amg.getNome());
             stmt.setString(2, amg.getTelefone());
 
-
             stmt.executeUpdate(); //atualiza
 
             JOptionPane.showMessageDialog(null, "salvo com sucesso!"); //se der certo
@@ -181,20 +179,18 @@ public class AmigoDAO implements DAOGenerico<Amigo> {
         }
     }
 
-
     @Override
     public void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public ArrayList<Amigo> consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void alterar(Amigo amg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-
 }

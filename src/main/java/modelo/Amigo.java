@@ -4,7 +4,7 @@ import dao.AmigoDAO;
 import java.util.ArrayList;
 
 public class Amigo {
-    
+
     public String nome;
     public String telefone;
     public int IdAmigo;
@@ -38,12 +38,4 @@ public class Amigo {
         this.IdAmigo = IdAmigo;
     }
 
-    /*public ArrayList<Amigo> getMinhaLista() {
-        return AmigoDAO.getMinhaLista();
-    }*/
-
-    
-    
-    
-    
 }

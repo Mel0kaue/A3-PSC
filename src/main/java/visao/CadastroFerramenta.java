@@ -19,9 +19,6 @@ import modelo.Ferramenta;
  */
 public class CadastroFerramenta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroFerramenta
-     */
     MaskFormatter mfCusto;
 
     public CadastroFerramenta() {
@@ -112,7 +109,7 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnAdicionarFerramenta = new javax.swing.JButton();
         inputQuantidade = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -244,7 +241,8 @@ public class CadastroFerramenta extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("qtd");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Quantidade");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,7 +266,7 @@ public class CadastroFerramenta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtFormatCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)))
+                            .addComponent(jLabel8)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -303,7 +301,7 @@ public class CadastroFerramenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMarca)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtInserirMarcaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,7 +383,6 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println("erro ao cadastrar ferramenta " + ex);
         }
-
 
     }
 
@@ -556,8 +553,8 @@ public class CadastroFerramenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCadastroFerramenta;
     private javax.swing.JLabel lblFerramenta;

@@ -5,7 +5,7 @@ package modelo;
  * @author kauem
  */
 public class Ferramenta {
-    
+
     private int id;
     private String Nome;
     private String Marca;
@@ -58,11 +58,11 @@ public class Ferramenta {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    
-    public int emprestar(){
-        if (quantidade > 0 ){
-            quantidade --;
-            System.out.println("emprestimo feito. Quantidade restant: "+quantidade);
+
+    public int emprestar() {
+        if (quantidade > 0) {
+            quantidade--;
+            System.out.println("emprestimo feito. Quantidade restant: " + quantidade);
             return quantidade;
         } else {
             System.out.println("esta ferramenta não consta mais no estoque. Já foi emprestada à alguém.");

@@ -2,12 +2,13 @@ package modelo;
 
 import java.sql.Date;
 import java.time.LocalDate;
+
 /**
  *
  * @author kauem
  */
 public class Emprestimo {
-    
+
     public int ID;
     public String amigoEsc;
     public String ferramentaEsc;
@@ -21,9 +22,7 @@ public class Emprestimo {
         this.status = "Ativo";
         this.quantidade = 1;
     }
-    
-    
-    
+
     // Getters e setters
     public int getID() {
         return ID;
@@ -72,13 +71,5 @@ public class Emprestimo {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    
-    
-    
 
-
-    
-    
-
-    
 }

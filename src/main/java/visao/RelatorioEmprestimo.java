@@ -24,12 +24,9 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
 
     private List<Integer> listaIds = new ArrayList<>();
 
-    /**
-     * Creates new form jFrmRelatorioEmp
-     */
     public RelatorioEmprestimo() {
         initComponents();
-        
+
         //Centralizar valores
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
@@ -250,10 +247,10 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                     ferramenta.setQuantidade(ferramenta.getQuantidade() + 1);
                     fdao.update(ferramenta);
                 }
-                
+
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String dataHora = sdf.format(new Date());
-                JOptionPane.showMessageDialog(rootPane, "Devolução realizada em: "+ dataHora);
+                JOptionPane.showMessageDialog(rootPane, "Devolução realizada em: " + dataHora);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao realizar a devolução. Índice inválido.");
                 return;

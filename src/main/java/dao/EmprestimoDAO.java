@@ -20,7 +20,7 @@ import modelo.Ferramenta;
  *
  * @author kauem
  */
-public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
+public class EmprestimoDAO implements DAOGenerico<Emprestimo> {
 
     public void create(Emprestimo e) throws ParseException {
 
@@ -28,13 +28,12 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
         PreparedStatement stmt = null;
 
         try {
-   
+
             //colocando dentro da tabela
             stmt = con.prepareStatement("INSERT INTO tb_emprestimos(amigo,ferramenta,Status, data) VALUES (?,?,?, NOW())");
             stmt.setString(1, e.getAmigoEsc());
             stmt.setString(2, e.getFerramentaEsc());
             stmt.setString(3, e.getStatus());
-
 
             stmt.executeUpdate(); //atualiza
 
@@ -51,7 +50,7 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
     public List<Emprestimo> read() { //lista
 
         //gerando conexão
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -70,7 +69,7 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
                 emprestimo.setFerramentaEsc(rs.getString("ferramenta"));
                 emprestimo.setStatus(rs.getString("Status"));
                 emprestimo.setData(rs.getDate("data"));
-               
+
                 emprestimos.add(emprestimo);
             }
 
@@ -83,10 +82,10 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
         return emprestimos;
 
     }
-    
+
     public void updateStatus(Emprestimo e) { //atualiza o status
 
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -104,14 +103,14 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
         }
 
     }
-    
+
     public void delete(Emprestimo e) { //deleta
 
-        Connection con = ConexaoBD.getConnection(); 
+        Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            
+
             stmt = con.prepareStatement("DELETE FROM tb_emprestimos WHERE id = ?");
             stmt.setInt(1, e.getID()); //pra pegar o id
 
@@ -125,7 +124,7 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
         }
 
     }
-    
+
     public boolean amigoPossuiFerramentasNaoDevolvidas(String nomeAmigo) {
         Connection con = ConexaoBD.getConnection();
         PreparedStatement stmt = null;
@@ -172,24 +171,24 @@ public class EmprestimoDAO implements DAOGenerico<Emprestimo>{
         }
         return ferramentasNaoDevolvidas;
     }
-    
+
     @Override
     public void inserir(Emprestimo obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void alterar(Emprestimo obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public ArrayList<Emprestimo> consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
